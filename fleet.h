@@ -41,22 +41,7 @@ const short BOXWIDTH = 79;
 // Size of the shipSize array
 const int SHIP_SIZE_ARRAYSIZE = 6; 
 // Number of elements for each ship
-const short shipSize[SHIP_SIZE_ARRAYSIZE] = {0, 2, 3, 3, 4, 5}; 
-
-//----------------------------------------------------------------------------
-// Enumerated type for ships
-//----------------------------------------------------------------------------
-enum Ship
-{
-	NOSHIP,		 // 0
-	MINESWEEPER, // 1 (1-5) -- used only for owner
-	SUB,		 // 2
-	FRIGATE,	 // 3
-	BATTLESHIP,	 // 4
-	CARRIER,	 // 5
-	HIT,		 // 6 (6-7)-- used only for other side
-	MISSED,		 // 7 
-}; 
+const short shipSize[SHIP_SIZE_ARRAYSIZE] = {0, 2, 3, 3, 4, 5};  
 
 //----------------------------------------------------------------------------
 // Enumerated type for direction on grid

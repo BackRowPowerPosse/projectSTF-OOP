@@ -19,12 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CCell.cpp" />
+    <ClCompile Include="CDirection.cpp" />
+    <ClCompile Include="CPlayer.cpp" />
+    <ClCompile Include="CShip.cpp" />
+    <ClCompile Include="CShipInfo.cpp" />
+    <ClCompile Include="CSinkTheFleet.cpp" />
     <ClCompile Include="fleet.cpp" />
-    <ClCompile Include="safeio.cpp" />
-    <ClCompile Include="SinkTheFleet.cpp" />
+    <ClCompile Include="SafeIO.cpp" />
+    <ClCompile Include="MainDriver.cpp" />
     <ClCompile Include="TextGraphics.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CCell.h" />
+    <ClInclude Include="CDirection.h" />
+    <ClInclude Include="CPlayer.h" />
+    <ClInclude Include="CShip.h" />
+    <ClInclude Include="CShipInfo.h" />
+    <ClInclude Include="CSinkTheFleet.h" />
     <ClInclude Include="fleet.h" />
     <ClInclude Include="safeio.h" />
     <ClInclude Include="textGraphics.h" />

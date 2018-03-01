@@ -21,10 +21,28 @@
     <ClCompile Include="fleet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="safeio.cpp">
+    <ClCompile Include="CShip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SinkTheFleet.cpp">
+    <ClCompile Include="MainDriver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SafeIO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CDirection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CCell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CShipInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSinkTheFleet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -36,6 +54,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="fleet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CShip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CDirection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CCell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CShipInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSinkTheFleet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
