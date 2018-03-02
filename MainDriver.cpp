@@ -13,7 +13,7 @@
 	#define new DEBUG_NEW
 #endif
 
-extern const char* shipNames[7];
+extern const char* shipNames[6];
 
 //----------------------------------------------------------------------------
 // Function:	main()

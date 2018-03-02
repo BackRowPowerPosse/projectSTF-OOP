@@ -20,8 +20,7 @@
 
 #include "fleet.h"
 
-const char* shipNames[SHIP_SIZE_ARRAYSIZE] = { "No Ship", "Mine Sweeper",
-"Submarine", "Frigate", "Battleship", "Aircraft Carrier" };
+
 // Total pieces in all ships
 const int TOTALPIECES = 17;
 
