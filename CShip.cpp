@@ -1,5 +1,5 @@
 #include "CShip.h"
-
+	
 namespace SINK_THE_FLEET
 {
 	const char *shipNames[SHIP_SIZE_ARRAYSIZE]
