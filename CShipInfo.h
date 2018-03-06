@@ -26,7 +26,7 @@ namespace SINK_THE_FLEET
 		void setName(CShip &name);
 		void setOrientation(CDirection &orientation);
 		void setBowLocation(CCell &bowLocation);
-		void setPiecesLeft();
+		void setPiecesLeft(short pieces);
 		CShipInfo operator--();
 
 		static const short shipSize[6];
