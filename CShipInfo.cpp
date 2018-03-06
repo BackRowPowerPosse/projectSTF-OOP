@@ -50,11 +50,6 @@ namespace SINK_THE_FLEET
 	//                	3/5/18  AM  completed version 1.0
 	//-----------------------------------------------------------------------------
 
-	CShipInfo::CShipInfo()
-	{
-
-	}
-
 	//-----------------------------------------------------------------------------
 	//	Class:         CShipInfo
 	//	method:        void print(ostream & sout)const;
