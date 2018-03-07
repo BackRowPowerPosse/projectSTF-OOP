@@ -1,5 +1,5 @@
 #include "CShip.h"
-
+	
 namespace SINK_THE_FLEET
 {
 	void CShip::print(ostream &sout) const
