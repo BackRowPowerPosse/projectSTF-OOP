@@ -44,7 +44,7 @@ namespace SINK_THE_FLEET
 			while ((row = toupper(sin.get())) < 'A' || row  > highChar)
 			{
 				sin.ignore(FILENAME_MAX, '\n');
-				cout << "Row must be a letter from A to " << highChar
+				cout << "Row must be a letter from A to " << highChar //Hardcore changes
 					<< " and column must be from 1 to "
 					<< numberOfCols << ": ";
 			}
