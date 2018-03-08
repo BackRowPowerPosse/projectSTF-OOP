@@ -24,7 +24,7 @@ namespace SINK_THE_FLEET
 		CPlayer operator=(CPlayer &player);
 		void setGridSize(char size);
 		void setCell(short whichGrid, CCell cell, CShip ship);
-		void saveGrid();
+		bool saveGrid();
 		void setShips();
 		void hitShip(CShip ship);
 		CPlayer operator--();

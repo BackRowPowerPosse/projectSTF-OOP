@@ -123,9 +123,73 @@ namespace SINK_THE_FLEET
 	void CPlayer::setCell(short whichGrid, CCell cell, CShip ship)
 	{
 	}
-	void CPlayer::saveGrid()
+
+	bool CPlayer::saveGrid()
 	{
+		//~~~~~~~~~~~~~Ready for testing
+		string filename;
+		ofstream ofs;
+		Ship ship = NOSHIP;
+		short shipCount[SHIP_SIZE_ARRAYSIZE] = { 0 };
+		char cell = ' ';
+		char orientation;
+		char row;
+		short col;
+		/*short numberOfRows = (toupper(size) == 'L') ? LARGEROWS : SMALLROWS;
+		short numberOfCols = (toupper(size) == 'L') ? LARGECOLS : SMALLCOLS;*/
+
+
+		cout << "Please enter file name: ";		// filename prompt
+		cin >> filename;						// enter filename
+		cin.ignore(FILENAME_MAX, '\n');			// clean buffer
+
+		try		// attempt to open file
+		{
+			ofs.open(filename.c_str()); // open file
+			if (!ofs)	// check if file opened successfully
+			{
+				cout << "could not open file " << filename << endl
+					<< " press <enter> to continue" << endl;
+				cin.ignore(FILENAME_MAX, '\n');
+				return false; // communicate to program that loading failed
+			}
+		}
+		catch (exception e) // other exception thrown, file couldn't load
+		{
+			cout << "could not open file " << filename << endl
+				<< " press <enter> to continue" << endl;
+			cin.ignore(FILENAME_MAX, '\n');
+			return false; // communicate to program that loading failed
+		}
+
+		// grid size
+		ofs << m_gridSize << endl;
+		for (int i = 1; i < 6; i++) {
+
+			// orientation
+			if (m_ships[i].getOrientation() == VERTICAL) {
+				orientation = 'V';
+			}
+			ofs << orientation << ' ';
+
+			// row
+			row = 'A' + m_ships[i].getBowLocation().getRow();
+			ofs << row << ' ';
+
+			// column
+			col = m_ships[i].getBowLocation().getCol() + 1;
+			ofs << col << endl;
+
+		}
+
+		ofs << endl;
+		printGrid(ofs, 0); // print show grid on file
+
+		cout << "File " << filename << " successfully saved" << endl
+			<< " press <enter> to continue" << endl;
+		cin.ignore(FILENAME_MAX, '\n');
 	}
+
 	void CPlayer::setShips()
 	{
 		//char input = 'V';
