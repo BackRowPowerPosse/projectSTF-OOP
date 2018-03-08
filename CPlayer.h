@@ -7,8 +7,8 @@ namespace SINK_THE_FLEET
 	class CPlayer
 	{
 	public:
-		CPlayer();
-		CPlayer();
+		CPlayer(unsigned short whichPlayer, char gridSize);
+		CPlayer(const CPlayer& playerObj);
 
 		~CPlayer();
 

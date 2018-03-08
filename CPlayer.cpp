@@ -2,9 +2,17 @@
 
 namespace SINK_THE_FLEET
 {
-	CPlayer::CPlayer()
+	//default constructor
+	CPlayer::CPlayer(unsigned short whichPlayer, char gridSize)
 	{
 		
+	}
+	//copy constructor
+	CPlayer::CPlayer(const CPlayer& playerObj)
+		: m_gridSize(playerObj.m_gridSize), m_piecesLeft(playerObj.m_piecesLeft)
+	{
+		m_ships = new CShipInfo[6];
+
 	}
 	CPlayer::~CPlayer()
 	{
