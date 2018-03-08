@@ -71,23 +71,22 @@ namespace SINK_THE_FLEET
 	}
 	bool CPlayer::isValidLocation(short whichShip)
 	{
-		short numberOfRows = (toupper(size) == 'L') ? LARGEROWS : SMALLROWS;
-		short numberOfCols = (toupper(size) == 'L') ? LARGECOLS : SMALLCOLS;
-
-		short bowLocationRow = player.m_ships[shipNumber].m_bowLocation.m_row;
-		short bowLocationColumn = player.m_ships[shipNumber].m_bowLocation.m_col;
-		short shipLength = shipSize[shipNumber];
-		short shipOrientation = player.m_ships[shipNumber].m_orientation; // 0 is horizontal, 1 is vertical
+		short numberOfRows = (this->m_gridSize == 'L') ? LARGEROWS : SMALLROWS;
+		short numberOfCols = (this->m_gridSize == 'L') ? LARGECOLS : SMALLCOLS;
+		//get orientation
+		short orientation = this->m_ships[whichShip].getOrientation();
+		CCell bow = this->m_ships[whichShip].getBowLocation();
+		short shipLength = this->m_ships[whichShip].getPiecesLeft();
 
 		short i = 0;
 
 		bool isOpen = true;
 
-		switch (shipOrientation)
+		switch (orientation)
 		{
 		case 0: //ship is horizontal
 			while (isOpen && i < shipLength) {
-				if (((bowLocationColumn + shipLength) > numberOfCols) ||
+				if (((bow.getCol + shipLength) > numberOfCols) ||
 					player.m_gameGrid[0][bowLocationRow][bowLocationColumn + i] != NOSHIP) //check if spot is empty
 				{
 					isOpen = false;
@@ -97,7 +96,7 @@ namespace SINK_THE_FLEET
 			break;
 		case 1://ship is vertical
 			while (isOpen && i < shipLength) {
-				if (((bowLocationRow + shipLength) > numberOfRows) ||
+				if (((bow.getRow + shipLength) > numberOfRows) ||
 					player.m_gameGrid[0][bowLocationRow + i][bowLocationColumn] != NOSHIP) // check overlapping from previous entries
 				{
 					isOpen = false;
@@ -110,7 +109,11 @@ namespace SINK_THE_FLEET
 	}
 	CShipInfo CPlayer::operator[](short index) const
 	{
-		return CShipInfo();
+		if ((index > SHIPSIZE) || (index < 1)) //ignore 0
+		{
+			throw range_error("Index out of range"); //throw range_error
+		}
+		return this->m_ships[index];
 	}
 	CPlayer CPlayer::operator=(CPlayer & player)
 	{

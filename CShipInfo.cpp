@@ -35,7 +35,7 @@ namespace SINK_THE_FLEET
 	// 
 	//	Version:        1.0
 	//   
-	//		Software:   MS Windows 10 for execution; 
+	//		Software:   MS Windows 10 for execution;  
 	//                  Compiles under Microsoft Visual C++.Net 2017
 	// 
 	//	class: CShipInfo
