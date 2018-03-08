@@ -78,6 +78,7 @@ namespace SINK_THE_FLEET
 		char fsize = 'S';
 		char row;
 		short col;
+		CCell bowCoordinates;
 		//short numberOfRows = (toupper(size) == 'L') ? LARGEROWS : SMALLROWS;
 		//short numberOfCols = (toupper(size) == 'L') ? LARGECOLS : SMALLCOLS;
 
@@ -109,7 +110,7 @@ namespace SINK_THE_FLEET
 			cin.ignore(FILENAME_MAX, '\n');
 			return false; // communicate to program that loading failed
 		}
-		// YOUR CODE GOES HERE ...
+		
 		// read grid size, check that it matches current game's size
 		ifs >> fsize;
 		if (fsize != m_gridSize) {
@@ -133,29 +134,34 @@ namespace SINK_THE_FLEET
 			//Ship Bow
 			//location.getRow();
 			ifs >> row;
-			m_ships[i].setBowLocation();
+			bowCoordinates.inputCoordinates(ifs, fsize); // ----====assuming inputCoordinates grabs both chars
+			m_ships[i].setBowLocation(bowCoordinates);
 			//players[whichPlayer].m_ships[i].m_bowLocation.m_row = (short)(row - 'A');  // row
 
 
-			ifs >> col;
-			players[whichPlayer].m_ships[i].m_bowLocation.m_col = col - 1;	// column
+			//ifs >> col;
+			//m_ships[i].setBowLocation();
+			//players[whichPlayer].m_ships[i].m_bowLocation.m_col = col - 1;	// column
 
-																			// check these coordinates
-			if (!isValidLocation(players[whichPlayer], i, size)) {
-				cout << "Bad Grid. Ships intersect or out of bounds" << endl
-					<< " press <enter> to continue" << endl;
-				cin.ignore(FILENAME_MAX, '\n');
-				// clear the grid
-				clearGrid(players[whichPlayer].m_gameGrid[0], size);
-				return false;
-			}
+			// ~_~_~_~_~Old Validation. Update to check validity of current coords?
+			//if (!isValidLocation(players[whichPlayer], i, size)) {
+			//	cout << "Bad Grid. Ships intersect or out of bounds" << endl
+			//		<< " press <enter> to continue" << endl;
+			//	cin.ignore(FILENAME_MAX, '\n');
+			//	// clear the grid
+			//	clearGrid(players[whichPlayer].m_gameGrid[0], size);
+			//	return false;
+			//}
 
-			for (int p = 0; p < shipSize[i]; p++) { // loop through each coordinate the ship touches
+			//!!double check whether .shipSize property is allowed to be called like that
+			for (int p = 0; p < (int)m_ships[i].shipSize; p++) { // loop through each coordinate the ship touches
 
-				int shipX = players[whichPlayer].m_ships[i].m_bowLocation.m_col;	// get x coordinate
-				int shipY = players[whichPlayer].m_ships[i].m_bowLocation.m_row;	// get y coordinate
+				//int shipX = players[whichPlayer].m_ships[i].m_bowLocation.m_col;	// get x coordinate --old
+				int shipX = m_ships[i].getBowLocation().getCol();	// get x coordinate
+				int shipY = m_ships[i].getBowLocation().getRow();	// get y coordinate
 
-				if (players[whichPlayer].m_ships[i].m_orientation == VERTICAL)	//	if VERTICAL
+				if (m_ships[i].getOrientation() == VERTICAL)	//	if VERTICAL
+					m_gameGrid[0]
 					players[whichPlayer].m_gameGrid[0][shipY + p][shipX] = players[whichPlayer].m_ships[i].m_name;	// write ship ID into location (y incremented)
 				else				// if HORIZONTAL
 					players[whichPlayer].m_gameGrid[0][shipY][shipX + p] = players[whichPlayer].m_ships[i].m_name;	// write ship ID into location (x incremented)
