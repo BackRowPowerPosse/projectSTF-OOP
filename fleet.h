@@ -15,14 +15,15 @@
 //----------------------------------------------------------------------------
 
 #pragma once
+
 #include <cctype>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
 #include <string>
-#include "safeio.h"
-#include "textGraphics.h"
+#include "SafeIO.h"
+#include "TextGraphics.h"
 
 using namespace std;
 
