@@ -63,7 +63,7 @@ namespace SINK_THE_FLEET
 			if (!(sin >> string))
 				return sin;
 
-			for (int i = 0; i < string.size(); i++)
+			for (short i = 0; i < string.size(); i++)
 				string.at(i) = toupper(string.at(i));
 
 			if (string == "NOSHIP")
@@ -82,8 +82,6 @@ namespace SINK_THE_FLEET
 				ship.setShip(Ship(6));
 			else if (string == "MISSED")
 				ship.setShip(Ship(7));
-			else
-				sin.clear(ios::failbit);
 		}
 
 		return sin;
