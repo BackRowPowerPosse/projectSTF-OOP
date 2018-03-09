@@ -53,7 +53,8 @@ namespace SINK_THE_FLEET
 
 	CPlayer CPlayer::operator=(CPlayer& playerObj) //for deep copy
 	{
-
+		short numberOfRows = (toupper(playerObj.m_gridSize) == 'L') ? LARGEROWS : SMALLROWS;
+		short numberOfCols = (toupper(playerObj.m_gridSize) == 'L') ? LARGECOLS : SMALLCOLS;
 		m_whichPlayer = playerObj.m_whichPlayer;
 		m_gridSize = playerObj.m_gridSize;
 		m_piecesLeft = playerObj.m_piecesLeft;
@@ -91,6 +92,7 @@ namespace SINK_THE_FLEET
 					} // end for j
 
 				} // end for i
+			}
 		}
 		return *this;
 	}
