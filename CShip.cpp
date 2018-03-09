@@ -1,17 +1,7 @@
 #include "CShip.h"
-
+	
 namespace SINK_THE_FLEET
 {
-	const char *shipNames[SHIP_SIZE_ARRAYSIZE]
-	{
-		"No Ship",
-		"Mine Sweeper",
-		"Submarine",
-		"Frigate",
-		"Battleship",
-		"Aircraft Carrier"
-	};
-
 	void CShip::print(ostream &sout) const
 	{
 		sout << ' ';
@@ -58,6 +48,42 @@ namespace SINK_THE_FLEET
 
 	istream &operator>>(istream &sin, CShip &ship)
 	{
+		short number;
+		string string;
 
+		if (isdigit(sin.peek()))
+		{
+			if (!(sin >> number))
+				return sin;
+			
+			ship.setShip(Ship(number));
+		}
+		else
+		{
+			if (!(sin >> string))
+				return sin;
+
+			for (short i = 0; i < string.size(); i++)
+				string.at(i) = toupper(string.at(i));
+
+			if (string == "NOSHIP")
+				ship.setShip(Ship(0));
+			else if (string == "MINESWEEPER")
+				ship.setShip(Ship(1));
+			else if (string == "SUB")
+				ship.setShip(Ship(2));
+			else if (string == "FRIGATE")
+				ship.setShip(Ship(3));
+			else if (string == "BATTLESHIP")
+				ship.setShip(Ship(4));
+			else if (string == "CARRIER")
+				ship.setShip(Ship(5));
+			else if (string == "HIT")
+				ship.setShip(Ship(6));
+			else if (string == "MISSED")
+				ship.setShip(Ship(7));
+		}
+
+		return sin;
 	}
 }

@@ -791,7 +791,7 @@ bool isValidLocation(const Player& player, short shipNumber, char size)
 //		9/12/06 PB comleted v 1.0
 //     
 //---------------------------------------------------------------------------
-void header(ostream& sout)
+void headerOld(ostream& sout)
 {
 	const string empty;
 	const string sink("SINK THE FLEET!");
