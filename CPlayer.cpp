@@ -1,20 +1,49 @@
-#include "CPlayer.h"
+   #include "CPlayer.h"
 
 namespace SINK_THE_FLEET
 {
 	//default constructor
 	CPlayer::CPlayer(unsigned short whichPlayer, char gridSize)
 	{
-		
+
 	}
 	//copy constructor
 	CPlayer::CPlayer(const CPlayer& playerObj)
 		: m_whichPlayer(playerObj.m_whichPlayer),
-		  m_gridSize(playerObj.m_gridSize),
-		  m_piecesLeft(playerObj.m_piecesLeft)
+		m_gridSize(playerObj.m_gridSize),
+		m_piecesLeft(playerObj.m_piecesLeft)
 	{
-		 = new CShipInfo[6];
+		m_ships = new CShipInfo[6];
+		for (int i = 0; i < 6; i++)
+		{
+			m_ships[i].setName = playerObj.m_ships[i].getName;
+			m_ships[i].setBowLocation = playerObj.m_ships[i].getBowLocation;
+			m_ships[i].setOrientation = playerObj.m_ships[i].getOrientation;
+			m_ships[i].setPiecesLeft = playerObj.m_ships[i].getPiecesLeft;
+		}
 
+	}
+
+	CPlayer CPlayer::operator=(CPlayer& playerObj) //for deep copy
+	{
+		m_whichPlayer = playerObj.m_whichPlayer;
+		m_gridSize = playerObj.m_gridSize;
+		m_piecesLeft = playerObj.m_piecesLeft;
+		//check for self assignment
+		if (this != &playerObj)
+		{
+			//delete whats inside if there is something
+			if (m_ships)
+				delete[] m_ships;
+			for (int i = 0; i < 6; i++)
+			{
+				m_ships[i].setName = playerObj.m_ships[i].getName;
+				m_ships[i].setBowLocation = playerObj.m_ships[i].getBowLocation;
+				m_ships[i].setOrientation = playerObj.m_ships[i].getOrientation;
+				m_ships[i].setPiecesLeft = playerObj.m_ships[i].getPiecesLeft;
+			}
+		}
+		return *this;
 	}
 	CPlayer::~CPlayer()
 	{
@@ -42,6 +71,8 @@ namespace SINK_THE_FLEET
 		system("cls");
 		short numberOfRows = (toupper(whichGrid) == 'L') ? LARGEROWS : SMALLROWS;
 		short numberOfCols = (toupper(whichGrid) == 'L') ? LARGECOLS : SMALLCOLS;
+
+		short whichGrid = (this->m_gridSize == 'S') ? 0 : 1; // 0 - small 1 - large
 		char rowMarker = 'A';
 
 		//print out first column (1-12)
@@ -128,10 +159,7 @@ namespace SINK_THE_FLEET
 		}
 		return this->m_ships[index];
 	}
-	CPlayer CPlayer::operator=(CPlayer & player)
-	{
-		return CPlayer();
-	}
+
 	void CPlayer::setGridSize(char size)
 	{
 		this->m_gridSize = size;
