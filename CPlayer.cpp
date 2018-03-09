@@ -42,8 +42,8 @@ namespace SINK_THE_FLEET
 					for (short k = 0; k < numberOfCols; ++k)
 					{
 						// initialize all items in row to NOSHIP
-						(this)->m_gameGrid[whichGrid][j][k] = NOSHIP;
-					} // end for k
+						(this)->m_gameGrid[whichGrid][j][k] = playerObj.m_gameGrid[whichGrid][j][k];
+					} // end for ->
 				} // end for j
 
 			} // end for i
@@ -53,6 +53,8 @@ namespace SINK_THE_FLEET
 
 	CPlayer CPlayer::operator=(CPlayer& playerObj) //for deep copy
 	{
+		short numberOfRows = (toupper(playerObj.m_gridSize) == 'L') ? LARGEROWS : SMALLROWS;
+		short numberOfCols = (toupper(playerObj.m_gridSize) == 'L') ? LARGECOLS : SMALLCOLS;
 
 		m_whichPlayer = playerObj.m_whichPlayer;
 		m_gridSize = playerObj.m_gridSize;
@@ -81,12 +83,12 @@ namespace SINK_THE_FLEET
 					for (short j = 0; j < numberOfRows; ++j)
 					{
 						m_gameGrid[whichGrid][j] = nullptr;
-						m_gameGrid[whichGrid][j] = new CShip[numberOfCols];
+						m_gameGrid[whichGrid][j] = playerObj.m_gameGrid[numberOfCols][j];
 
 						for (short k = 0; k < numberOfCols; ++k)
 						{
 							// initialize all items in row to NOSHIP
-							(this)->m_gameGrid[whichGrid][j][k] = NOSHIP;
+							(this)->m_gameGrid[whichGrid][j][k] = playerObj.m_gameGrid[whichGrid][j][k];
 						} // end for k
 					} // end for j
 
