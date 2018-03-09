@@ -15,9 +15,9 @@ namespace SINK_THE_FLEET
 	{
 	public:
 		CDirection(Direction2 initDirection = HORIZONTAL) :m_direction(initDirection) {};
-		operator Direction2() const;
-		void print(ostream &sout) const;
-		void print() const;
+		operator Direction2()const;
+		void print(ostream &sout)const;
+		void print()const;
 
 	private:
 		Direction2 m_direction;
