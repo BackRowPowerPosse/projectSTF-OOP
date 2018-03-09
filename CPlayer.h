@@ -12,6 +12,7 @@ namespace SINK_THE_FLEET
 
 		~CPlayer();
 
+		const int TOTALPIECES = 17;
 		unsigned short getWhichPlayer() const;
 		short getPiecesLeft() const;
 		char getGridSize() const;

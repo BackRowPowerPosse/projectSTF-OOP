@@ -146,25 +146,33 @@ namespace SINK_THE_FLEET
 			//	return false;
 			//}
 
+			if (!isValidLocation(i)) {
+				cout << "Bad Grid. Ships intersect or out of bounds" << endl
+							<< " press <enter> to continue" << endl;
+				cin.ignore(FILENAME_MAX, '\n');
+				cin.get();
+				//!!!!call clear grid here when it's done!!!!
+				return false;
+			}
+				
+
 			//!!double check whether .shipSize property is allowed to be called like that
 			for (int p = 0; p < (int)m_ships[i].shipSize; p++) { // loop through each coordinate the ship touches
 
-				//int shipX = players[whichPlayer].m_ships[i].m_bowLocation.m_col;	// get x coordinate --old
-				int shipX = m_ships[i].getBowLocation().getCol();	// get x coordinate
-				int shipY = m_ships[i].getBowLocation().getRow();	// get y coordinate
-
 				if (m_ships[i].getOrientation() == VERTICAL)	//	if VERTICAL
-					m_gameGrid[0]
-					players[whichPlayer].m_gameGrid[0][shipY + p][shipX] = players[whichPlayer].m_ships[i].m_name;	// write ship ID into location (y incremented)
+					m_gameGrid[0][m_ships[i].getBowLocation.getRow() + p][m_ships[i].getBowLocation.getCol()] = m_ships[i];
+					
 				else				// if HORIZONTAL
-					players[whichPlayer].m_gameGrid[0][shipY][shipX + p] = players[whichPlayer].m_ships[i].m_name;	// write ship ID into location (x incremented)
+					m_gameGrid[0][m_ships[i].getBowLocation.getRow()][m_ships[i].getBowLocation.getCol() + p] = m_ships[i];					
 			}
 
-			players[whichPlayer].m_ships[i].m_piecesLeft = shipSize[i];		// initialize piecesLeft for each ship
+			//players[whichPlayer].m_ships[i].m_piecesLeft = shipSize[i];		// initialize piecesLeft for each ship
+
+			//m_ships[i].setPiecesLeft();
 
 		}
 
-		players[whichPlayer].m_piecesLeft = TOTALPIECES; // player starts with 17 pieces total
+		m_piecesLeft = TOTALPIECES;
 
 		ifs.close();
 
