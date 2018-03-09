@@ -5,7 +5,7 @@ namespace SINK_THE_FLEET
 	//default constructor
 	CPlayer::CPlayer(unsigned short whichPlayer, char gridSize)
 	{
-
+		
 	}
 	//copy constructor
 	CPlayer::CPlayer(const CPlayer& playerObj)
