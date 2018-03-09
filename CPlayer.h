@@ -2,13 +2,16 @@
 #include "fleet.h"
 #include "CSinkTheFleet.h"
 
+#define SHIPSIZE  6
+#define GAMEGRID  2
+
 namespace SINK_THE_FLEET
 {
 	class CPlayer
 	{
 	public:
-		CPlayer();
-		CPlayer();
+		CPlayer(unsigned short whichPlayer, char gridSize);
+		CPlayer(const CPlayer& playerObj);
 
 		~CPlayer();
 
@@ -35,8 +38,8 @@ namespace SINK_THE_FLEET
 
 		unsigned short m_whichPlayer;
 		short m_piecesLeft;
-		CShipInfo m_ships[6];
+		CShipInfo m_ships[SHIPSIZE];
 		char m_gridSize;
-		CShip **m_gameGrid[2];
+		CShip **m_gameGrid[GAMEGRID];
 	};
 }

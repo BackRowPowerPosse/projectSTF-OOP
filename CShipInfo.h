@@ -13,8 +13,9 @@ namespace SINK_THE_FLEET
 	class CShipInfo
 	{
 	public:
+		CShipInfo(CShip name, CDirection direction, CCell bow, short pieces)
+			: m_name(name), m_orientation(direction), m_bowLocation(bow), m_piecesLeft(pieces) {}
 		CShipInfo();
-
 		void print(ostream &sout) const;
 		void print() const;
 		CShip getName() const;
@@ -26,7 +27,7 @@ namespace SINK_THE_FLEET
 		void setName(CShip &name);
 		void setOrientation(CDirection &orientation);
 		void setBowLocation(CCell &bowLocation);
-		void setPiecesLeft();
+		void setPiecesLeft(short pieces);
 		CShipInfo operator--();
 
 		static const short shipSize[6];
