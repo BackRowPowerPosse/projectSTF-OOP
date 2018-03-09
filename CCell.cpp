@@ -20,7 +20,7 @@ namespace SINK_THE_FLEET
 
 	void CCell::print(ostream &sout) const
 	{
-		sout << (char)(m_row + 64) << (char)(m_col + 1);
+		sout << (char)(m_row + 64) << (m_col + 1);
 	}
 
 	void CCell::print() const
