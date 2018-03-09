@@ -132,16 +132,9 @@ namespace SINK_THE_FLEET
 			}
 
 			//Ship Bow
-			//location.getRow();
-			ifs >> row;
 			bowCoordinates.inputCoordinates(ifs, fsize); // ----====assuming inputCoordinates grabs both chars
 			m_ships[i].setBowLocation(bowCoordinates);
-			//players[whichPlayer].m_ships[i].m_bowLocation.m_row = (short)(row - 'A');  // row
 
-
-			//ifs >> col;
-			//m_ships[i].setBowLocation();
-			//players[whichPlayer].m_ships[i].m_bowLocation.m_col = col - 1;	// column
 
 			// ~_~_~_~_~Old Validation. Update to check validity of current coords?
 			//if (!isValidLocation(players[whichPlayer], i, size)) {
