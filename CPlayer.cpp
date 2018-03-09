@@ -145,8 +145,6 @@ namespace SINK_THE_FLEET
 				CCell cell(i,j);
 				Ship ship = static_cast<Ship>(getCell(whichGrid,cell));
 				ship.print();
-				
-
 			}
 			sout << endl;
 
