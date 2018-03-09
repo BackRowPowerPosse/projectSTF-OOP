@@ -112,9 +112,17 @@ namespace SINK_THE_FLEET
 			sout << left << rowMarker++;
 
 			//print out ship
-			for (int j = 0; j < numberOfCols; j++)
+			for (short j = 0; j < numberOfCols; j++)
 			{
-				//printShip(sout, grid[i][j]);
+				/*
+				getCell, returns ship
+				ship.print
+				*/
+				CCell cell(i,j);
+				Ship ship = static_cast<Ship>(getCell(whichGrid,cell));
+				ship.print();
+				
+
 			}
 			sout << endl;
 
