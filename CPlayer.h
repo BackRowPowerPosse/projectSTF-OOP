@@ -24,14 +24,13 @@ namespace SINK_THE_FLEET
 		bool isValidLocation(short whichShip);
 		CShipInfo operator[](short index) const;
 
-		CPlayer operator=(CPlayer &player);
+		CPlayer operator=(CPlayer &playerObj);
 		void setGridSize(char size);
 		void setCell(short whichGrid, CCell cell, CShip ship);
 		void saveGrid();
 		void setShips();
 		void hitShip(CShip ship);
 		CPlayer operator--();
-
 	private:
 		void allocateMemory();
 		void deleteMemory();

@@ -5,7 +5,7 @@ namespace SINK_THE_FLEET
 	//default constructor
 	CPlayer::CPlayer(unsigned short whichPlayer, char gridSize)
 	{
-
+		
 	}
 	//copy constructor
 	CPlayer::CPlayer(const CPlayer& playerObj)
@@ -13,7 +13,9 @@ namespace SINK_THE_FLEET
 		m_gridSize(playerObj.m_gridSize),
 		m_piecesLeft(playerObj.m_piecesLeft)
 	{
-		m_ships = new CShipInfo[6];
+		short numberOfRows = (toupper(playerObj.m_gridSize) == 'L') ? LARGEROWS : SMALLROWS;
+		short numberOfCols = (toupper(playerObj.m_gridSize) == 'L') ? LARGECOLS : SMALLCOLS;
+
 		for (int i = 0; i < 6; i++)
 		{
 			m_ships[i].setName = playerObj.m_ships[i].getName;
@@ -21,20 +23,43 @@ namespace SINK_THE_FLEET
 			m_ships[i].setOrientation = playerObj.m_ships[i].getOrientation;
 			m_ships[i].setPiecesLeft = playerObj.m_ships[i].getPiecesLeft;
 		}
+		for (int whichGrid = 0; whichGrid < NUMPLAYERS; whichGrid++)
+		{
+			// loop through both players -- player 1 and player 2
+			for (short i = 0; i < NUMPLAYERS; ++i)
+			{
+				// initialize to null pointer -- simplifies debugging if
+				// exception thrown by line below --cleans this spot
+				m_gameGrid[whichGrid] = nullptr;
+				// allocate memory for array of pointers to ships
+				// -- each item constitutes a row pointer.
+				m_gameGrid[whichGrid] = new CShip *[numberOfRows];
+				for (short j = 0; j < numberOfRows; ++j)
+				{
+					m_gameGrid[whichGrid][j] = nullptr;
+					m_gameGrid[whichGrid][j] = new CShip[numberOfCols];
+
+					for (short k = 0; k < numberOfCols; ++k)
+					{
+						// initialize all items in row to NOSHIP
+						(this)->m_gameGrid[whichGrid][j][k] = NOSHIP;
+					} // end for k
+				} // end for j
+
+			} // end for i
+		}
 
 	}
 
 	CPlayer CPlayer::operator=(CPlayer& playerObj) //for deep copy
 	{
+
 		m_whichPlayer = playerObj.m_whichPlayer;
 		m_gridSize = playerObj.m_gridSize;
 		m_piecesLeft = playerObj.m_piecesLeft;
 		//check for self assignment
 		if (this != &playerObj)
 		{
-			//delete whats inside if there is something
-			if (m_ships)
-				delete[] m_ships;
 			for (int i = 0; i < 6; i++)
 			{
 				m_ships[i].setName = playerObj.m_ships[i].getName;
