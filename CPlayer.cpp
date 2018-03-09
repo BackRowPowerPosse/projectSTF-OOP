@@ -51,28 +51,27 @@ namespace SINK_THE_FLEET
 	}
 	unsigned short CPlayer::getWhichPlayer() const
 	{
-		return this->m_whichPlayer;
+		return m_whichPlayer;
 	}
 	short CPlayer::getPiecesLeft() const
 	{
-		return this->m_piecesLeft;
+		return m_piecesLeft;
 	}
 	char CPlayer::getGridSize() const
 	{
-		return this->m_gridSize;
+		return m_gridSize;
 	}
 	Ship CPlayer::getCell(short whichGrid, CCell cell) const
 	{
-		//return 
+		return static_cast<Ship>(m_gameGrid[whichGrid][cell.getCol][cell.getRow]); 
 	}
 	void CPlayer::printGrid(ostream & sout, short whichGrid) const
 	{
 		//clear the screen before printing the grid
 		system("cls");
-		short numberOfRows = (toupper(whichGrid) == 'L') ? LARGEROWS : SMALLROWS;
-		short numberOfCols = (toupper(whichGrid) == 'L') ? LARGECOLS : SMALLCOLS;
+		short numberOfRows = (m_gridSize == 'L') ? LARGEROWS : SMALLROWS;
+		short numberOfCols = (m_gridSize == 'L') ? LARGECOLS : SMALLCOLS;
 
-		short whichGrid = (this->m_gridSize == 'S') ? 0 : 1; // 0 - small 1 - large
 		char rowMarker = 'A';
 
 		//print out first column (1-12)
@@ -112,12 +111,12 @@ namespace SINK_THE_FLEET
 	}
 	bool CPlayer::isValidLocation(short whichShip)
 	{
-		short numberOfRows = (this->m_gridSize == 'L') ? LARGEROWS : SMALLROWS;
-		short numberOfCols = (this->m_gridSize == 'L') ? LARGECOLS : SMALLCOLS;
+		short numberOfRows = (m_gridSize == 'L') ? LARGEROWS : SMALLROWS;
+		short numberOfCols = (m_gridSize == 'L') ? LARGECOLS : SMALLCOLS;
 		//get orientation
-		short orientation = this->m_ships[whichShip].getOrientation();
-		CCell bow = this->m_ships[whichShip].getBowLocation();
-		short shipLength = this->m_ships[whichShip].getPiecesLeft();
+		short orientation = m_ships[whichShip].getOrientation();
+		CCell bow = m_ships[whichShip].getBowLocation();
+		short shipLength = m_ships[whichShip].getPiecesLeft();
 
 		short i = 0;
 
@@ -129,7 +128,8 @@ namespace SINK_THE_FLEET
 			while (isOpen && i < shipLength) 
 			{
 				if (((bow.getCol + shipLength) > numberOfCols) ||
-					this->getCell(**this->m_gameGrid[0], bow.getCol + i) != NOSHIP) //check if spot is empty
+					getCell(**this->m_gameGrid[0], bow.getCol + i) != NOSHIP) 
+					//check if spot is empty
 				{
 					isOpen = false;
 				}
@@ -140,7 +140,8 @@ namespace SINK_THE_FLEET
 			while (isOpen && i < shipLength)
 			{
 				if (((bow.getRow + shipLength) > numberOfRows) ||
-					this->getCell(**this->m_gameGrid[0], bow.getRow + i) != NOSHIP) // check overlapping from previous entries
+					getCell(**this->m_gameGrid[0], bow.getRow + i) != NOSHIP) 
+					// check overlapping from previous entries
 				{
 					isOpen = false;
 				}
@@ -156,12 +157,12 @@ namespace SINK_THE_FLEET
 		{
 			throw range_error("Index out of range"); //throw range_error
 		}
-		return this->m_ships[index];
+		return m_ships[index];
 	}
 
 	void CPlayer::setGridSize(char size)
 	{
-		this->m_gridSize = size;
+		m_gridSize = size;
 	}
 	void CPlayer::setCell(short whichGrid, CCell cell, CShip ship)
 	{
@@ -270,12 +271,12 @@ namespace SINK_THE_FLEET
 	}
 	void CPlayer::hitShip(CShip ship)
 	{
-		this->m_piecesLeft--;
+		m_piecesLeft--;
 		
 	}
 	CPlayer CPlayer::operator--()
 	{
-		this->m_piecesLeft--;
+		m_piecesLeft--;
 		return *this;
 	}
 	void CPlayer::allocateMemory()
