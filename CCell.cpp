@@ -38,15 +38,19 @@ namespace SINK_THE_FLEET
 		do
 		{
 			col = 0;
-			cout << "Row must be a letter from A to " << highChar
-				<< " and column must be from 1 to "
-				<< numberOfCols << ": ";
-			while ((row = toupper(sin.get())) < 'A' || row  > highChar)
-			{
-				sin.ignore(FILENAME_MAX, '\n');
-				cout << "Row must be a letter from A to " << highChar //Hardcore changes
+			if (&sin == &cin) {
+				cout << "Row must be a letter from A to " << highChar
 					<< " and column must be from 1 to "
 					<< numberOfCols << ": ";
+			}
+			while ((row = toupper(sin.get())) < 'A' || row > highChar)
+			{
+				sin.ignore(FILENAME_MAX, '\n');
+				if (&sin == &cin) {
+				cout << "Row must be a letter from A to " << highChar
+					<< " and column must be from 1 to "
+					<< numberOfCols << ": ";
+				}
 			}
 			sin >> col;
 			if (!sin)

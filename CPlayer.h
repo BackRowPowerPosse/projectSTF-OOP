@@ -20,14 +20,14 @@ namespace SINK_THE_FLEET
 		char getGridSize() const;
 		Ship getCell(short whichGrid, CCell cell) const;
 		void printGrid(ostream &sout, short whichGrid) const;
-		void getGrid(string fileName) const;
+		bool getGrid(string fileName);
 		bool isValidLocation(short whichShip);
 		CShipInfo operator[](short index) const;
 
 		CPlayer operator=(CPlayer &playerObj);
 		void setGridSize(char size);
 		void setCell(short whichGrid, CCell cell, CShip ship);
-		void saveGrid();
+		bool saveGrid();
 		void setShips();
 		void hitShip(CShip ship);
 		CPlayer operator--();
