@@ -35,8 +35,8 @@ namespace SINK_THE_FLEET
 	// 
 	//	Version:        1.0
 	//   
-	//		Software:   MS Windows 10 for execution; 
-	//                  	Compiles under Microsoft Visual C++.Net 2017
+	//		Software:   MS Windows 10 for execution;  
+	//                  Compiles under Microsoft Visual C++.Net 2017
 	// 
 	//	class: CShipInfo
 	//
@@ -49,10 +49,6 @@ namespace SINK_THE_FLEET
 	//	History Log:
 	//                	3/5/18  AM  completed version 1.0
 	//-----------------------------------------------------------------------------
-
-	CShipInfo::CShipInfo()
-	{
-	}
 
 	//-----------------------------------------------------------------------------
 	//	Class:         CShipInfo
@@ -69,6 +65,17 @@ namespace SINK_THE_FLEET
 	//-----------------------------------------------------------------------------
 	void CShipInfo::print(ostream & sout) const
 	{
+		sout << this->m_name << ", located ";
+		if (this->m_orientation)
+		{
+			sout << "vertically at ";
+		}
+		else
+		{
+			sout << "horizontally at ";
+		}
+		sout << getBowLocation() << "-- " << this->m_piecesLeft << " pieces left";
+
 	}
 	//-----------------------------------------------------------------------------
 	//	Class:         CShipInfo
@@ -84,7 +91,7 @@ namespace SINK_THE_FLEET
 	//-----------------------------------------------------------------------------
 	void CShipInfo::print() const
 	{
-
+		print(cout);
 	}
 	//-----------------------------------------------------------------------------
 	//	Class:         CShipInfo
@@ -157,18 +164,22 @@ namespace SINK_THE_FLEET
 	//-----------------------------------------------------------------------------
 	//	Class:         CShipInfo
 	//	method:        bool isSunk();
-	//	description:   returns true if ship is sunk, otherwise false
+	//	description:    returns true if pieces = 0, otherwise false
 	//	Input:         None
 	//	Output:        None
 	//	Calls:         None
 	//	Called By:     
 	//	Parameters:    
-	//	Returns:       returns true if ship is sunk, otherwise false 
+	//	Returns:       returns true if pieces = 0, otherwise false 
 	//	History Log:
 	//	               
 	//-----------------------------------------------------------------------------
 	bool CShipInfo::isSunk()
 	{
+		if (this->m_piecesLeft == 0)
+		{
+			return true;
+		}
 		return false;
 	}
 	//-----------------------------------------------------------------------------
@@ -235,8 +246,9 @@ namespace SINK_THE_FLEET
 	//	History Log:
 	//	               3/5/18  AM  completed version 1.0
 	//-----------------------------------------------------------------------------
-	void CShipInfo::setPiecesLeft()
+	void CShipInfo::setPiecesLeft(short pieces)
 	{
+		this->m_piecesLeft = pieces;
 	}
 	//-----------------------------------------------------------------------------
 	//	Class:         CShipInfo
@@ -247,13 +259,14 @@ namespace SINK_THE_FLEET
 	//	Calls:         None
 	//	Called By:     
 	//	Parameters:   
-	//	Returns:       n/a 
+	//	Returns:       current object 
 	//	History Log:
 	//	               3/5/18  AM  completed version 1.0
 	//-----------------------------------------------------------------------------
 	CShipInfo CShipInfo::operator--()
 	{
-		return CShipInfo();
+		--this->m_piecesLeft;
+		return *this;
 	}
 	// ----------------------------------------------------------------------------
 	//	method:         ostream& operator<<(ostream& sout, const CShipInfo & shipInfo)
@@ -270,6 +283,7 @@ namespace SINK_THE_FLEET
 	// ----------------------------------------------------------------------------
 	ostream & operator<<(ostream & sout, const CShipInfo & shipInfo)
 	{
-		
+		shipInfo.print(sout);
+		return sout;
 	}
 }
