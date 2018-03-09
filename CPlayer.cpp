@@ -83,7 +83,7 @@ namespace SINK_THE_FLEET
 					for (short j = 0; j < numberOfRows; ++j)
 					{
 						m_gameGrid[whichGrid][j] = nullptr;
-						m_gameGrid[whichGrid][j] = playerObj.m_gameGrid[numberOfCols][j];
+						m_gameGrid[whichGrid][j] = playerObj.m_gameGrid[whichGrid][j];
 
 						for (short k = 0; k < numberOfCols; ++k)
 						{
