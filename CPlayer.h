@@ -1,9 +1,8 @@
 #pragma once
 #include "fleet.h"
+#include <string.h>
 #include "CSinkTheFleet.h"
 
-#define SHIPSIZE  6
-#define GAMEGRID  2
 
 namespace SINK_THE_FLEET
 {
@@ -37,8 +36,8 @@ namespace SINK_THE_FLEET
 
 		unsigned short m_whichPlayer;
 		short m_piecesLeft;
-		CShipInfo m_ships[SHIPSIZE];
+		CShipInfo m_ships[SHIP_SIZE_ARRAYSIZE];
 		char m_gridSize;
-		CShip **m_gameGrid[GAMEGRID];
+		CShip **m_gameGrid[2];
 	};
 }

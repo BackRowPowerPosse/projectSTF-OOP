@@ -114,7 +114,7 @@ namespace SINK_THE_FLEET
 	}
 	Ship CPlayer::getCell(short whichGrid, CCell cell) const
 	{
-		return static_cast<Ship>(m_gameGrid[whichGrid][cell.getCol][cell.getRow]); 
+		return static_cast<Ship>(**m_gameGrid[whichGrid][cell.getCol][cell.getRow]); 
 	}
 	void CPlayer::printGrid(ostream & sout, short whichGrid) const
 	{
@@ -140,13 +140,9 @@ namespace SINK_THE_FLEET
 			//print out ship
 			for (short j = 0; j < numberOfCols; j++)
 			{
-				/*
-				getCell, returns ship
-				ship.print
-				*/
 				CCell cell(i,j);
-				Ship ship = static_cast<Ship>(getCell(whichGrid,cell));
-				ship.print();
+				Ship ship = getCell(whichGrid, cell);
+				cout << ship;
 			}
 			sout << endl;
 
@@ -163,7 +159,7 @@ namespace SINK_THE_FLEET
 			sout << endl;
 		}
 	}
-	void CPlayer::getGrid(string fileName) const
+	bool CPlayer::getGrid(string fileName)
 	{
 	}
 	bool CPlayer::isValidLocation(short whichShip)
@@ -210,7 +206,7 @@ namespace SINK_THE_FLEET
 	}
 	CShipInfo CPlayer::operator[](short index) const
 	{
-		if ((index > SHIPSIZE) || (index < 1)) //ignore 0
+		if ((index > SHIP_SIZE_ARRAYSIZE) || (index < 1)) //ignore 0
 		{
 			throw range_error("Index out of range"); //throw range_error
 		}
