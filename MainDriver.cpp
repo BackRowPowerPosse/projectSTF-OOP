@@ -90,17 +90,7 @@ int main()
 		
 	// Old code -- move it to other classes
 
-	//do
-	//{
-	//	numRows = (toupper(gridSize) == 'L') ? LARGEROWS : SMALLROWS;
-	//	numCols = (toupper(gridSize) == 'L') ? LARGECOLS : SMALLCOLS;
-
-	//	initializePlayer(game);		
-	//	initializePlayer(game + 1);
-	//	// Dynamically create the rows of the array
-	//	allocMem(game, gridSize);
-	//	
-	//	for(whichPlayer = 0; whichPlayer < NUMPLAYERS; whichPlayer++)
+	//for(whichPlayer = 0; whichPlayer < NUMPLAYERS; whichPlayer++)
 	//	{
 	//		outSStream.str("");
 	//		outSStream.clear();
@@ -207,13 +197,6 @@ int main()
 	//			// Switch players if cannot reshoot
 	//			if (!reshot) whichPlayer = !whichPlayer;
 	//	}
-	//	
-	//	endBox(whichPlayer);
-	//	// Clean up memory
-	//	deleteMem(game, gridSize);
-	//	again = safeChoice("Would you like to play again?", 'Y', 'N');
-	//}
-	//while(again == 'Y');
 
 	_CrtDumpMemoryLeaks();
 
