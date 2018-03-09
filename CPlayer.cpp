@@ -139,7 +139,6 @@ namespace SINK_THE_FLEET
 	{
 		short numberOfRows = (this->m_gridSize == 'L') ? LARGEROWS : SMALLROWS;
 		short numberOfCols = (this->m_gridSize == 'L') ? LARGECOLS : SMALLCOLS;
-		short whichGrid = (this->m_gridSize == 'S') ? 0 : 1; // 0 - small 1 - large
 		//get orientation
 		short orientation = this->m_ships[whichShip].getOrientation();
 		CCell bow = this->m_ships[whichShip].getBowLocation();
@@ -155,7 +154,7 @@ namespace SINK_THE_FLEET
 			while (isOpen && i < shipLength) 
 			{
 				if (((bow.getCol + shipLength) > numberOfCols) ||
-					this->getCell(whichGrid, bow.getCol + i) != NOSHIP) //check if spot is empty
+					this->getCell(**this->m_gameGrid[0], bow.getCol + i) != NOSHIP) //check if spot is empty
 				{
 					isOpen = false;
 				}
@@ -166,7 +165,7 @@ namespace SINK_THE_FLEET
 			while (isOpen && i < shipLength)
 			{
 				if (((bow.getRow + shipLength) > numberOfRows) ||
-					this->getCell(whichGrid, bow.getRow + i) != NOSHIP) // check overlapping from previous entries
+					this->getCell(**this->m_gameGrid[0], bow.getRow + i) != NOSHIP) // check overlapping from previous entries
 				{
 					isOpen = false;
 				}
