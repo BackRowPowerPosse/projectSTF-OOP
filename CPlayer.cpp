@@ -324,6 +324,8 @@ namespace SINK_THE_FLEET
 	}
 	void CPlayer::hitShip(CShip ship)
 	{
+		static_cast<short>(ship);
+		m_ships[ship].setPiecesLeft((m_ships[ship].getPiecesLeft) - 1);
 		m_piecesLeft--;
 		
 	}
