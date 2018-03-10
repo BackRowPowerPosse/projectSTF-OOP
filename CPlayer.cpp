@@ -5,8 +5,27 @@ namespace SINK_THE_FLEET
 	//default constructor
 	CPlayer::CPlayer(unsigned short whichPlayer, char gridSize)
 	{
+		//	validates and sets m_gridSize
+		if (toupper(gridSize) == 'L' || toupper(gridSize) == 'S') {
+			m_gridSize = gridSize;
+		}
+		else {
+			cout << "Bad gridSize input, defaulting to small" << endl;
+			m_gridSize = 'S';
+		}
+
+		//	sets m_whichPlayer
+		m_whichPlayer = whichPlayer;
+
+		//	set both gamegrids to null
+		m_gameGrid[0] = nullptr;
+		m_gameGrid[1] = nullptr;
+
+		//	calls allocateMemory
+		allocateMemory();
 		
 	}
+
 	//copy constructor
 	CPlayer::CPlayer(const CPlayer& playerObj)
 		: m_whichPlayer(playerObj.m_whichPlayer),
@@ -457,8 +476,65 @@ namespace SINK_THE_FLEET
 	}
 	void CPlayer::allocateMemory()
 	{
+		short numberOfRows = (toupper(m_gridSize) == 'L') ? LARGEROWS : SMALLROWS;
+		short numberOfCols = (toupper(m_gridSize) == 'L') ? LARGECOLS : SMALLCOLS;
+
+		try
+		{
+			for (int whichGrid = 0; whichGrid < NUMPLAYERS; whichGrid++)	// loop through both grid types -- current player and opponent
+			{
+				
+					m_gameGrid[whichGrid] = nullptr;					//	initialize to null pointer -- simplifies debugging if exception thrown by line below -- cleans this spot in mem
+					m_gameGrid[whichGrid] = new CShip*[numberOfRows];	//	allocate memory for array of pointers to ships -- each item constitutes a row pointer
+					for (short j = 0; j < numberOfRows; ++j)
+					{
+						// set the pointers to NULL, then allocate the
+						// memory for each row in each grid
+						m_gameGrid[whichGrid][j] = nullptr;
+						m_gameGrid[whichGrid][j] = new CShip[numberOfCols];	//	allocate a new ship array that each row pointer will point to
+
+						for (short k = 0; k < numberOfCols; ++k)
+						{
+							m_gameGrid[whichGrid][j][k] = NOSHIP;	//	initialize all items in row to NOSHIP
+						} // end for k
+					} // end for j
+
+				// end for i
+			} // end for whichGrid
+		}
+		catch (bad_alloc e)	// badalloc might be better exception
+		{
+			deleteMem();
+			cerr << "exception: " << e.what() << endl;
+			cout << "shutting down" << endl;
+			cin.ignore(FILENAME_MAX, '\n');
+			exit(EXIT_FAILURE);
+		}
+
 	}
 	void CPlayer::deleteMemory()
 	{
+		short numberOfRows = (toupper(m_gridSize) == 'L') ? LARGEROWS : SMALLROWS;
+
+		// delete[] in reverse order of allocMem()
+		// be sure to check if the memory was allocated (!nullptr) BEFORE deleting
+
+		for (int whichGrid = 0; whichGrid < NUMPLAYERS; whichGrid++) {	// loop through both types of grids
+
+				for (short j = 0; j < numberOfRows; ++j) {	//	loop through all of the rows
+
+															//	if pointer is NOT null --> delete the array of ships this row pointer points to
+					if (m_gameGrid[whichGrid][j] != nullptr)
+						delete[] m_gameGrid[whichGrid][j];
+				}
+
+				//	if pointer is NOT null --> delete the array of row pointers
+				if (m_gameGrid[whichGrid] != nullptr)
+					delete[] m_gameGrid[whichGrid];
+
+			
+
+		}
+
 	}
 }
