@@ -8,7 +8,7 @@ namespace SINK_THE_FLEET
 	{
 	public:
 		CPlayer(unsigned short whichPlayer, char gridSize);
-		CPlayer();
+		CPlayer(const CPlayer& playerObj);
 
 		~CPlayer();
 
@@ -17,11 +17,11 @@ namespace SINK_THE_FLEET
 		char getGridSize() const;
 		Ship getCell(short whichGrid, CCell cell) const;
 		void printGrid(ostream &sout, short whichGrid) const;
-		void getGrid(string fileName) const;
+		bool getGrid(string fileName);
 		bool isValidLocation(short whichShip);
 		CShipInfo operator[](short index) const;
 
-		CPlayer operator=(CPlayer &player);
+		CPlayer operator=(CPlayer &playerObj);
 		void setGridSize(char size);
 		void setCell(short whichGrid, CCell cell, CShip ship);
 		void saveGrid();
@@ -35,7 +35,7 @@ namespace SINK_THE_FLEET
 
 		unsigned short m_whichPlayer;
 		short m_piecesLeft;
-		CShipInfo m_ships[6];
+		CShipInfo m_ships[SHIP_SIZE_ARRAYSIZE];
 		char m_gridSize;
 		CShip **m_gameGrid[2];
 	};
