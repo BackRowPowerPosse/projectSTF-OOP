@@ -159,7 +159,7 @@ namespace SINK_THE_FLEET
 			sout << endl;
 		}
 	}
-	bool CPlayer::getGrid(string fileName)
+	void CPlayer::getGrid(string fileName)
 	{
 	}
 	bool CPlayer::isValidLocation(short whichShip)

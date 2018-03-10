@@ -1,8 +1,6 @@
 #pragma once
 #include "fleet.h"
-#include <string.h>
 #include "CSinkTheFleet.h"
-
 
 namespace SINK_THE_FLEET
 {
@@ -26,10 +24,11 @@ namespace SINK_THE_FLEET
 		CPlayer operator=(CPlayer &playerObj);
 		void setGridSize(char size);
 		void setCell(short whichGrid, CCell cell, CShip ship);
-		bool saveGrid();
+		void saveGrid();
 		void setShips();
 		void hitShip(CShip ship);
 		CPlayer operator--();
+
 	private:
 		void allocateMemory();
 		void deleteMemory();
