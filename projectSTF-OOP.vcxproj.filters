@@ -47,12 +47,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="safeio.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="textGraphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="fleet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -72,6 +66,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CSinkTheFleet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SafeIO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextGraphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
