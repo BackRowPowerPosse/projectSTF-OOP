@@ -73,7 +73,7 @@ namespace SINK_THE_FLEET
 	}
 	
 		
-	}
+	
 	//-----------------------------------------------------------------------------
 	//	Class:        CPlayer
 	//	method:       CPlayer::CPlayer(CPlayer& playerObj)  
@@ -673,7 +673,7 @@ namespace SINK_THE_FLEET
 		}
 		catch (bad_alloc e)	// badalloc might be better exception
 		{
-			deleteMem();
+			deleteMemory();
 			cerr << "exception: " << e.what() << endl;
 			cout << "shutting down" << endl;
 			cin.ignore(FILENAME_MAX, '\n');
