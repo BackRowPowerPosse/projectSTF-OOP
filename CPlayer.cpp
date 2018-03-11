@@ -206,7 +206,7 @@ namespace SINK_THE_FLEET
 	}
 	CShipInfo CPlayer::operator[](short index) const
 	{
-		if ((index > SHIP_SIZE_ARRAYSIZE) || (index < 1)) //ignore 0
+		if ((index > SHIP_SIZE_ARRAYSIZE))
 		{
 			throw range_error("Index out of range"); //throw range_error
 		}
@@ -219,6 +219,7 @@ namespace SINK_THE_FLEET
 	}
 	void CPlayer::setCell(short whichGrid, CCell cell, CShip ship)
 	{
+		m_gameGrid[whichGrid][cell.getRow][cell.getCol] = ship;
 	}
 	void CPlayer::saveGrid()
 	{
