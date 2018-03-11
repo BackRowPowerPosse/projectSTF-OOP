@@ -1,3 +1,9 @@
+//-----------------------------------------------------------------------------
+//	File:           CShipInfo.h
+//
+//	class:		CShipInfo
+//-----------------------------------------------------------------------------
+
 #pragma once
 #include "fleet.h"
 #include "CSinkTheFleet.h"
@@ -7,8 +13,9 @@ namespace SINK_THE_FLEET
 	class CShipInfo
 	{
 	public:
+		CShipInfo(CShip name, CDirection direction, CCell bow, short pieces)
+			: m_name(name), m_orientation(direction), m_bowLocation(bow), m_piecesLeft(pieces) {}
 		CShipInfo();
-
 		void print(ostream &sout) const;
 		void print() const;
 		CShip getName() const;
@@ -17,10 +24,10 @@ namespace SINK_THE_FLEET
 		short getPiecesLeft() const;
 		bool isSunk();
 
-		void setName();
-		void setOrientation();
-		void setBowLocation();
-		void setPiecesLeft();
+		void setName(CShip &name);
+		void setOrientation(CDirection &orientation);
+		void setBowLocation(CCell &bowLocation);
+		void setPiecesLeft(short pieces);
 		CShipInfo operator--();
 
 		static const short shipSize[6];
