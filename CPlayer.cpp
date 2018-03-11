@@ -1,10 +1,100 @@
-#include "CPlayer.h"
+   #include "CPlayer.h"
 
 namespace SINK_THE_FLEET
 {
-	CPlayer::CPlayer()
+	//default constructor
+	CPlayer::CPlayer(unsigned short whichPlayer, char gridSize)
 	{
 		
+	}
+	//copy constructor
+	CPlayer::CPlayer(const CPlayer& playerObj)
+		: m_whichPlayer(playerObj.m_whichPlayer),
+		m_gridSize(playerObj.m_gridSize),
+		m_piecesLeft(playerObj.m_piecesLeft)
+	{
+		short numberOfRows = (toupper(playerObj.m_gridSize) == 'L') ? LARGEROWS : SMALLROWS;
+		short numberOfCols = (toupper(playerObj.m_gridSize) == 'L') ? LARGECOLS : SMALLCOLS;
+
+		for (int i = 0; i < 6; i++)
+		{
+			m_ships[i].setName = playerObj.m_ships[i].getName;
+			m_ships[i].setBowLocation = playerObj.m_ships[i].getBowLocation;
+			m_ships[i].setOrientation = playerObj.m_ships[i].getOrientation;
+			m_ships[i].setPiecesLeft = playerObj.m_ships[i].getPiecesLeft;
+		}
+		for (int whichGrid = 0; whichGrid < NUMPLAYERS; whichGrid++)
+		{
+			// loop through both players -- player 1 and player 2
+			for (short i = 0; i < NUMPLAYERS; ++i)
+			{
+				// initialize to null pointer -- simplifies debugging if
+				// exception thrown by line below --cleans this spot
+				m_gameGrid[whichGrid] = nullptr;
+				// allocate memory for array of pointers to ships
+				// -- each item constitutes a row pointer.
+				m_gameGrid[whichGrid] = new CShip *[numberOfRows];
+				for (short j = 0; j < numberOfRows; ++j)
+				{
+					m_gameGrid[whichGrid][j] = nullptr;
+					m_gameGrid[whichGrid][j] = new CShip[numberOfCols];
+
+					for (short k = 0; k < numberOfCols; ++k)
+					{
+						// initialize all items in row to NOSHIP
+						(this)->m_gameGrid[whichGrid][j][k] = NOSHIP;
+					} // end for k
+				} // end for j
+
+			} // end for i
+		}
+
+	}
+
+	CPlayer CPlayer::operator=(CPlayer& playerObj) //for deep copy
+	{
+		short numberOfRows = (toupper(playerObj.m_gridSize) == 'L') ? LARGEROWS : SMALLROWS;
+		short numberOfCols = (toupper(playerObj.m_gridSize) == 'L') ? LARGECOLS : SMALLCOLS;
+		m_whichPlayer = playerObj.m_whichPlayer;
+		m_gridSize = playerObj.m_gridSize;
+		m_piecesLeft = playerObj.m_piecesLeft;
+		//check for self assignment
+		if (this != &playerObj)
+		{
+			for (int i = 0; i < 6; i++)
+			{
+				m_ships[i].setName = playerObj.m_ships[i].getName;
+				m_ships[i].setBowLocation = playerObj.m_ships[i].getBowLocation;
+				m_ships[i].setOrientation = playerObj.m_ships[i].getOrientation;
+				m_ships[i].setPiecesLeft = playerObj.m_ships[i].getPiecesLeft;
+			}
+			for (int whichGrid = 0; whichGrid < NUMPLAYERS; whichGrid++)
+			{
+				// loop through both players -- player 1 and player 2
+				for (short i = 0; i < NUMPLAYERS; ++i)
+				{
+					// initialize to null pointer -- simplifies debugging if
+					// exception thrown by line below --cleans this spot
+					m_gameGrid[whichGrid] = nullptr;
+					// allocate memory for array of pointers to ships
+					// -- each item constitutes a row pointer.
+					m_gameGrid[whichGrid] = playerObj.m_gameGrid[whichGrid];
+					for (short j = 0; j < numberOfRows; ++j)
+					{
+						m_gameGrid[whichGrid][j] = nullptr;
+						m_gameGrid[whichGrid][j] = new CShip[numberOfCols];
+
+						for (short k = 0; k < numberOfCols; ++k)
+						{
+							// initialize all items in row to NOSHIP
+							(this)->m_gameGrid[whichGrid][j][k] = NOSHIP;
+						} // end for k
+					} // end for j
+
+				} // end for i
+			}
+		}
+		return *this;
 	}
 	CPlayer::~CPlayer()
 	{
@@ -12,26 +102,27 @@ namespace SINK_THE_FLEET
 	}
 	unsigned short CPlayer::getWhichPlayer() const
 	{
-		return this->m_whichPlayer;
+		return m_whichPlayer;
 	}
 	short CPlayer::getPiecesLeft() const
 	{
-		return this->m_piecesLeft;
+		return m_piecesLeft;
 	}
 	char CPlayer::getGridSize() const
 	{
-		return this->m_gridSize;
+		return m_gridSize;
 	}
 	Ship CPlayer::getCell(short whichGrid, CCell cell) const
 	{
-		//return 
+		return (**m_gameGrid[whichGrid][cell.getCol][cell.getRow]); 
 	}
 	void CPlayer::printGrid(ostream & sout, short whichGrid) const
 	{
 		//clear the screen before printing the grid
 		system("cls");
-		short numberOfRows = (toupper(whichGrid) == 'L') ? LARGEROWS : SMALLROWS;
-		short numberOfCols = (toupper(whichGrid) == 'L') ? LARGECOLS : SMALLCOLS;
+		short numberOfRows = (m_gridSize == 'L') ? LARGEROWS : SMALLROWS;
+		short numberOfCols = (m_gridSize == 'L') ? LARGECOLS : SMALLCOLS;
+
 		char rowMarker = 'A';
 
 		//print out first column (1-12)
@@ -47,9 +138,11 @@ namespace SINK_THE_FLEET
 			sout << left << rowMarker++;
 
 			//print out ship
-			for (int j = 0; j < numberOfCols; j++)
+			for (short j = 0; j < numberOfCols; j++)
 			{
-				//printShip(sout, grid[i][j]);
+				CCell cell(i,j);
+				Ship ship = getCell(whichGrid, cell);
+				cout << ship;
 			}
 			sout << endl;
 
@@ -66,9 +159,9 @@ namespace SINK_THE_FLEET
 			sout << endl;
 		}
 	}
-
-	bool CPlayer::getGrid(string fileName)
+	void CPlayer::getGrid(string fileName)
 	{
+
 		string line;
 		//string fileName;
 		ifstream ifs;
@@ -182,27 +275,27 @@ namespace SINK_THE_FLEET
 
 		return true;
 	}
-
 	bool CPlayer::isValidLocation(short whichShip)
 	{
-		short numberOfRows = (toupper(size) == 'L') ? LARGEROWS : SMALLROWS;
-		short numberOfCols = (toupper(size) == 'L') ? LARGECOLS : SMALLCOLS;
-
-		short bowLocationRow = player.m_ships[shipNumber].m_bowLocation.m_row;
-		short bowLocationColumn = player.m_ships[shipNumber].m_bowLocation.m_col;
-		short shipLength = shipSize[shipNumber];
-		short shipOrientation = player.m_ships[shipNumber].m_orientation; // 0 is horizontal, 1 is vertical
+		short numberOfRows = (m_gridSize == 'L') ? LARGEROWS : SMALLROWS;
+		short numberOfCols = (m_gridSize == 'L') ? LARGECOLS : SMALLCOLS;
+		//get orientation
+		short orientation = m_ships[whichShip].getOrientation();
+		CCell bow = m_ships[whichShip].getBowLocation();
+		short shipLength = m_ships[whichShip].getPiecesLeft();
 
 		short i = 0;
 
 		bool isOpen = true;
 
-		switch (shipOrientation)
+		switch (orientation)
 		{
 		case 0: //ship is horizontal
-			while (isOpen && i < shipLength) {
-				if (((bowLocationColumn + shipLength) > numberOfCols) ||
-					player.m_gameGrid[0][bowLocationRow][bowLocationColumn + i] != NOSHIP) //check if spot is empty
+			while (isOpen && i < shipLength) 
+			{
+				if (((bow.getCol + shipLength) > numberOfCols) ||
+					getCell(**this->m_gameGrid[0], bow.getCol + i) != NOSHIP) 
+					//check if spot is empty
 				{
 					isOpen = false;
 				}
@@ -210,9 +303,11 @@ namespace SINK_THE_FLEET
 			}
 			break;
 		case 1://ship is vertical
-			while (isOpen && i < shipLength) {
-				if (((bowLocationRow + shipLength) > numberOfRows) ||
-					player.m_gameGrid[0][bowLocationRow + i][bowLocationColumn] != NOSHIP) // check overlapping from previous entries
+			while (isOpen && i < shipLength)
+			{
+				if (((bow.getRow + shipLength) > numberOfRows) ||
+					getCell(**this->m_gameGrid[0], bow.getRow + i) != NOSHIP) 
+					// check overlapping from previous entries
 				{
 					isOpen = false;
 				}
@@ -224,86 +319,24 @@ namespace SINK_THE_FLEET
 	}
 	CShipInfo CPlayer::operator[](short index) const
 	{
-		return CShipInfo();
+		if ((index > SHIP_SIZE_ARRAYSIZE))
+		{
+			throw range_error("Index out of range"); //throw range_error
+		}
+		return m_ships[index];
 	}
-	CPlayer CPlayer::operator=(CPlayer & player)
-	{
-		return CPlayer();
-	}
+
 	void CPlayer::setGridSize(char size)
 	{
-		this->m_gridSize = size;
+		m_gridSize = size;
 	}
 	void CPlayer::setCell(short whichGrid, CCell cell, CShip ship)
 	{
+		m_gameGrid[whichGrid][cell.getRow][cell.getCol] = ship;
 	}
-
-	bool CPlayer::saveGrid()
+	void CPlayer::saveGrid()
 	{
-		//~~~~~~~~~~~~~Ready for testing
-		string filename;
-		ofstream ofs;
-		Ship ship = NOSHIP;
-		short shipCount[SHIP_SIZE_ARRAYSIZE] = { 0 };
-		char cell = ' ';
-		char orientation;
-		char row;
-		short col;
-		/*short numberOfRows = (toupper(size) == 'L') ? LARGEROWS : SMALLROWS;
-		short numberOfCols = (toupper(size) == 'L') ? LARGECOLS : SMALLCOLS;*/
-
-
-		cout << "Please enter file name: ";		// filename prompt
-		cin >> filename;						// enter filename
-		cin.ignore(FILENAME_MAX, '\n');			// clean buffer
-
-		try		// attempt to open file
-		{
-			ofs.open(filename.c_str()); // open file
-			if (!ofs)	// check if file opened successfully
-			{
-				cout << "could not open file " << filename << endl
-					<< " press <enter> to continue" << endl;
-				cin.ignore(FILENAME_MAX, '\n');
-				return false; // communicate to program that loading failed
-			}
-		}
-		catch (exception e) // other exception thrown, file couldn't load
-		{
-			cout << "could not open file " << filename << endl
-				<< " press <enter> to continue" << endl;
-			cin.ignore(FILENAME_MAX, '\n');
-			return false; // communicate to program that loading failed
-		}
-
-		// grid size
-		ofs << m_gridSize << endl;
-		for (int i = 1; i < 6; i++) {
-
-			// orientation
-			if (m_ships[i].getOrientation() == VERTICAL) {
-				orientation = 'V';
-			}
-			ofs << orientation << ' ';
-
-			// row
-			row = 'A' + m_ships[i].getBowLocation().getRow();
-			ofs << row << ' ';
-
-			// column
-			col = m_ships[i].getBowLocation().getCol() + 1;
-			ofs << col << endl;
-
-		}
-
-		ofs << endl;
-		printGrid(ofs, 0); // print show grid on file
-
-		cout << "File " << filename << " successfully saved" << endl
-			<< " press <enter> to continue" << endl;
-		cin.ignore(FILENAME_MAX, '\n');
 	}
-
 	void CPlayer::setShips()
 	{
 		char input = 'V';
@@ -406,12 +439,14 @@ namespace SINK_THE_FLEET
 	}
 	void CPlayer::hitShip(CShip ship)
 	{
-		this->m_piecesLeft--;
+		static_cast<short>(ship);
+		m_ships[ship].setPiecesLeft((m_ships[ship].getPiecesLeft) - 1);
+		m_piecesLeft--;
 		
 	}
 	CPlayer CPlayer::operator--()
 	{
-		this->m_piecesLeft--;
+		m_piecesLeft--;
 		return *this;
 	}
 	void CPlayer::allocateMemory()
@@ -419,5 +454,6 @@ namespace SINK_THE_FLEET
 	}
 	void CPlayer::deleteMemory()
 	{
+
 	}
 }

@@ -7,7 +7,7 @@ namespace SINK_THE_FLEET
 	class CCell
 	{
 	public:
-		CCell();
+		CCell(short row, short column);
 		
 		short getRow() const;
 		short getCol() const;

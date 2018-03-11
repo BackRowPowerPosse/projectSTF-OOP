@@ -38,8 +38,8 @@
     <ClInclude Include="CShipInfo.h" />
     <ClInclude Include="CSinkTheFleet.h" />
     <ClInclude Include="fleet.h" />
-    <ClInclude Include="safeio.h" />
-    <ClInclude Include="textGraphics.h" />
+    <ClInclude Include="SafeIO.h" />
+    <ClInclude Include="TextGraphics.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

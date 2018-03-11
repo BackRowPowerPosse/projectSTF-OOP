@@ -7,8 +7,8 @@ namespace SINK_THE_FLEET
 	class CPlayer
 	{
 	public:
-		CPlayer();
-		CPlayer();
+		CPlayer(unsigned short whichPlayer, char gridSize);
+		CPlayer(const CPlayer& playerObj);
 
 		~CPlayer();
 
@@ -24,10 +24,10 @@ namespace SINK_THE_FLEET
 		const short shipSize[SHIP_SIZE_ARRAYSIZE] = { 0, 2, 3, 3, 4, 5 }; // array of ship sizes.
 		//SHIP_SIZE_ARRAYSIZE is constant in "fleet.h" and will need to be replaced
 
-		CPlayer operator=(CPlayer &player);
+		CPlayer operator=(CPlayer &playerObj);
 		void setGridSize(char size);
 		void setCell(short whichGrid, CCell cell, CShip ship);
-		bool saveGrid();
+		void saveGrid();
 		void setShips();
 		void hitShip(CShip ship);
 		CPlayer operator--();
@@ -38,7 +38,7 @@ namespace SINK_THE_FLEET
 
 		unsigned short m_whichPlayer;
 		short m_piecesLeft;
-		CShipInfo m_ships[6];
+		CShipInfo m_ships[SHIP_SIZE_ARRAYSIZE];
 		char m_gridSize;
 		CShip **m_gameGrid[2];
 	};

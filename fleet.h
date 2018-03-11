@@ -15,14 +15,15 @@
 //----------------------------------------------------------------------------
 
 #pragma once
+
 #include <cctype>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
 #include <string>
-#include "safeio.h"
-#include "textGraphics.h"
+#include "SafeIO.h"
+#include "TextGraphics.h"
 
 using namespace std;
 
@@ -169,7 +170,7 @@ bool isValidLocation(const Player& player, short shipNumber, char size);
 //----------------------------------------------------------------------------
 
 // Prints opening graphic
-void header(ostream& sout);
+void headerOld(ostream& sout);
 
 // Prints closing graphic
 void endBox(short player);
