@@ -7,7 +7,20 @@ namespace SINK_THE_FLEET
 	{
 		
 	}
-	//copy constructor
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:       CPlayer::CPlayer(CPlayer& playerObj)  
+	//	description:  Copy construcor, copies the properties of an existing object
+	//				  into a new object and creates new pointers for CShip
+	//	Input:        None 
+	//	Output:       None 
+	//	Calls:        getBowLocation(), getOrientation(), getPiecesLeft()
+	//	Called By:    setShips();
+	//	Parameters:   CPlayer &playerObj reference to an existing CPlayer object
+	//	Returns:      n/a
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	CPlayer::CPlayer(const CPlayer& playerObj)
 		: m_whichPlayer(playerObj.m_whichPlayer),
 		m_gridSize(playerObj.m_gridSize),
@@ -50,8 +63,20 @@ namespace SINK_THE_FLEET
 		}
 
 	}
-
-	CPlayer CPlayer::operator=(CPlayer& playerObj) //for deep copy
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:       CPlayer CPlayer::operator=(CPlayer& playerObj) 
+	//	description:  assigns the members of an object to another 
+	//	Input:        None 
+	//	Output:       None 
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   CPlayer &playerObj reference to an existing CPlayer object
+	//	Returns:      CPlayer object after the assignment is complete
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
+	CPlayer CPlayer::operator=(CPlayer& playerObj) 
 	{
 		short numberOfRows = (toupper(playerObj.m_gridSize) == 'L') ? LARGEROWS : SMALLROWS;
 		short numberOfCols = (toupper(playerObj.m_gridSize) == 'L') ? LARGECOLS : SMALLCOLS;
