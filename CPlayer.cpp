@@ -23,8 +23,56 @@ namespace SINK_THE_FLEET
 
 		//	calls allocateMemory
 		allocateMemory();
+
+		initializationSelection();
+
 		
 	}
+
+	void CPlayer::initializationSelection() {
+
+		short selection;
+		string filename;
+		bool doPrompt = true;
+
+		while (doPrompt) {
+			doPrompt = true;
+			system("cls");
+			cout << "Player " << m_whichPlayer + 1 << ", how would you like to set up your grid?" << endl;
+			cout << "(1) Load grid from file" << endl;
+			cout << "(2) Manually set ships" << endl;
+			cout << "(3) Randomly place all ships" << endl;
+			safeRead(cin, selection, "choose an option from above (enter a number)");
+
+			switch (selection) {
+			case 1:
+				safeRead(cin, filename, "enter filename");
+				if (getGrid(filename))
+					doPrompt = false;	// loading succeeds, exit prompt. Otherwise, prompt should restart from the top of loop
+				else
+					cout << "grid failed to load. restarting this player's prompt... <press ENTER to continue>" << endl;
+					cin.ignore(FILENAME_MAX, '\n');
+					cin.get();	// this might be unnecessary to hold prompt at this spot for 1 char input
+				break;
+			case 2:
+				if (setShips())	// this will show as error until setShips() is developed to return bool
+					doPrompt = false;	// setting succeded, exit prompt
+				break;
+			case 3:
+				autoSetShips();
+				doPrompt = false;	// autoSetShips should automatically succeed (will continue re-rolling until success)
+				break;
+			default:
+				cout << "bad input, try again <press ENTER to continue>" << endl;
+				cin.ignore(FILENAME_MAX, '\n');
+				cin.get();	// this might be unnecessary to hold prompt at this spot for 1 char input
+
+			}
+		}
+
+		
+	}
+	
 
 	//copy constructor
 	CPlayer::CPlayer(const CPlayer& playerObj)
@@ -42,6 +90,8 @@ namespace SINK_THE_FLEET
 		}
 
 	}
+
+	
 
 	CPlayer CPlayer::operator=(CPlayer& playerObj) //for deep copy
 	{

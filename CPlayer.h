@@ -35,6 +35,8 @@ namespace SINK_THE_FLEET
 		void hitShip(CShip ship);
 		CPlayer operator--();
 
+		void initializationSelection();
+
 	private:
 		void allocateMemory();
 		void deleteMemory();
