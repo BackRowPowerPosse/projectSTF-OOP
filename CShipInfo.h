@@ -29,7 +29,7 @@ namespace SINK_THE_FLEET
 		void setPiecesLeft(short pieces);
 		CShipInfo operator--();
 
-		static const short shipSize[6];
+		//static const short shipSize[6];
 
 	private:
 		CShip m_name;

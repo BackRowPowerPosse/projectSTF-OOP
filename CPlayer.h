@@ -21,6 +21,8 @@ namespace SINK_THE_FLEET
 		bool getGrid(string fileName);
 		bool isValidLocation(short whichShip);
 		CShipInfo operator[](short index) const;
+		const short shipSize[SHIP_SIZE_ARRAYSIZE] = { 0, 2, 3, 3, 4, 5 }; // array of ship sizes.
+		//SHIP_SIZE_ARRAYSIZE is constant in "fleet.h" and will need to be replaced
 
 		CPlayer operator=(CPlayer &player);
 		void setGridSize(char size);

@@ -157,7 +157,7 @@ namespace SINK_THE_FLEET
 				
 
 			//!!double check whether .shipSize property is allowed to be called like that
-			for (int p = 0; p < (int)m_ships[i].shipSize; p++) { // loop through each coordinate the ship touches
+			for (int p = 0; p < shipSize[i]; p++) { // loop through each coordinate the ship touches
 
 				if (m_ships[i].getOrientation() == VERTICAL)	//	if VERTICAL
 					m_gameGrid[0][m_ships[i].getBowLocation.getRow() + p][m_ships[i].getBowLocation.getCol()] = m_ships[i];
@@ -168,7 +168,7 @@ namespace SINK_THE_FLEET
 
 			//players[whichPlayer].m_ships[i].m_piecesLeft = shipSize[i];		// initialize piecesLeft for each ship
 
-			//m_ships[i].setPiecesLeft();
+			m_ships[i].setPiecesLeft(shipSize[i]);
 
 		}
 
@@ -306,102 +306,103 @@ namespace SINK_THE_FLEET
 
 	void CPlayer::setShips()
 	{
-		//char input = 'V';
-		//char ok = 'Y';
-		//char save = 'N';
-		//char shipResponse = 'N';
-		//ostringstream outSStream;
+		char input = 'V';
+		char ok = 'Y';
+		bool badShip;
+		char save = 'N';
+		ostringstream outSStream;
 		//Cell location = { 0, 0 };
-		//do
-		//{
+		CCell bow;
+		//clearGrid(players[whichPlayer].m_gameGrid[0], size); // clear the grid
 
-		//	for (short j = 1; j < SHIP_SIZE_ARRAYSIZE; j++)
-		//	{
-		//		system("cls");
-		//		printGrid(cout, players[whichPlayer].m_gameGrid[0], size);
-		//		outSStream.str("");
-		//		outSStream << "Player " << whichPlayer + 1 << " Enter "
-		//			<< shipNames[j] << " orientation";
-		//		input = safeChoice(outSStream.str(), 'V', 'H');
-		//		players[whichPlayer].m_ships[j].m_orientation
-		//			= (input == 'V') ? VERTICAL : HORIZONTAL;
-		//		cout << "Player " << whichPlayer + 1 << " Enter " << shipNames[j] <<
-		//			" bow coordinates <row letter><col #>: "
-		//			<< endl;
-		//		players[whichPlayer].m_ships[j].m_bowLocation = location = getCoord(cin, size);
+		m_piecesLeft = TOTALPIECES; //TOTALPIECES = 17
 
-		//		if (!isValidLocation(players[whichPlayer], j, size))
-		//		{
-		//			cout << "invalid location. Press <enter>";
-		//			cin.get();
-		//			j--; // redo by resetting the counter
-		//			continue;
-		//		}
+		for (short j = 1; j < SHIP_SIZE_ARRAYSIZE; j++)	// loop through each of this player's ships
+		{
+			do {
+				badShip = false; // reset loop flag -- will exit by default
 
-		//		short bowLocationRow = players[whichPlayer].m_ships[j].m_bowLocation.m_row;
-		//		short bowLocationCol = players[whichPlayer].m_ships[j].m_bowLocation.m_col;
-		//		short finalLocationRow = (players[whichPlayer].m_ships[j].m_bowLocation.m_row) + shipSize[j];
-		//		short finalLocationCol = (players[whichPlayer].m_ships[j].m_bowLocation.m_col) + shipSize[j];
-		//		Ship shipType = static_cast<Ship>(j);
+				printGrid(outSStream, 0); //Show grid. Empty at first.				
+				
+				//Initialize pieces left for each ship
+				m_ships[j].setPiecesLeft(shipSize[j]); 
+				
+				//ORIENTATION
+				outSStream.str("");
+				outSStream << "Player " << this + 1 << " Enter " //Should show "Player (number of player) Enter (shipName) orientation"
+					<< shipNames[j] << " orientation";
+				
+				input = safeChoice(outSStream.str(), 'V', 'H');
+				if (input == 'V')
+					m_ships[j].setOrientation(CDirection(VERTICAL));
+				else
+					m_ships[j].setOrientation(CDirection(HORIZONTAL));
 
-		//		//0 - horizontal
-		//		//1 - vertical
+				//BOW COORDINATE PROMPT
+				cout << "Player " << this + 1 << " Enter " << shipNames[j] <<
+					" bow coordinates <row letter><col #>: " << endl;			
+				//BOW COORDINATE INPUT
+				bow.inputCoordinates(cin, m_gridSize);
+				m_ships[j].setBowLocation(bow);
 
-		//		switch (input)
-		//		{
-		//		case 'H':
+				// if ok
+				if (!isValidLocation(j))
+				{
+					cout << "invalid location. Press <enter>";
+					cin.get();
+					j--; // redo
+					continue; // skip to next loop iteration
+				}
 
-		//			for (short i = 0; (bowLocationRow + i) < finalLocationRow; i++)
-		//			{
-		//				players[whichPlayer].m_gameGrid[0][bowLocationRow][bowLocationCol + i] = shipType;
-		//			}
-		//			break;
+				//	WRITING SHIPS INTO GRID ARRAYS
+				for (int p = 0; p < shipSize[j]; p++) 
+				{
 
-		//		case 'V':
+					//int shipX = players[whichPlayer].m_ships[j].m_bowLocation.m_col;	// get x coordinate
+					//int shipY = players[whichPlayer].m_ships[j].m_bowLocation.m_row;	// get y coordinate
 
-		//			for (short i = 0; (bowLocationCol + i) < finalLocationCol; i++)
-		//			{
-		//				players[whichPlayer].m_gameGrid[0][bowLocationRow + i][bowLocationCol] = shipType;
-		//			}
-		//			break;
-		//		}
+					if (m_ships[j].getOrientation == VERTICAL)
+					{	//	if VERTICAL
+						// write ship ID into location (Column incremented)
+						CCell placement = (bow.getCol() + j, bow.getRow());
+						setCell(0, placement, m_ships[j].getName());
+					}
+						
+					else// if HORIZONTAL
+					{
+						// write ship ID into location (Row incremented)
+						CCell placement = (bow.getCol(), bow.getRow() + j);
+						setCell(0, placement, m_ships[j].getName());
 
-		//		printGrid(cout, players[whichPlayer].m_gameGrid[0], size);
-		//		cout << "Player " << whichPlayer + 1 << " " << shipNames[j];
-		//		shipResponse = safeChoice(" OK? ", 'Y', 'N');
+					}
+				}
 
-		//		switch (shipResponse)
-		//		{
-		//		case 'Y':
-		//			break;
-		//		case 'N':
-		//			if (input == 'H')
-		//			{
-		//				for (short i = 0; (bowLocationRow + i) < finalLocationRow; i++)
-		//				{
-		//					players[whichPlayer].m_gameGrid[0][bowLocationRow][bowLocationCol + i] = NOSHIP;
-		//				}
-		//			}
-		//			else
-		//			{
-		//				for (short i = 0; (bowLocationCol + i) < finalLocationCol; i++)
-		//				{
-		//					players[whichPlayer].m_gameGrid[0][bowLocationRow + i][bowLocationCol] = NOSHIP;
-		//				}
-		//			}
+				//GRID CONFIRMATION
+				printGrid(cout, j);
+				
+				outSStream.str("");
+				outSStream << shipNames[j] << " location okay?";
+				ok = safeChoice(outSStream.str(), 'Y', 'N'); // is ship ok?
+				if (ok == 'N') {
+					badShip = true; // redo loop
 
-		//			break;
-		//		}
-		//		if (shipResponse == 'N')
-		//		{
-		//			j--; //keep counter at current ship
-		//		}
-		//	}
-		//} while (shipResponse != 'Y');
-		//// end for j
-		//save = safeChoice("\nSave starting grid?", 'Y', 'N');
-		//if (save == 'Y')
-		//	//saveGrid(players, whichPlayer, size);
+					for (int p = 0; p < shipSize[j]; p++) {  // erase ship from grid
+
+						if (m_ships[j].getOrientation() == VERTICAL)	//	if VERTICAL
+						{
+							CCell placement = (bow.getCol() + j, bow.getRow());
+							setCell(0, placement, m_ships[0].getName()); //Sets cell to NOSHIP
+						}
+							
+						else				// if HORIZONTAL
+						{
+							CCell placement = (bow.getCol(), bow.getRow() + j);
+							setCell(0, placement, m_ships[0].getName()); //Sets cell to NOSHIP
+						}							
+					}
+				}
+			} while (badShip);
+		} // end for j
 	}
 	void CPlayer::hitShip(CShip ship)
 	{
