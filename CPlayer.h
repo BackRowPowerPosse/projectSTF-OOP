@@ -2,9 +2,6 @@
 #include "fleet.h"
 #include "CSinkTheFleet.h"
 
-#define SHIPSIZE  6
-#define GAMEGRID  2
-
 namespace SINK_THE_FLEET
 {
 	class CPlayer
@@ -15,6 +12,7 @@ namespace SINK_THE_FLEET
 
 		~CPlayer();
 
+		const int TOTALPIECES = 17;
 		unsigned short getWhichPlayer() const;
 		short getPiecesLeft() const;
 		char getGridSize() const;
@@ -23,22 +21,25 @@ namespace SINK_THE_FLEET
 		bool getGrid(string fileName);
 		bool isValidLocation(short whichShip);
 		CShipInfo operator[](short index) const;
+		const short shipSize[SHIP_SIZE_ARRAYSIZE] = { 0, 2, 3, 3, 4, 5 }; // array of ship sizes.
+		//SHIP_SIZE_ARRAYSIZE is constant in "fleet.h" and will need to be replaced
 
 		CPlayer operator=(CPlayer &playerObj);
 		void setGridSize(char size);
 		void setCell(short whichGrid, CCell cell, CShip ship);
-		bool saveGrid();
+		void saveGrid();
 		void setShips();
 		void hitShip(CShip ship);
 		CPlayer operator--();
+
 	private:
 		void allocateMemory();
 		void deleteMemory();
 
 		unsigned short m_whichPlayer;
 		short m_piecesLeft;
-		CShipInfo m_ships[SHIPSIZE];
+		CShipInfo m_ships[SHIP_SIZE_ARRAYSIZE];
 		char m_gridSize;
-		CShip **m_gameGrid[GAMEGRID];
+		CShip **m_gameGrid[2];
 	};
 }
