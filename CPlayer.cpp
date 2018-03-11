@@ -7,7 +7,20 @@ namespace SINK_THE_FLEET
 	{
 		
 	}
-	//copy constructor
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:       CPlayer::CPlayer(CPlayer& playerObj)  
+	//	description:  Copy construcor, copies the properties of an existing object
+	//				  into a new object and creates new pointers for CShip
+	//	Input:        None 
+	//	Output:       None 
+	//	Calls:        getBowLocation(), getOrientation(), getPiecesLeft()
+	//	Called By:    setShips();
+	//	Parameters:   CPlayer &playerObj reference to an existing CPlayer object
+	//	Returns:      n/a
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	CPlayer::CPlayer(const CPlayer& playerObj)
 		: m_whichPlayer(playerObj.m_whichPlayer),
 		m_gridSize(playerObj.m_gridSize),
@@ -42,19 +55,32 @@ namespace SINK_THE_FLEET
 					for (short k = 0; k < numberOfCols; ++k)
 					{
 						// initialize all items in row to NOSHIP
-						(this)->m_gameGrid[whichGrid][j][k] = NOSHIP;
-					} // end for k
+						(this)->m_gameGrid[whichGrid][j][k] = playerObj.m_gameGrid[whichGrid][j][k];
+					} // end for ->
 				} // end for j
 
 			} // end for i
 		}
 
 	}
-
-	CPlayer CPlayer::operator=(CPlayer& playerObj) //for deep copy
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:       CPlayer CPlayer::operator=(CPlayer& playerObj) 
+	//	description:  assigns the members of an object to another 
+	//	Input:        None 
+	//	Output:       None 
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   CPlayer &playerObj reference to an existing CPlayer object
+	//	Returns:      CPlayer object after the assignment is complete
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
+	CPlayer CPlayer::operator=(CPlayer& playerObj) 
 	{
 		short numberOfRows = (toupper(playerObj.m_gridSize) == 'L') ? LARGEROWS : SMALLROWS;
 		short numberOfCols = (toupper(playerObj.m_gridSize) == 'L') ? LARGECOLS : SMALLCOLS;
+    
 		m_whichPlayer = playerObj.m_whichPlayer;
 		m_gridSize = playerObj.m_gridSize;
 		m_piecesLeft = playerObj.m_piecesLeft;
@@ -82,12 +108,12 @@ namespace SINK_THE_FLEET
 					for (short j = 0; j < numberOfRows; ++j)
 					{
 						m_gameGrid[whichGrid][j] = nullptr;
-						m_gameGrid[whichGrid][j] = new CShip[numberOfCols];
+						m_gameGrid[whichGrid][j] = playerObj.m_gameGrid[whichGrid][j];
 
 						for (short k = 0; k < numberOfCols; ++k)
 						{
 							// initialize all items in row to NOSHIP
-							(this)->m_gameGrid[whichGrid][j][k] = NOSHIP;
+							(this)->m_gameGrid[whichGrid][j][k] = playerObj.m_gameGrid[whichGrid][j][k];
 						} // end for k
 					} // end for j
 
