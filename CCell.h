@@ -7,10 +7,11 @@ namespace SINK_THE_FLEET
 	class CCell
 	{
 	public:
-		CCell(short row, short column);
+		CCell(short row, short column)
+			: m_row(row), m_col(column) {}
 		
-		short getRow() const;
-		short getCol() const;
+		short getRow() const { return m_row; }
+		short getCol() const { return m_col; }
 		void print(ostream &sout) const;
 		void print() const;
 
