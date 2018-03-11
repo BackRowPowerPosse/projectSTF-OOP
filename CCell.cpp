@@ -2,11 +2,6 @@
 
 namespace SINK_THE_FLEET
 {
-	CCell::CCell()
-	{
-		m_row = 0;
-		m_col = 0;
-	}
 
 	short CCell::getRow() const
 	{

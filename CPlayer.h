@@ -1,6 +1,8 @@
 #pragma once
 #include "fleet.h"
 #include "CSinkTheFleet.h"
+#include <ctime>
+#include <cstdlib>
 
 #define SHIPSIZE  6
 #define GAMEGRID  2
@@ -29,6 +31,7 @@ namespace SINK_THE_FLEET
 		void setCell(short whichGrid, CCell cell, CShip ship);
 		bool saveGrid();
 		void setShips();
+		void autoSetShips();
 		void hitShip(CShip ship);
 		CPlayer operator--();
 

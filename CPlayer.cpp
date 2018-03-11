@@ -464,6 +464,40 @@ namespace SINK_THE_FLEET
 		//if (save == 'Y')
 		//	//saveGrid(players, whichPlayer, size);
 	}
+
+	void CPlayer::autoSetShips() {
+
+		short numberOfRows = (toupper(m_gridSize) == 'L') ? LARGEROWS : SMALLROWS;
+		short numberOfCols = (toupper(m_gridSize) == 'L') ? LARGECOLS : SMALLCOLS;
+
+		//	the rand() function (from cstdlib) generates 'random' number based on a 'seed'
+		//	multiple runs creating a series of rand() numbers based on the same 'seed' will produce the same series of numbers
+		//	
+		//	To make this more random, change the seed.
+		//	srand(x) changes the seed according to x(integer type)
+		//	time(0) gets the current system's time in milliseconds past the system's reference epoch
+
+		//	srand(time(0)) plants an unpredictable 'seed', to make rand() 'more' random
+		srand(time(0));
+
+		for (short j = 1; j < SHIP_SIZE_ARRAYSIZE; j++) {	// loop through all ships
+
+			bool badCoord = true;
+			int randX;
+			int randY;
+			CCell coord;
+			while (badCoord) {
+				badCoord = true;
+				randX = rand() % numberOfCols;	// random number from 0 to numberOfCols
+				randY = rand() % numberOfRows;	// random number from 0 to numberOfRows
+				m_ships[j].setBowLocation(CCell(randY, randX));
+				if (isValidLocation(j))	// if m_ships[j] is in a valid location...
+					badCoord = false;	//	do NOT re-roll
+
+			}
+		}
+	}
+
 	void CPlayer::hitShip(CShip ship)
 	{
 		this->m_piecesLeft--;
