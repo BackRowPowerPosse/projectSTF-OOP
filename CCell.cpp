@@ -2,6 +2,7 @@
 
 namespace SINK_THE_FLEET
 {
+
 	//-----------------------------------------------------------------------------
 	//	Class:         CCell
 	//	method:        void print(ostream & sout)const;

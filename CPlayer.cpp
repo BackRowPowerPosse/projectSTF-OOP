@@ -5,6 +5,73 @@ namespace SINK_THE_FLEET
 	//default constructor
 	CPlayer::CPlayer(unsigned short whichPlayer, char gridSize)
 	{
+
+		//	validates and sets m_gridSize
+		if (toupper(gridSize) == 'L' || toupper(gridSize) == 'S') {
+			m_gridSize = gridSize;
+		}
+		else {
+			cout << "Bad gridSize input, defaulting to small" << endl;
+			m_gridSize = 'S';
+		}
+
+		//	sets m_whichPlayer
+		m_whichPlayer = whichPlayer;
+
+		//	set both gamegrids to null
+		m_gameGrid[0] = nullptr;
+		m_gameGrid[1] = nullptr;
+
+		//	calls allocateMemory
+		allocateMemory();
+
+		initializationSelection();
+
+		
+	}
+
+	void CPlayer::initializationSelection() {
+
+		short selection;
+		string filename;
+		bool doPrompt = true;
+
+		while (doPrompt) {
+			doPrompt = true;
+			system("cls");
+			cout << "Player " << m_whichPlayer + 1 << ", how would you like to set up your grid?" << endl;
+			cout << "(1) Load grid from file" << endl;
+			cout << "(2) Manually set ships" << endl;
+			cout << "(3) Randomly place all ships" << endl;
+			safeRead(cin, selection, "choose an option from above (enter a number)");
+
+			switch (selection) {
+			case 1:
+				safeRead(cin, filename, "enter filename");
+				if (getGrid(filename))
+					doPrompt = false;	// loading succeeds, exit prompt. Otherwise, prompt should restart from the top of loop
+				else
+					cout << "grid failed to load. restarting this player's prompt... <press ENTER to continue>" << endl;
+					cin.ignore(FILENAME_MAX, '\n');
+					cin.get();	// this might be unnecessary to hold prompt at this spot for 1 char input
+				break;
+			case 2:
+				if (setShips())	// this will show as error until setShips() is developed to return bool
+					doPrompt = false;	// setting succeded, exit prompt
+				break;
+			case 3:
+				autoSetShips();
+				doPrompt = false;	// autoSetShips should automatically succeed (will continue re-rolling until success)
+				break;
+			default:
+				cout << "bad input, try again <press ENTER to continue>" << endl;
+				cin.ignore(FILENAME_MAX, '\n');
+				cin.get();	// this might be unnecessary to hold prompt at this spot for 1 char input
+
+			}
+		}	
+	}
+	
 		
 	}
 	//-----------------------------------------------------------------------------
@@ -61,8 +128,8 @@ namespace SINK_THE_FLEET
 
 			} // end for i
 		}
-
 	}
+
 	//-----------------------------------------------------------------------------
 	//	Class:        CPlayer
 	//	method:       CPlayer CPlayer::operator=(CPlayer& playerObj) 
@@ -185,9 +252,9 @@ namespace SINK_THE_FLEET
 			sout << endl;
 		}
 	}
-	void CPlayer::getGrid(string fileName)
-	{
 
+	bool CPlayer::getGrid(string fileName)
+	{
 		string line;
 		//string fileName;
 		ifstream ifs;
@@ -250,9 +317,10 @@ namespace SINK_THE_FLEET
 				m_ships[i].setOrientation(CDirection(HORIZONTAL));
 			}
 
-			//Ship Bow
+
 			bowCoordinates.inputCoordinates(ifs, fsize); // ----====assuming inputCoordinates grabs both chars
 			m_ships[i].setBowLocation(bowCoordinates);
+
 
 
 			// ~_~_~_~_~Old Validation. Update to check validity of current coords?
@@ -293,6 +361,7 @@ namespace SINK_THE_FLEET
 
 		m_piecesLeft = TOTALPIECES;
 
+
 		ifs.close();
 
 		cout << "File " << fileName << " successfully loaded" << endl
@@ -301,6 +370,7 @@ namespace SINK_THE_FLEET
 
 		return true;
 	}
+
 	bool CPlayer::isValidLocation(short whichShip)
 	{
 		short numberOfRows = (m_gridSize == 'L') ? LARGEROWS : SMALLROWS;
@@ -360,9 +430,73 @@ namespace SINK_THE_FLEET
 	{
 		m_gameGrid[whichGrid][cell.getRow][cell.getCol] = ship;
 	}
-	void CPlayer::saveGrid()
+
+	bool CPlayer::saveGrid()
 	{
+		//~~~~~~~~~~~~~Ready for testing
+		string filename;
+		ofstream ofs;
+		Ship ship = NOSHIP;
+		short shipCount[SHIP_SIZE_ARRAYSIZE] = { 0 };
+		char cell = ' ';
+		char orientation;
+		char row;
+		short col;
+		/*short numberOfRows = (toupper(size) == 'L') ? LARGEROWS : SMALLROWS;
+		short numberOfCols = (toupper(size) == 'L') ? LARGECOLS : SMALLCOLS;*/
+
+
+		cout << "Please enter file name: ";		// filename prompt
+		cin >> filename;						// enter filename
+		cin.ignore(FILENAME_MAX, '\n');			// clean buffer
+
+		try		// attempt to open file
+		{
+			ofs.open(filename.c_str()); // open file
+			if (!ofs)	// check if file opened successfully
+			{
+				cout << "could not open file " << filename << endl
+					<< " press <enter> to continue" << endl;
+				cin.ignore(FILENAME_MAX, '\n');
+				return false; // communicate to program that loading failed
+			}
+		}
+		catch (exception e) // other exception thrown, file couldn't load
+		{
+			cout << "could not open file " << filename << endl
+				<< " press <enter> to continue" << endl;
+			cin.ignore(FILENAME_MAX, '\n');
+			return false; // communicate to program that loading failed
+		}
+
+		// grid size
+		ofs << m_gridSize << endl;
+		for (int i = 1; i < 6; i++) {
+
+			// orientation
+			if (m_ships[i].getOrientation() == VERTICAL) {
+				orientation = 'V';
+			}
+			ofs << orientation << ' ';
+
+			// row
+			row = 'A' + m_ships[i].getBowLocation().getRow();
+			ofs << row << ' ';
+
+			// column
+			col = m_ships[i].getBowLocation().getCol() + 1;
+			ofs << col << endl;
+
+		}
+
+		ofs << endl;
+		printGrid(ofs, 0); // print show grid on file
+
+		cout << "File " << filename << " successfully saved" << endl
+			<< " press <enter> to continue" << endl;
+		cin.ignore(FILENAME_MAX, '\n');
 	}
+
 	void CPlayer::setShips()
 	{
 		char input = 'V';
@@ -463,6 +597,40 @@ namespace SINK_THE_FLEET
 			} while (badShip);
 		} // end for j
 	}
+
+	void CPlayer::autoSetShips() {
+
+		short numberOfRows = (toupper(m_gridSize) == 'L') ? LARGEROWS : SMALLROWS;
+		short numberOfCols = (toupper(m_gridSize) == 'L') ? LARGECOLS : SMALLCOLS;
+
+		//	the rand() function (from cstdlib) generates 'random' number based on a 'seed'
+		//	multiple runs creating a series of rand() numbers based on the same 'seed' will produce the same series of numbers
+		//	
+		//	To make this more random, change the seed.
+		//	srand(x) changes the seed according to x(integer type)
+		//	time(0) gets the current system's time in milliseconds past the system's reference epoch
+
+		//	srand(time(0)) plants an unpredictable 'seed', to make rand() 'more' random
+		srand(time(0));
+
+		for (short j = 1; j < SHIP_SIZE_ARRAYSIZE; j++) {	// loop through all ships
+
+			bool badCoord = true;
+			int randX;
+			int randY;
+			CCell coord;
+			while (badCoord) {
+				badCoord = true;
+				randX = rand() % numberOfCols;	// random number from 0 to numberOfCols
+				randY = rand() % numberOfRows;	// random number from 0 to numberOfRows
+				m_ships[j].setBowLocation(CCell(randY, randX));
+				if (isValidLocation(j))	// if m_ships[j] is in a valid location...
+					badCoord = false;	//	do NOT re-roll
+
+			}
+		}
+	}
+
 	void CPlayer::hitShip(CShip ship)
 	{
 		static_cast<short>(ship);
@@ -477,9 +645,64 @@ namespace SINK_THE_FLEET
 	}
 	void CPlayer::allocateMemory()
 	{
+		short numberOfRows = (toupper(m_gridSize) == 'L') ? LARGEROWS : SMALLROWS;
+		short numberOfCols = (toupper(m_gridSize) == 'L') ? LARGECOLS : SMALLCOLS;
+
+		try
+		{
+			for (int whichGrid = 0; whichGrid < NUMPLAYERS; whichGrid++)	// loop through both grid types -- current player and opponent
+			{
+				
+					m_gameGrid[whichGrid] = nullptr;					//	initialize to null pointer -- simplifies debugging if exception thrown by line below -- cleans this spot in mem
+					m_gameGrid[whichGrid] = new CShip*[numberOfRows];	//	allocate memory for array of pointers to ships -- each item constitutes a row pointer
+					for (short j = 0; j < numberOfRows; ++j)
+					{
+						// set the pointers to NULL, then allocate the
+						// memory for each row in each grid
+						m_gameGrid[whichGrid][j] = nullptr;
+						m_gameGrid[whichGrid][j] = new CShip[numberOfCols];	//	allocate a new ship array that each row pointer will point to
+
+						for (short k = 0; k < numberOfCols; ++k)
+						{
+							m_gameGrid[whichGrid][j][k] = NOSHIP;	//	initialize all items in row to NOSHIP
+						} // end for k
+					} // end for j
+
+				// end for i
+			} // end for whichGrid
+		}
+		catch (bad_alloc e)	// badalloc might be better exception
+		{
+			deleteMem();
+			cerr << "exception: " << e.what() << endl;
+			cout << "shutting down" << endl;
+			cin.ignore(FILENAME_MAX, '\n');
+			exit(EXIT_FAILURE);
+		}
+
 	}
 	void CPlayer::deleteMemory()
 	{
+		short numberOfRows = (toupper(m_gridSize) == 'L') ? LARGEROWS : SMALLROWS;
 
+		// delete[] in reverse order of allocMem()
+		// be sure to check if the memory was allocated (!nullptr) BEFORE deleting
+
+		for (int whichGrid = 0; whichGrid < NUMPLAYERS; whichGrid++) {	// loop through both types of grids
+
+				for (short j = 0; j < numberOfRows; ++j) {	//	loop through all of the rows
+
+															//	if pointer is NOT null --> delete the array of ships this row pointer points to
+					if (m_gameGrid[whichGrid][j] != nullptr)
+						delete[] m_gameGrid[whichGrid][j];
+				}
+
+				//	if pointer is NOT null --> delete the array of row pointers
+				if (m_gameGrid[whichGrid] != nullptr)
+					delete[] m_gameGrid[whichGrid];
+
+			
+
+		}
 	}
 }
