@@ -18,6 +18,7 @@ namespace SINK_THE_FLEET
 		void print() const;
 
 		void inputCoordinates(istream &sin, char size);
+		CCell operator=(const CCell &cell);
     
 		// Number of players in game
 		const short NUMPLAYERS = 2;

@@ -87,6 +87,11 @@ namespace SINK_THE_FLEET
 		m_row = static_cast<short>(row - 'A');
 	}
 
+	CCell CCell::operator=(const CCell & cell)
+	{
+		return cell;
+	}
+
 	// ----------------------------------------------------------------------------
 	//	method:         ostream& operator<<(ostream& sout, const CCell &cell)
 	//	description:    prints out the cell object to the stream
