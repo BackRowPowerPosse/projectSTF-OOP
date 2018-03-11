@@ -114,7 +114,7 @@ namespace SINK_THE_FLEET
 	}
 	Ship CPlayer::getCell(short whichGrid, CCell cell) const
 	{
-		return static_cast<Ship>(**m_gameGrid[whichGrid][cell.getCol][cell.getRow]); 
+		return (**m_gameGrid[whichGrid][cell.getCol][cell.getRow]); 
 	}
 	void CPlayer::printGrid(ostream & sout, short whichGrid) const
 	{
@@ -340,5 +340,6 @@ namespace SINK_THE_FLEET
 	}
 	void CPlayer::deleteMemory()
 	{
+
 	}
 }
