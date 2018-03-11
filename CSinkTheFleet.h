@@ -13,10 +13,10 @@ namespace SINK_THE_FLEET
 	public:
 		CSinkTheFleet(char size) : m_gridSize(size) {}
 
-		CPlayer operator[](short index) const;
+		CPlayer operator[](short index) const { return m_players[index]; }
 
 		short play();
-		CPlayer operator[](short index);
+		CPlayer operator[](short index) { return m_players[index]; }
 
 		static void header();
 		static void endBox(short winner);
