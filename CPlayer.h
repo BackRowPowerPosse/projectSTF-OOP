@@ -30,7 +30,7 @@ namespace SINK_THE_FLEET
 		void setGridSize(char size);
 		void setCell(short whichGrid, CCell cell, CShip ship);
 		bool saveGrid();
-		void setShips();
+		bool setShips();
 		void autoSetShips();
 		void hitShip(CShip ship);
 		CPlayer operator--();

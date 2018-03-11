@@ -497,7 +497,7 @@ namespace SINK_THE_FLEET
 		cin.ignore(FILENAME_MAX, '\n');
 	}
 
-	void CPlayer::setShips()
+	bool CPlayer::setShips()
 	{
 		char input = 'V';
 		char ok = 'Y';
