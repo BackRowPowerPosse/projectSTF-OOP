@@ -688,6 +688,7 @@ namespace SINK_THE_FLEET
 				// if ok
 				if (!isValidLocation(j))
 				{
+					cout << m_ships[j].getBowLocation().getRow() << "," << m_ships[j].getBowLocation().getCol() << endl;
 					cout << "invalid location. Press <enter>";
 					cin.get();
 					j--; // redo

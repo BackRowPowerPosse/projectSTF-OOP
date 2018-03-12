@@ -57,6 +57,7 @@ namespace SINK_THE_FLEET
 		char highChar = static_cast<char>(numberOfRows - 1) + 'A';
 		char row = 'A';
 		short col = 0;
+
 		do
 		{
 			col = 0;
@@ -66,15 +67,6 @@ namespace SINK_THE_FLEET
 					<< numberOfCols << ": ";
 			}
 			sin >> row;
-			while (toupper(row) < 'A' || row > highChar)
-			{
-				sin.ignore(FILENAME_MAX, '\n');
-				if (&sin == &cin) {
-				cout << "Row must be a letter from A to " << highChar
-					<< " and column must be from 1 to "
-					<< numberOfCols << ": ";
-				}
-			}
 			sin >> col;
 			if (!sin)
 				sin.clear();
@@ -82,7 +74,7 @@ namespace SINK_THE_FLEET
 		} while (col < 1 || col > numberOfCols);
 
 		m_col = col - 1;
-		m_row = static_cast<short>(row - 'A');
+		m_row = static_cast<short>(toupper(row) - 'A');
 	}
 
 	CCell CCell::operator=(const CCell & cell)
