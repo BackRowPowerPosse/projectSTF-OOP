@@ -47,7 +47,7 @@ namespace SINK_THE_FLEET
 	//-----------------------------------------------------------------------------
 	void CPlayer::initializationSelection() {
 
-		short selection;
+		short selection = 0;
 		string filename;
 		bool doPrompt = true;
 
@@ -58,11 +58,15 @@ namespace SINK_THE_FLEET
 			cout << "(1) Load grid from file" << endl;
 			cout << "(2) Manually set ships" << endl;
 			cout << "(3) Randomly place all ships" << endl;
-			safeRead(cin, selection, "choose an option from above (enter a number)");
+			//safeRead(cin, selection, "choose an option from above (enter a number)");
+			cout << "Choose an option from above (enter a number)" << endl;
+			cin >> selection;
 
 			switch (selection) {
 			case 1:
-				safeRead(cin, filename, "enter filename");
+				//safeRead(cin, filename, "enter filename");
+				cout << "Enter filename" << endl;
+				cin >> filename;
 				if (getGrid(filename))
 					doPrompt = false;	// loading succeeds, exit prompt. Otherwise, prompt should restart from the top of loop
 				else
