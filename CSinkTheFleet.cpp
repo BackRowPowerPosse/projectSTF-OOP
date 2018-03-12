@@ -5,6 +5,8 @@ namespace SINK_THE_FLEET
 {
 	CSinkTheFleet::CSinkTheFleet(char size)
 	{
+		m_gridSize = size;
+
 		m_players[0] = CPlayer(1, size);
 		m_players[1] = CPlayer(2, size);
 	}

@@ -8,7 +8,7 @@ namespace SINK_THE_FLEET
 	class CSinkTheFleet
 	{
 	public:
-		CSinkTheFleet(char size) : m_gridSize(size) {}
+		CSinkTheFleet(char size);
 
 		CPlayer operator[](short index) const { return m_players[index]; }
 
