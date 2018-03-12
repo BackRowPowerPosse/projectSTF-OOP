@@ -267,7 +267,7 @@ namespace SINK_THE_FLEET
 		short numberOfCols = (toupper(playerObj.m_gridSize) == 'L') ?
 			LARGECOLS : SMALLCOLS;
     
-		deleteMemory();
+		deleteMemory();	// delete BEFORE changing variables (remove current data)
 
 		m_whichPlayer = playerObj.m_whichPlayer;
 		m_gridSize = playerObj.m_gridSize;
@@ -277,8 +277,7 @@ namespace SINK_THE_FLEET
 			m_ships[i] = playerObj.m_ships[i];
 		}
 
-		
-		allocateMemory();
+		allocateMemory();	// allocate afterwards -- save data according to variables after changing
 		
 
 		for (short row = 0; row < numberOfRows; row++) 
@@ -482,36 +481,33 @@ namespace SINK_THE_FLEET
 		short numberOfRows = (m_gridSize == 'L') ? LARGEROWS : SMALLROWS;
 		short numberOfCols = (m_gridSize == 'L') ? LARGECOLS : SMALLCOLS;
 		//get orientation
-		short orientation = m_ships[whichShip].getOrientation();
+		Direction orientation = m_ships[whichShip].getOrientation();
 		CCell bow = m_ships[whichShip].getBowLocation();
-		short shipLength = m_ships[whichShip].getPiecesLeft();
-		short i = 0;
+		short shipLength = shipSize[whichShip];
+
 		bool isOpen = true;
 
 		switch (orientation)
 		{
-		case 0: // ship is horizontal
-			while (isOpen && i < shipLength) 
+		case HORIZONTAL: // ship is horizontal
+			for(short i = 0; i < shipLength && isOpen; i++)
 			{
 				if (((bow.getCol() + shipLength) > numberOfCols) ||
 					getCell(0, bow.getCol() + i) != NOSHIP) 
 					// check if spot is empty
 					isOpen = false;
 
-				i++;
 			}
 
 			break;
 
-		case 1: // ship is vertical
-			while (isOpen && i < shipLength)
+		case VERTICAL: // ship is vertical
+			for (short i = 0; i < shipLength && isOpen; i++)
 			{
 				if (((bow.getRow() + shipLength) > numberOfRows) ||
 					getCell(0, bow.getRow() + i) != NOSHIP) 
 					// check overlapping from previous entries
 					isOpen = false;
-				
-				i++;
 			}
 
 			break;
@@ -665,8 +661,9 @@ namespace SINK_THE_FLEET
 				outSStream.str("");
 				// Should show "Player (number of player) Enter (shipName)
 				// orientation"
-				outSStream << "Player " << this + 1 << " Enter " 
+				outSStream << "Player " << m_whichPlayer << " Enter " 
 					<< shipNames[j] << " orientation";
+				input = cin.get();
 				input = safeChoice(outSStream.str(), 'V', 'H');
 
 				if (input == 'V')
@@ -703,13 +700,13 @@ namespace SINK_THE_FLEET
 					if (m_ships[j].getOrientation() == VERTICAL)
 					{	//	if VERTICAL
 						// write ship ID into location (Column incremented)
-						CCell placement = (bow.getCol() + j, bow.getRow());
+						CCell placement(bow.getRow() + p, bow.getCol());
 						setCell(0, placement, m_ships[j].getName());
 					}
 					else // if HORIZONTAL
 					{
 						// write ship ID into location (Row incremented)
-						CCell placement = (bow.getCol(), bow.getRow() + j);
+						CCell placement(bow.getRow(), bow.getCol() + p);
 						setCell(0, placement, m_ships[j].getName());
 					}
 				}
@@ -809,7 +806,12 @@ namespace SINK_THE_FLEET
 				if (isValidLocation(j)) {
 					badCoord = false;	//	do NOT re-roll
 
-					setCell(0, CCell(randY, randX), m_ships[j].getName());
+					for (int i = 0; i < shipSize[j]; i++) {
+						if((Direction)m_ships[j].getOrientation() == VERTICAL)
+							setCell(0, CCell(randY + i, randX), m_ships[j].getName());
+						else
+							setCell(0, CCell(randY, randX + i), m_ships[j].getName());
+					}
 				}
 
 			}
