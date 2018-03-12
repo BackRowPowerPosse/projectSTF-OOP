@@ -284,7 +284,7 @@ namespace SINK_THE_FLEET
 	//-----------------------------------------------------------------------------
 	Ship CPlayer::getCell(short whichGrid, CCell cell) const
 	{
-		return (**m_gameGrid[whichGrid][cell.getCol][cell.getRow]); 
+		return m_gameGrid[whichGrid][cell.getCol()][cell.getRow()]; 
 	}
 	//-----------------------------------------------------------------------------
 	//	Class:        CPlayer
@@ -450,10 +450,10 @@ namespace SINK_THE_FLEET
 			for (int p = 0; p < shipSize[i]; p++) { // loop through each coordinate the ship touches
 
 				if (m_ships[i].getOrientation() == VERTICAL)	//	if VERTICAL
-					m_gameGrid[0][m_ships[i].getBowLocation.getRow() + p][m_ships[i].getBowLocation.getCol()] = m_ships[i];
+					m_gameGrid[0][m_ships[i].getBowLocation().getRow() + p][m_ships[i].getBowLocation().getCol()] = m_ships[i];
 					
 				else				// if HORIZONTAL
-					m_gameGrid[0][m_ships[i].getBowLocation.getRow()][m_ships[i].getBowLocation.getCol() + p] = m_ships[i];					
+					m_gameGrid[0][m_ships[i].getBowLocation().getRow()][m_ships[i].getBowLocation().getCol() + p] = m_ships[i];					
 			}
 
 			//players[whichPlayer].m_ships[i].m_piecesLeft = shipSize[i];		// initialize piecesLeft for each ship
@@ -506,8 +506,8 @@ namespace SINK_THE_FLEET
 		case 0: //ship is horizontal
 			while (isOpen && i < shipLength) 
 			{
-				if (((bow.getCol + shipLength) > numberOfCols) ||
-					getCell(**this->m_gameGrid[0], bow.getCol + i) != NOSHIP) 
+				if (((bow.getCol() + shipLength) > numberOfCols) ||
+					getCell(0, bow.getCol() + i) != NOSHIP) 
 					//check if spot is empty
 				{
 					isOpen = false;
@@ -518,8 +518,8 @@ namespace SINK_THE_FLEET
 		case 1://ship is vertical
 			while (isOpen && i < shipLength)
 			{
-				if (((bow.getRow + shipLength) > numberOfRows) ||
-					getCell(**this->m_gameGrid[0], bow.getRow + i) != NOSHIP) 
+				if (((bow.getRow() + shipLength) > numberOfRows) ||
+					getCell(0, bow.getRow() + i) != NOSHIP) 
 					// check overlapping from previous entries
 				{
 					isOpen = false;
@@ -558,7 +558,7 @@ namespace SINK_THE_FLEET
 	}
 	void CPlayer::setCell(short whichGrid, CCell cell, CShip ship)
 	{
-		m_gameGrid[whichGrid][cell.getRow][cell.getCol] = ship;
+		m_gameGrid[whichGrid][cell.getRow()][cell.getCol()] = ship;
 	}
 	//-----------------------------------------------------------------------------
 	//	Class:        CPlayer
@@ -708,7 +708,7 @@ namespace SINK_THE_FLEET
 					//int shipX = players[whichPlayer].m_ships[j].m_bowLocation.m_col;	// get x coordinate
 					//int shipY = players[whichPlayer].m_ships[j].m_bowLocation.m_row;	// get y coordinate
 
-					if (m_ships[j].getOrientation == VERTICAL)
+					if (m_ships[j].getOrientation() == VERTICAL)
 					{	//	if VERTICAL
 						// write ship ID into location (Column incremented)
 						CCell placement = (bow.getCol() + j, bow.getRow());
@@ -813,7 +813,7 @@ namespace SINK_THE_FLEET
 	void CPlayer::hitShip(CShip ship)
 	{
 		static_cast<short>(ship);
-		m_ships[ship].setPiecesLeft((m_ships[ship].getPiecesLeft) - 1);
+		m_ships[ship].setPiecesLeft(m_ships[ship].getPiecesLeft() - 1);
 		m_piecesLeft--;
 		
 	}
