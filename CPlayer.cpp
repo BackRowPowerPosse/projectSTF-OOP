@@ -443,13 +443,13 @@ namespace SINK_THE_FLEET
 				{
 					CCell placement(bowCoordinates.getRow() + p,
 						bowCoordinates.getCol());
-					setCell(0, placement, m_ships[p].getName());
+					setCell(0, placement, m_ships[i].getName());
 				}					
 				else // if HORIZONTAL
 				{
 					CCell placement(bowCoordinates.getRow(),
 						bowCoordinates.getCol() + p);
-					setCell(0, placement, m_ships[p].getName());
+					setCell(0, placement, m_ships[i].getName());
 				}									
 			}
 			m_ships[i].setPiecesLeft(shipSize[i]);
