@@ -728,6 +728,7 @@ namespace SINK_THE_FLEET
 				}
 			} while (badShip);
 		} // end for j
+		return true;
 	}
 	//-----------------------------------------------------------------------------
 	//	Class:        CPlayer
