@@ -863,7 +863,6 @@ namespace SINK_THE_FLEET
 					repeatRoll = false;
 					if (safeChoice("Save this grid to file?", 'Y', 'N') == 'Y')
 						saveGrid();
-
 				}
 				else 
 					return false;
