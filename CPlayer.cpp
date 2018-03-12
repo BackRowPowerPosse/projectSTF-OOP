@@ -20,6 +20,10 @@ namespace SINK_THE_FLEET
 			m_gridSize = 'S';
 		}
 
+		for (int i = 0; i < SHIP_SIZE_ARRAYSIZE; i++) {
+			m_ships[i].setName(CShip((Ship)i));
+		}
+
 		//	sets m_whichPlayer
 		m_whichPlayer = whichPlayer;
 
@@ -763,7 +767,7 @@ namespace SINK_THE_FLEET
 				m_ships[j].setBowLocation(CCell(randY, randX));
 				if (isValidLocation(j)) {	// if m_ships[j] is in a valid location...
 					badCoord = false;	//	do NOT re-roll
-					setCell(0, CCell(randY, randX), CShip(FRIGATE));
+					setCell(0, CCell(randY, randX), m_ships[j].getName());
 				}
 
 			}
