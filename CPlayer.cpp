@@ -436,19 +436,15 @@ namespace SINK_THE_FLEET
 
 				if (m_ships[i].getOrientation() == VERTICAL) //	if VERTICAL
 				{
-					CCell placement = (bowCoordinates.getCol() + p,
-						bowCoordinates.getRow());
+					CCell placement(bowCoordinates.getCol(),
+						bowCoordinates.getRow() + p);
 					setCell(0, placement, m_ships[p].getName());
-					//m_gameGrid[0][m_ships[i].getBowLocation().getRow() +
-					//p][m_ships[i].getBowLocation().getCol()] = m_ships[i];
 				}					
 				else // if HORIZONTAL
 				{
-					CCell placement = (bowCoordinates.getCol(),
-						bowCoordinates.getRow() + p);
+					CCell placement(bowCoordinates.getCol() + p,
+						bowCoordinates.getRow());
 					setCell(0, placement, m_ships[p].getName());
-					//m_gameGrid[0][m_ships[i].getBowLocation().getRow()]
-					//[m_ships[i].getBowLocation().getCol() + p] = m_ships[i];	
 				}									
 			}
 			m_ships[i].setPiecesLeft(shipSize[i]);
