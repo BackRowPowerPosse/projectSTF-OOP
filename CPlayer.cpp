@@ -668,7 +668,7 @@ namespace SINK_THE_FLEET
 				// orientation"
 				outSStream << "Player " << m_whichPlayer << " Enter " 
 					<< shipNames[j] << " orientation";
-				input = cin.get();
+				//input = cin.get();
 				input = safeChoice(outSStream.str(), 'V', 'H');
 
 				if (input == 'V')
@@ -731,18 +731,18 @@ namespace SINK_THE_FLEET
 						// if VERTICAL
 						if (m_ships[j].getOrientation() == VERTICAL)
 						{
-							CCell placement = (bow.getRow(),
-								bow.getCol() + p);
+							CCell placement(bow.getRow() + p,
+								bow.getCol());
 							// Sets cell to NOSHIP
-							setCell(0, placement, m_ships[0].getName());
+							setCell(0, placement, NOSHIP);
 						}
 							
 						else // if HORIZONTAL
 						{
-							CCell placement = (bow.getRow() + p,
-								bow.getCol());
+							CCell placement = (bow.getRow(),
+								bow.getCol() + p);
 							//Sets cell to NOSHIP
-							setCell(0, placement, m_ships[0].getName());
+							setCell(0, placement, NOSHIP);
 						}							
 					}
 				}
@@ -751,8 +751,8 @@ namespace SINK_THE_FLEET
 
 		do
 		{
-			cout << "Do you wish to save this grid to a file?";
-			if (safeChoice(outSStream.str(), 'Y', 'N') == 'N')
+			//cout << endl << "Do you wish to save this grid to a file?";
+			if (safeChoice("Do you wish to save this grid to a file?", 'Y', 'N') == 'N')
 				break;
 		} while (saveGrid() != true);
 
