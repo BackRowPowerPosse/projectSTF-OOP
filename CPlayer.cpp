@@ -284,7 +284,7 @@ namespace SINK_THE_FLEET
 	//-----------------------------------------------------------------------------
 	Ship CPlayer::getCell(short whichGrid, CCell cell) const
 	{
-		return (m_gameGrid[whichGrid][cell.getCol()][cell.getRow()]);
+		return m_gameGrid[whichGrid][cell.getCol()][cell.getRow()]; 
 	}
 	//-----------------------------------------------------------------------------
 	//	Class:        CPlayer
@@ -359,7 +359,6 @@ namespace SINK_THE_FLEET
 	bool CPlayer::getGrid(string fileName)
 	{
 		string line;
-		//string fileName;
 		ifstream ifs;
 		Ship ship = NOSHIP;
 		short shipCount[SHIP_SIZE_ARRAYSIZE] = { 0 };
@@ -368,18 +367,9 @@ namespace SINK_THE_FLEET
 		char row;
 		short col;
 		CCell bowCoordinates;
-		//short numberOfRows = (toupper(size) == 'L') ? LARGEROWS : SMALLROWS;
-		//short numberOfCols = (toupper(size) == 'L') ? LARGECOLS : SMALLCOLS;
-
-		//~-~-~-File name already passed in. Assuming prompted before method is called.~-~-~-~
-		//cout << "Please enter file name: ";		// filename prompt
-		//cin >> fileName;						// string prompt for filename
-		//cin.ignore(FILENAME_MAX, '\n');
 
 		//~_~_~_~_~_~Unsure what to do with clearGrid section here.
 		//clearGrid(players[whichPlayer].m_gameGrid[0], size); // start with a fresh grid
-
-
 
 		try		// attempt to open file
 		{
@@ -424,46 +414,34 @@ namespace SINK_THE_FLEET
 			bowCoordinates.inputCoordinates(ifs, fsize); // ----====assuming inputCoordinates grabs both chars
 			m_ships[i].setBowLocation(bowCoordinates);
 
-
-
-			// ~_~_~_~_~Old Validation. Update to check validity of current coords?
-			//if (!isValidLocation(players[whichPlayer], i, size)) {
-			//	cout << "Bad Grid. Ships intersect or out of bounds" << endl
-			//		<< " press <enter> to continue" << endl;
-			//	cin.ignore(FILENAME_MAX, '\n');
-			//	// clear the grid
-			//	clearGrid(players[whichPlayer].m_gameGrid[0], size);
-			//	return false;
-			//}
-
 			if (!isValidLocation(i)) {
 				cout << "Bad Grid. Ships intersect or out of bounds" << endl
 							<< " press <enter> to continue" << endl;
 				cin.ignore(FILENAME_MAX, '\n');
 				cin.get();
-				//!!!!call clear grid here when it's done!!!!
+				//???Clear grid here?
 				return false;
-			}
-				
+			}				
 
-			//!!double check whether .shipSize property is allowed to be called like that
 			for (int p = 0; p < shipSize[i]; p++) { // loop through each coordinate the ship touches
 
 				if (m_ships[i].getOrientation() == VERTICAL)	//	if VERTICAL
-					m_gameGrid[0][m_ships[i].getBowLocation.getRow() + p][m_ships[i].getBowLocation.getCol()] = m_ships[i];
-					
+				{
+					CCell placement = (bowCoordinates.getCol() + p, bowCoordinates.getRow());
+					setCell(0, placement, m_ships[p].getName());
+					//m_gameGrid[0][m_ships[i].getBowLocation().getRow() + p][m_ships[i].getBowLocation().getCol()] = m_ships[i];
+				}					
 				else				// if HORIZONTAL
-					m_gameGrid[0][m_ships[i].getBowLocation.getRow()][m_ships[i].getBowLocation.getCol() + p] = m_ships[i];					
+				{
+					CCell placement = (bowCoordinates.getCol(), bowCoordinates.getRow() + p);
+					setCell(0, placement, m_ships[p].getName());
+					//m_gameGrid[0][m_ships[i].getBowLocation().getRow()][m_ships[i].getBowLocation().getCol() + p] = m_ships[i];	
+				}									
 			}
-
-			//players[whichPlayer].m_ships[i].m_piecesLeft = shipSize[i];		// initialize piecesLeft for each ship
-
 			m_ships[i].setPiecesLeft(shipSize[i]);
-
 		}
 
 		m_piecesLeft = TOTALPIECES;
-
 
 		ifs.close();
 
@@ -507,7 +485,7 @@ namespace SINK_THE_FLEET
 			while (isOpen && i < shipLength) 
 			{
 				if (((bow.getCol() + shipLength) > numberOfCols) ||
-					getCell(**this->m_gameGrid[0], bow.getCol() + i) != NOSHIP) 
+					getCell(0, bow.getCol() + i) != NOSHIP) 
 					//check if spot is empty
 				{
 					isOpen = false;
@@ -519,7 +497,7 @@ namespace SINK_THE_FLEET
 			while (isOpen && i < shipLength)
 			{
 				if (((bow.getRow() + shipLength) > numberOfRows) ||
-					getCell(**this->m_gameGrid[0], bow.getRow() + i) != NOSHIP) 
+					getCell(0, bow.getRow() + i) != NOSHIP) 
 					// check overlapping from previous entries
 				{
 					isOpen = false;
@@ -813,7 +791,7 @@ namespace SINK_THE_FLEET
 	void CPlayer::hitShip(CShip ship)
 	{
 		static_cast<short>(ship);
-		m_ships[ship].setPiecesLeft((m_ships[ship].getPiecesLeft()) - 1);
+		m_ships[ship].setPiecesLeft(m_ships[ship].getPiecesLeft() - 1);
 		m_piecesLeft--;
 		
 	}
