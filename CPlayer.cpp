@@ -749,6 +749,9 @@ namespace SINK_THE_FLEET
 			} while (badShip);
 		} // end for j
 
+		if (safeChoice("Is this grid ok?", 'Y', 'N') == 'N')
+			return false;
+
 		do
 		{
 			//cout << endl << "Do you wish to save this grid to a file?";
