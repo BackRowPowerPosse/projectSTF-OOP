@@ -799,16 +799,21 @@ namespace SINK_THE_FLEET
 			while (badCoord)
 			{
 				badCoord = true;
-				// random number from 0 to numberOfCols
-				randX = rand() % numberOfCols;
-				// random number from 0 to numberOfRows
-				randY = rand() % numberOfRows;
+				randX = rand() % numberOfCols;	// random number from 0 to numberOfCols
+				randY = rand() % numberOfRows;	// random number from 0 to numberOfRows
+
+				if (rand() % 2 == 0) 	// if rand() is even
+					m_ships[j].setOrientation(CDirection(VERTICAL));
+				else
+					m_ships[j].setOrientation(CDirection(HORIZONTAL));
+
 				m_ships[j].setBowLocation(CCell(randY, randX));
 
 				// if m_ships[j] is in a valid location...
 				if (isValidLocation(j))
 				{
 					badCoord = false;	//	do NOT re-roll
+
 					setCell(0, CCell(randY, randX), m_ships[j].getName());
 				}
 
