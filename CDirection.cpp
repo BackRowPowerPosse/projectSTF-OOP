@@ -21,6 +21,11 @@ namespace SINK_THE_FLEET
 		print(cout);
 	}
 
+	CDirection CDirection::operator=(const CDirection& other) {
+		m_direction = other.m_direction;
+		return *this;
+	}
+
 	ostream &operator<<(ostream &sout, const CDirection &direction)
 	{
 		direction.print(sout);

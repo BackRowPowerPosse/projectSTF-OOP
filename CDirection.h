@@ -13,6 +13,8 @@ namespace SINK_THE_FLEET
 		void print(ostream &sout) const;
 		void print() const;
 
+		CDirection operator=(const CDirection& other);
+
 
 	private:
 		Direction m_direction;

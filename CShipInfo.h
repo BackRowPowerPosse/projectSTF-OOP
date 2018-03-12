@@ -34,6 +34,7 @@ namespace SINK_THE_FLEET
 		void setBowLocation(CCell &bowLocation);
 		void setPiecesLeft(short pieces);
 		CShipInfo operator--();
+		CShipInfo operator=(const CShipInfo& other);
 
 	private:
 		CShip m_name;
