@@ -21,7 +21,7 @@ namespace SINK_THE_FLEET
 		}
 
 		for (int i = 0; i < SHIP_SIZE_ARRAYSIZE; i++) {
-			m_ships[i].setName(CShip((Ship)i));
+			m_ships[i] = CShipInfo(CShip((Ship)i), VERTICAL, CCell(0, 0), shipSize[i]);
 		}
 
 		//	sets m_whichPlayer
