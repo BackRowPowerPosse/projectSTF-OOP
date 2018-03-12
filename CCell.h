@@ -60,7 +60,7 @@ namespace SINK_THE_FLEET
 		void print() const { print(cout); }
 
 		void inputCoordinates(istream &sin, char size);
-		CCell operator=(const CCell & cell) { return cell; }
+		CCell operator=(const CCell & cell);
 
 	private:
 		unsigned short m_row;

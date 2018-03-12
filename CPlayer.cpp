@@ -547,15 +547,6 @@ namespace SINK_THE_FLEET
 		return m_ships[index];
 	}
 
-	void CPlayer::setGridSize(char size)
-	{
-		m_gridSize = size;
-	}
-	void CPlayer::setCell(short whichGrid, CCell cell, CShip ship)
-	{
-		m_gameGrid[whichGrid][cell.getRow()][cell.getCol()] = ship;
-		cout << m_gameGrid[whichGrid][cell.getRow()][cell.getCol()] << endl;
-	}
 	//-----------------------------------------------------------------------------
 	//	Class:        CPlayer
 	//	method:      bool CPlayer::saveGrid()
@@ -815,7 +806,8 @@ namespace SINK_THE_FLEET
 				m_ships[j].setBowLocation(CCell(randY, randX));
 
 				// if m_ships[j] is in a valid location...
-				if (isValidLocation(j))	
+				if (isValidLocation(j))
+				{
 					badCoord = false;	//	do NOT re-roll
 					setCell(0, CCell(randY, randX), m_ships[j].getName());
 				}
