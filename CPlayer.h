@@ -82,7 +82,7 @@ namespace SINK_THE_FLEET
 		char getGridSize() const { return m_gridSize; }
 		Ship getCell(short whichGrid, CCell cell) const
 		{
-			return m_gameGrid[whichGrid][cell.getCol()][cell.getRow()];
+			return m_gameGrid[whichGrid][cell.getRow()][cell.getCol()];
 		}
 		void printGrid(ostream &sout, short whichGrid) const;
 		bool getGrid(string fileName);

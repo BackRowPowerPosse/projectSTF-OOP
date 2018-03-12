@@ -336,7 +336,7 @@ namespace SINK_THE_FLEET
 			{
 				CCell cell(i, j);
 				sout << " ";
-				sout << m_gameGrid[0][i][j];
+				sout << m_gameGrid[whichGrid][i][j];
 				sout << VERT;
 			}
 				sout << endl;

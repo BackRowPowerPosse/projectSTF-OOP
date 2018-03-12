@@ -98,7 +98,7 @@ namespace SINK_THE_FLEET
 		{
 			system("cls");
 			m_players[whichPlayer].printGrid(cout, 1);
-			cout << "Player " << whichPlayer + 1 << ", enter coordinates for"
+			cout << "Player " << whichPlayer + 1 << ", enter coordinates for "
 				"firing:" << endl;
 			coord.inputCoordinates(cin, m_gridSize);
 
@@ -106,7 +106,7 @@ namespace SINK_THE_FLEET
 			{
 				cout << "You have already shot at " << static_cast<char>
 					(coord.getRow() + 'A') << coord.getCol() + 1 << endl;
-				cout << "Player " << whichPlayer + 1 << ", enter coordinates"
+				cout << "Player " << whichPlayer + 1 << ", enter coordinates "
 					<< "for firing:" << endl;
 				coord.inputCoordinates(cin, m_gridSize);
 			}
