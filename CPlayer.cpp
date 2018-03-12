@@ -291,7 +291,8 @@ namespace SINK_THE_FLEET
 			}
 		}
 		printGrid(cout, 0);
-		
+		cin.ignore(FILENAME_MAX, '\n');
+		cin.get();
 		return *this;
 	}
 	
@@ -435,19 +436,15 @@ namespace SINK_THE_FLEET
 
 				if (m_ships[i].getOrientation() == VERTICAL) //	if VERTICAL
 				{
-					CCell placement = (bowCoordinates.getCol() + p,
-						bowCoordinates.getRow());
+					CCell placement(bowCoordinates.getCol(),
+						bowCoordinates.getRow() + p);
 					setCell(0, placement, m_ships[p].getName());
-					//m_gameGrid[0][m_ships[i].getBowLocation().getRow() +
-					//p][m_ships[i].getBowLocation().getCol()] = m_ships[i];
 				}					
 				else // if HORIZONTAL
 				{
-					CCell placement = (bowCoordinates.getCol(),
-						bowCoordinates.getRow() + p);
+					CCell placement(bowCoordinates.getCol() + p,
+						bowCoordinates.getRow());
 					setCell(0, placement, m_ships[p].getName());
-					//m_gameGrid[0][m_ships[i].getBowLocation().getRow()]
-					//[m_ships[i].getBowLocation().getCol() + p] = m_ships[i];	
 				}									
 			}
 			m_ships[i].setPiecesLeft(shipSize[i]);
@@ -494,10 +491,10 @@ namespace SINK_THE_FLEET
 		switch (orientation)
 		{
 		case HORIZONTAL: // ship is horizontal
-			for(short i = 0; i < shipLength && isOpen; i++)
+			for (short i = 0; i < shipLength && isOpen; i++)
 			{
 				if (((bow.getCol() + shipLength) > numberOfCols) ||
-					getCell(0, bow.getCol() + i) != NOSHIP) 
+					getCell(0, bow.getCol() + i) != NOSHIP)
 					// check if spot is empty
 					isOpen = false;
 
@@ -509,7 +506,7 @@ namespace SINK_THE_FLEET
 			for (short i = 0; i < shipLength && isOpen; i++)
 			{
 				if (((bow.getRow() + shipLength) > numberOfRows) ||
-					getCell(0, bow.getRow() + i) != NOSHIP) 
+					getCell(0, bow.getRow() + i) != NOSHIP)
 					// check overlapping from previous entries
 					isOpen = false;
 			}
