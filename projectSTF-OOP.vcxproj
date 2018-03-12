@@ -41,6 +41,9 @@
     <ClInclude Include="SafeIO.h" />
     <ClInclude Include="TextGraphics.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="test.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{FDA08257-E848-41C7-BCBB-27259E517183}</ProjectGuid>

@@ -85,6 +85,7 @@ namespace SINK_THE_FLEET
 			return m_gameGrid[whichGrid][cell.getRow()][cell.getCol()];
 		}
 		void printGrid(ostream &sout, short whichGrid) const;
+		void clearGrid(short whichGrid);
 		bool getGrid(string fileName);
 		bool isValidLocation(short whichShip);
 		CShipInfo operator[](short index) const;
