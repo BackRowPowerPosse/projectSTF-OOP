@@ -295,7 +295,6 @@ namespace SINK_THE_FLEET
 				}
 			}
 		}
-		printGrid(cout, 0);
 		cin.ignore(FILENAME_MAX, '\n');
 		cin.get();
 		return *this;
