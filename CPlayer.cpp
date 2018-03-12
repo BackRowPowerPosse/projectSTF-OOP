@@ -846,8 +846,11 @@ namespace SINK_THE_FLEET
 					if (safeChoice("Save this grid to file?", 'Y', 'N') == 'Y')
 						saveGrid();
 				}
-				else 
+				else {
+					cout << "Grid will now be cleared <press ENTER to continue>" << endl;
+					cin.ignore(FILENAME_MAX, '\n');
 					return false;
+				}
 
 		} while (repeatRoll);
 
