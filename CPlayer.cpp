@@ -56,7 +56,7 @@ namespace SINK_THE_FLEET
 		while (doPrompt) {
 			doPrompt = true;
 			system("cls");
-			cout << "Player " << m_whichPlayer + 1 << ", how would you like to set up your grid?" << endl;
+			cout << "Player " << m_whichPlayer << ", how would you like to set up your grid?" << endl;
 			cout << "(1) Load grid from file" << endl;
 			cout << "(2) Manually set ships" << endl;
 			cout << "(3) Randomly place all ships" << endl;
@@ -647,7 +647,7 @@ namespace SINK_THE_FLEET
 				
 				//ORIENTATION
 				outSStream.str("");
-				outSStream << "Player " << this + 1 << " Enter " //Should show "Player (number of player) Enter (shipName) orientation"
+				outSStream << "Player " << m_whichPlayer << " Enter " //Should show "Player (number of player) Enter (shipName) orientation"
 					<< shipNames[j] << " orientation";
 				
 				input = safeChoice(outSStream.str(), 'V', 'H');
@@ -657,7 +657,7 @@ namespace SINK_THE_FLEET
 					m_ships[j].setOrientation(CDirection(HORIZONTAL));
 
 				//BOW COORDINATE PROMPT
-				cout << "Player " << this + 1 << " Enter " << shipNames[j] <<
+				cout << "Player " <<  m_whichPlayer << " Enter " << shipNames[j] <<
 					" bow coordinates <row letter><col #>: " << endl;			
 				//BOW COORDINATE INPUT
 				bow.inputCoordinates(cin, m_gridSize);
