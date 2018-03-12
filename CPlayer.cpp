@@ -739,7 +739,7 @@ namespace SINK_THE_FLEET
 							
 						else // if HORIZONTAL
 						{
-							CCell placement = (bow.getRow(),
+							CCell placement(bow.getRow(),
 								bow.getCol() + p);
 							//Sets cell to NOSHIP
 							setCell(0, placement, NOSHIP);
