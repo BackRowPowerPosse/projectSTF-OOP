@@ -5,7 +5,6 @@ namespace SINK_THE_FLEET
 {
 	void CShip::print(ostream &sout) const
 	{
-		sout << ' ';
 
 		switch (m_ship)
 		{
@@ -37,7 +36,6 @@ namespace SINK_THE_FLEET
 			sout << 'X';
 		}
 
-		sout << VERT;
 	}
 
 	CShip CShip::operator=(const CShip& other) {
@@ -49,7 +47,7 @@ namespace SINK_THE_FLEET
 	{
 		ship.print(sout);
 
-		return sout;
+		return cout;
 	}
 
 	istream &operator>>(istream &sin, CShip &ship)

@@ -56,7 +56,7 @@ namespace SINK_THE_FLEET
 		while (doPrompt) {
 			doPrompt = true;
 			system("cls");
-			cout << "Player " << m_whichPlayer + 1 << ", how would you like to set up your grid?" << endl;
+			cout << "Player " << m_whichPlayer << ", how would you like to set up your grid?" << endl;
 			cout << "(1) Load grid from file" << endl;
 			cout << "(2) Manually set ships" << endl;
 			cout << "(3) Randomly place all ships" << endl;
@@ -322,23 +322,17 @@ namespace SINK_THE_FLEET
 			//print out ship
 			for (short j = 0; j < numberOfCols; j++)
 			{
-				CCell cell(i,j);
+				CCell cell(i, j);
 				Ship ship = getCell(whichGrid, cell);
-				cout << ship;
+				sout << " " << ship << VERT;
 			}
-			sout << endl;
+				sout << endl;
+				sout << HORIZ;
 
-			//finish row with 2 horizontal lines and cross right
-			for (int k = 1; k < numberOfCols; k++)
-			{
-				if (k == 1)
-				{
-					sout << HORIZ << HORIZ << HORIZ << CR;
-				}
-				sout << HORIZ << HORIZ << CR;
-			}
-			//end line, go to next row
-			sout << endl;
+				for (short j = 0; j < numberOfCols; ++j)
+					sout << HORIZ << HORIZ << CR;
+
+				sout << endl;
 		}
 	}
 	//-----------------------------------------------------------------------------
@@ -645,14 +639,14 @@ namespace SINK_THE_FLEET
 			do {
 				badShip = false; // reset loop flag -- will exit by default
 
-				printGrid(outSStream, 0); //Show grid. Empty at first.				
+				printGrid(cout, 0); //Show grid. Empty at first.				
 				
 				//Initialize pieces left for each ship
 				m_ships[j].setPiecesLeft(shipSize[j]); 
 				
 				//ORIENTATION
 				outSStream.str("");
-				outSStream << "Player " << this + 1 << " Enter " //Should show "Player (number of player) Enter (shipName) orientation"
+				outSStream << "Player " << m_whichPlayer << " Enter " //Should show "Player (number of player) Enter (shipName) orientation"
 					<< shipNames[j] << " orientation";
 				
 				input = safeChoice(outSStream.str(), 'V', 'H');
@@ -662,7 +656,7 @@ namespace SINK_THE_FLEET
 					m_ships[j].setOrientation(CDirection(HORIZONTAL));
 
 				//BOW COORDINATE PROMPT
-				cout << "Player " << this + 1 << " Enter " << shipNames[j] <<
+				cout << "Player " <<  m_whichPlayer << " Enter " << shipNames[j] <<
 					" bow coordinates <row letter><col #>: " << endl;			
 				//BOW COORDINATE INPUT
 				bow.inputCoordinates(cin, m_gridSize);
