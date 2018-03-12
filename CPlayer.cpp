@@ -320,7 +320,7 @@ namespace SINK_THE_FLEET
 			{
 				CCell cell(i,j);
 				Ship ship = getCell(whichGrid, cell);
-				cout << ship;
+				
 			}
 			sout << endl;
 
@@ -640,7 +640,7 @@ namespace SINK_THE_FLEET
 			do {
 				badShip = false; // reset loop flag -- will exit by default
 
-				printGrid(outSStream, 0); //Show grid. Empty at first.				
+				printGrid(cout, 0); //Show grid. Empty at first.				
 				
 				//Initialize pieces left for each ship
 				m_ships[j].setPiecesLeft(shipSize[j]); 

@@ -90,7 +90,9 @@ namespace SINK_THE_FLEET
 
 	CCell CCell::operator=(const CCell & cell)
 	{
-		return cell;
+		m_row = cell.m_row;
+		m_col = cell.m_col;
+		return *this;
 	}
 
 	// ----------------------------------------------------------------------------
