@@ -1,4 +1,4 @@
-#include "CShip.h"
+#include "FleetLibrary.h"
 	
 namespace SINK_THE_FLEET
 {

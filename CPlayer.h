@@ -1,8 +1,6 @@
 #pragma once
-#include "fleet.h"
-#include "CSinkTheFleet.h"
-#include <ctime>
-#include <cstdlib>
+
+#include "FleetLibrary.h"
 
 namespace SINK_THE_FLEET
 {

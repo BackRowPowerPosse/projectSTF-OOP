@@ -1,6 +1,6 @@
 #pragma once
-#include "fleet.h"
-#include "CSinkTheFleet.h"
+
+#include "FleetLibrary.h"
 
 namespace SINK_THE_FLEET
 {

@@ -18,7 +18,7 @@
 //			
 //-----------------------------------------------------------------------------
 
-#include "CShipInfo.h"
+#include "FleetLibrary.h"
 
 namespace SINK_THE_FLEET
 {
@@ -65,7 +65,7 @@ namespace SINK_THE_FLEET
 	//-----------------------------------------------------------------------------
 	void CShipInfo::print(ostream & sout) const
 	{
-		sout << this->m_name << ", located ";
+		sout << m_name << ", located ";
 		if (this->m_orientation)
 		{
 			sout << "vertically at ";

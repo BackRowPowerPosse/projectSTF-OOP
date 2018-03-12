@@ -1,10 +1,6 @@
 #pragma once
-#include "fleet.h"
-#include "CPlayer.h"
-#include "CShip.h"
-#include "CCell.h"
-#include "CDirection.h"
-#include "CShipInfo.h"
+
+#include "FleetLibrary.h"
 
 namespace SINK_THE_FLEET
 {

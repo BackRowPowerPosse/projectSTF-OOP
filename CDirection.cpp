@@ -1,14 +1,13 @@
-#include "CDirection.h"
+#include "FleetLibrary.h"
 
 namespace SINK_THE_FLEET
 {
-
-	CDirection::operator Direction2() const
+	CDirection::operator Direction() const
 	{
 		return m_direction;
 	}
 
-	void CDirection::print(ostream &sout)const
+	void CDirection::print(ostream &sout) const
 	{
 		if (m_direction)	// if not zero, therefore 1, therefore vertical
 			sout << "V";
@@ -16,7 +15,7 @@ namespace SINK_THE_FLEET
 			sout << "H";
 	}
 
-	void CDirection::print()const
+	void CDirection::print() const
 	{
 		print(cout);
 	}

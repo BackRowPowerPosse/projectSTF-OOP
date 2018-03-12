@@ -1,6 +1,6 @@
 #pragma once
-#include "fleet.h"
-#include "CSinkTheFleet.h"
+
+#include "FleetLibrary.h"
 
 namespace SINK_THE_FLEET
 {
@@ -19,17 +19,6 @@ namespace SINK_THE_FLEET
 
 		void inputCoordinates(istream &sin, char size);
 		CCell operator=(const CCell &cell);
-    
-		// Number of players in game
-		const short NUMPLAYERS = 2;
-		// Number of rows/columns in small sea array
-		const short SMALLROWS = 8;
-		// Number of rows/columns in large sea array
-		const short LARGEROWS = 10;
-		// Number of rows/columns in small sea array
-		const short SMALLCOLS = 12;
-		// Number of rows/columns in large sea array
-		const short LARGECOLS = 24;
 
 	private:
 		unsigned short m_row;

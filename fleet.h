@@ -40,7 +40,7 @@ const short LARGECOLS = 24;
 // Maximum screen line length
 const short BOXWIDTH = 79;
 // Size of the shipSize array
-const int SHIP_SIZE_ARRAYSIZE = 6; 
+const int SHIP_SIZE_ARRAYSIZE = 6;
 // Number of elements for each ship
 const short shipSize[SHIP_SIZE_ARRAYSIZE] = {0, 2, 3, 3, 4, 5};
 

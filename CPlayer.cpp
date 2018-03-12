@@ -1,4 +1,4 @@
-   #include "CPlayer.h"
+#include "FleetLibrary.h"
 
 namespace SINK_THE_FLEET
 {
@@ -26,12 +26,10 @@ namespace SINK_THE_FLEET
 		allocateMemory();
 
 		initializationSelection();
-
-		
 	}
 
-	void CPlayer::initializationSelection() {
-
+	void CPlayer::initializationSelection()
+	{
 		short selection;
 		string filename;
 		bool doPrompt = true;

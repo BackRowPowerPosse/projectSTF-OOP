@@ -4,15 +4,7 @@
 // Functions:	main()
 //----------------------------------------------------------------------------
 
-#include "CCell.h"
-#include "CDirection.h"
-#include "CPlayer.h"
-#include "CShip.h"
-#include "CShipInfo.h"
-#include "CSinkTheFleet.h"
-#include "fleet.h"
-#include "SafeIO.h"
-#include "TextGraphics.h"
+#include "FleetLibrary.h"
 
 #define _CRTDBG_MAP_ALLOC
 

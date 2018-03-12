@@ -74,5 +74,8 @@
     <ClInclude Include="TextGraphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FleetLibrary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

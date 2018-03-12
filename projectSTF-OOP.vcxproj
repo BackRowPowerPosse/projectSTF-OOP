@@ -38,6 +38,7 @@
     <ClInclude Include="CShipInfo.h" />
     <ClInclude Include="CSinkTheFleet.h" />
     <ClInclude Include="fleet.h" />
+    <ClInclude Include="FleetLibrary.h" />
     <ClInclude Include="SafeIO.h" />
     <ClInclude Include="TextGraphics.h" />
   </ItemGroup>
