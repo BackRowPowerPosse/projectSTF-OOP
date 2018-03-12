@@ -98,7 +98,7 @@ namespace SINK_THE_FLEET
 		}
 		bool saveGrid();
 		bool setShips();
-		void autoSetShips();
+		bool autoSetShips();
 		void hitShip(CShip ship);
 		void initializationSelection();
 		CPlayer operator--();

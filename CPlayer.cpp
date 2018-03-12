@@ -127,6 +127,7 @@ namespace SINK_THE_FLEET
 		bool doPrompt = true;
 
 		while (doPrompt) {
+			clearGrid(0);	// ensure grid is empty
 			doPrompt = true;
 			system("cls");
 			cout << "Player " << m_whichPlayer
@@ -761,6 +762,9 @@ namespace SINK_THE_FLEET
 			} while (badShip);
 		} // end for j
 
+		if (safeChoice("Is this grid ok?", 'Y', 'N') == 'N')
+			return false;
+
 		do
 		{
 			//cout << endl << "Do you wish to save this grid to a file?";
@@ -783,7 +787,7 @@ namespace SINK_THE_FLEET
 	//	History Log:
 	//	              3/6/18
 	//------------------------------------------------------------------------
-	void CPlayer::autoSetShips()
+	bool CPlayer::autoSetShips()
 	{
 		bool repeatRoll;
 		do {
@@ -846,14 +850,21 @@ namespace SINK_THE_FLEET
 			}
 
 			printGrid(cout, 0);
-			stringstream ss;
-			ss << "Player ";
-			ss << m_whichPlayer;
-			ss << ", use this grid?";
-			if (safeChoice(ss.str(), 'Y', 'N') == 'N')
+			if (safeChoice("Re-roll ship random ship placements?", 'Y', 'N') == 'Y')
 				repeatRoll = true;
+			else
+				if (safeChoice("Use this grid?", 'Y', 'N') == 'Y') {
+					repeatRoll = false;
+					if (safeChoice("Save this grid to file?", 'Y', 'N' == 'Y'))
+						saveGrid();
+
+				}
+				else 
+					return false;
 
 		} while (repeatRoll);
+
+		return true;
 	}
 	
 	//------------------------------------------------------------------------
