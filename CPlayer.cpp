@@ -813,7 +813,12 @@ namespace SINK_THE_FLEET
 				if (isValidLocation(j)) {
 					badCoord = false;	//	do NOT re-roll
 
-					setCell(0, CCell(randY, randX), m_ships[j].getName());
+					for (int i = 0; i < shipSize[j]; i++) {
+						if((Direction)m_ships[j].getOrientation() == VERTICAL)
+							setCell(0, CCell(randY + i, randX), m_ships[j].getName());
+						else
+							setCell(0, CCell(randY, randX + i), m_ships[j].getName());
+					}
 				}
 
 			}
