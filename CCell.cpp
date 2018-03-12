@@ -70,8 +70,8 @@ namespace SINK_THE_FLEET
 			sin >> col;
 			if (!sin)
 				sin.clear();
-			sin.ignore(FILENAME_MAX, '\n');
-		} while (col < 1 || col > numberOfCols);
+			//sin.ignore(FILENAME_MAX, '\n');
+		} while ((col < 1 || col > numberOfCols) && (&sin == &cin));
 
 		m_col = col - 1;
 		m_row = static_cast<short>(toupper(row) - 'A');
