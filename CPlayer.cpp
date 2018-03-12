@@ -375,9 +375,8 @@ namespace SINK_THE_FLEET
 		char fsize = 'S';
 		CCell bowCoordinates;
 
-		//~_~_~_~_~_~Unsure what to do with clearGrid section here.
-		// start with a fresh grid
-		//clearGrid(players[whichPlayer].m_gameGrid[0], size); 
+		//Start with fresh grid
+		clearGrid(0);
 
 		try		// attempt to open file
 		{
@@ -429,7 +428,7 @@ namespace SINK_THE_FLEET
 				cin.ignore(FILENAME_MAX, '\n');
 				cin.get();
 
-				//???Clear grid here?
+				clearGrid(0);
 				return false;
 			}
 
@@ -459,6 +458,15 @@ namespace SINK_THE_FLEET
 		cout << "File " << fileName << " successfully loaded" << endl
 			<< " press <enter> to continue" << endl;
 		cin.ignore(FILENAME_MAX, '\n');
+
+		printGrid(cout, 0);
+
+		//Final confirmation prompt. 'N' returns user to placement sytle menu.
+		if (safeChoice("Is this grid ok?", 'Y', 'N') == 'N')
+		{
+			clearGrid(0);
+			return false;
+		}
 
 		return true;
 	}
