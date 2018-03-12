@@ -411,8 +411,6 @@ namespace SINK_THE_FLEET
 			m_ships[i].setBowLocation(bowCoordinates);
 
 			if (!isValidLocation(i)) {
-				CCell reset; //in case of failure resets bow
-				m_ships[i].setBowLocation(reset);
 				cout << "Bad Grid. Ships intersect or out of bounds" << endl
 							<< " press <enter> to continue" << endl;
 				cin.ignore(FILENAME_MAX, '\n');
