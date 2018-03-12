@@ -731,16 +731,16 @@ namespace SINK_THE_FLEET
 						// if VERTICAL
 						if (m_ships[j].getOrientation() == VERTICAL)
 						{
-							CCell placement = (bow.getCol() + j,
-								bow.getRow());
+							CCell placement = (bow.getRow(),
+								bow.getCol() + p);
 							// Sets cell to NOSHIP
 							setCell(0, placement, m_ships[0].getName());
 						}
 							
 						else // if HORIZONTAL
 						{
-							CCell placement = (bow.getCol(),
-								bow.getRow() + j);
+							CCell placement = (bow.getRow() + p,
+								bow.getCol());
 							//Sets cell to NOSHIP
 							setCell(0, placement, m_ships[0].getName());
 						}							
