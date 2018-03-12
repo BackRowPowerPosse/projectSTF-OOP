@@ -543,6 +543,18 @@ namespace SINK_THE_FLEET
 	}
 
 
+	void CPlayer::clearGrid(short whichPlayer) {
+		short numberOfRows = (toupper(m_gridSize) == 'L') ? LARGEROWS :
+			SMALLROWS;
+		short numberOfCols = (toupper(m_gridSize) == 'L') ? LARGECOLS :
+			SMALLCOLS;
+
+		for (short row = 0; row < numberOfRows; row++) {
+			for (short col = 0; col < numberOfCols; col++) {
+				m_gameGrid[whichPlayer][row][col] = NOSHIP;
+			}
+		}
+	}
 
 	//-----------------------------------------------------------------------------
 	//	Class:        CPlayer
@@ -773,62 +785,75 @@ namespace SINK_THE_FLEET
 	//------------------------------------------------------------------------
 	void CPlayer::autoSetShips()
 	{
+		bool repeatRoll;
+		do {
+			clearGrid(0);
+			repeatRoll = false;
+			short numberOfRows = (toupper(m_gridSize) == 'L') ? LARGEROWS :
+				SMALLROWS;
+			short numberOfCols = (toupper(m_gridSize) == 'L') ? LARGECOLS :
+				SMALLCOLS;
 
-		short numberOfRows = (toupper(m_gridSize) == 'L') ? LARGEROWS :
-			SMALLROWS;
-		short numberOfCols = (toupper(m_gridSize) == 'L') ? LARGECOLS :
-			SMALLCOLS;
+			//	the rand() function (from cstdlib) generates 'random' number based
+			//	on a 'seed'
+			//	multiple runs creating a series of rand() numbers based on the
+			//	same 'seed' will produce the same series of numbers
+			//	
+			//	To make this more random, change the seed.
+			//	srand(x) changes the seed according to x(integer type)
+			//	time(0) gets the current system's time in milliseconds past the
+			//	system's reference epoch
 
-		//	the rand() function (from cstdlib) generates 'random' number based
-		//	on a 'seed'
-		//	multiple runs creating a series of rand() numbers based on the
-		//	same 'seed' will produce the same series of numbers
-		//	
-		//	To make this more random, change the seed.
-		//	srand(x) changes the seed according to x(integer type)
-		//	time(0) gets the current system's time in milliseconds past the
-		//	system's reference epoch
+			//	srand(time(0)) plants an unpredictable 'seed', to make rand()
+			//	'more' random
+			srand(time(0));
 
-		//	srand(time(0)) plants an unpredictable 'seed', to make rand()
-		//	'more' random
-		srand(time(0));
+			// loop through all ships
+			for (short j = 1; j < SHIP_SIZE_ARRAYSIZE; j++)
+			{
+				bool badCoord = true;
+				int randX;
+				int randY;
+				CCell coord;
 
-		// loop through all ships
-		for (short j = 1; j < SHIP_SIZE_ARRAYSIZE; j++)
-		{
-			bool badCoord = true;
-			int randX;
-			int randY;
-			CCell coord;
+				//printGrid(cout, 0);
+				while (badCoord)
+				{
+					badCoord = true;
+					randX = rand() % numberOfCols;	// random number from 0 to numberOfCols
+					randY = rand() % numberOfRows;	// random number from 0 to numberOfRows
+
+					if (rand() % 2 == 0) 	// if rand() is even
+						m_ships[j].setOrientation(CDirection(VERTICAL));
+					else
+						m_ships[j].setOrientation(CDirection(HORIZONTAL));
+
+					m_ships[j].setBowLocation(CCell(randY, randX));
+
+					// if m_ships[j] is in a valid location...
+					if (isValidLocation(j)) {
+						badCoord = false;	//	do NOT re-roll
+
+						for (int i = 0; i < shipSize[j]; i++) {
+							if ((Direction)m_ships[j].getOrientation() == VERTICAL)
+								setCell(0, CCell(randY + i, randX), m_ships[j].getName());
+							else
+								setCell(0, CCell(randY, randX + i), m_ships[j].getName());
+						}
+					}
+
+				}
+			}
 
 			printGrid(cout, 0);
-			while (badCoord)
-			{
-				badCoord = true;
-				randX = rand() % numberOfCols;	// random number from 0 to numberOfCols
-				randY = rand() % numberOfRows;	// random number from 0 to numberOfRows
+			stringstream ss;
+			ss << "Player ";
+			ss << m_whichPlayer;
+			ss << ", use this grid?";
+			if (safeChoice(ss.str(), 'Y', 'N') == 'N')
+				repeatRoll = true;
 
-				if (rand() % 2 == 0) 	// if rand() is even
-					m_ships[j].setOrientation(CDirection(VERTICAL));
-				else
-					m_ships[j].setOrientation(CDirection(HORIZONTAL));
-
-				m_ships[j].setBowLocation(CCell(randY, randX));
-
-				// if m_ships[j] is in a valid location...
-				if (isValidLocation(j)) {
-					badCoord = false;	//	do NOT re-roll
-
-					for (int i = 0; i < shipSize[j]; i++) {
-						if((Direction)m_ships[j].getOrientation() == VERTICAL)
-							setCell(0, CCell(randY + i, randX), m_ships[j].getName());
-						else
-							setCell(0, CCell(randY, randX + i), m_ships[j].getName());
-					}
-				}
-
-			}
-		}
+		} while (repeatRoll);
 	}
 	
 	//------------------------------------------------------------------------
