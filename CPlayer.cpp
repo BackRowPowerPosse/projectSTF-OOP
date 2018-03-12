@@ -151,21 +151,9 @@ namespace SINK_THE_FLEET
 					// loading succeeds, exit prompt. Otherwise, prompt should
 					// restart from the top of loop
 					doPrompt = false;	
-				else
-				{
-					cout << "grid failed to load. restarting this player's"
-						<< "prompt... <press ENTER to continue>" << endl;
-					cin.ignore(FILENAME_MAX, '\n');
-					// this might be unnecessary to hold prompt at this spot
-					// for 1 char input
-					cin.get();
-				}
-
 				break;
 
 			case '2':
-				// this will show as error until setShips() is developed to
-				// return bool
 				if (setShips())
 					// setting succeded, exit prompt
 					doPrompt = false;
@@ -426,7 +414,6 @@ namespace SINK_THE_FLEET
 				cout << "Bad Grid. Ships intersect or out of bounds" << endl
 							<< " press <enter> to continue" << endl;
 				cin.ignore(FILENAME_MAX, '\n');
-				cin.get();
 
 				clearGrid(0);
 				return false;
