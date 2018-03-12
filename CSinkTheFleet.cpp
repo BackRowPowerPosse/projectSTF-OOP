@@ -54,7 +54,6 @@ namespace SINK_THE_FLEET
 	CSinkTheFleet::CSinkTheFleet(char size)
 	{
 		m_gridSize = size;
-
 		m_players[0] = CPlayer(1, size);
 		m_players[1] = CPlayer(2, size);
 	}
@@ -139,6 +138,7 @@ namespace SINK_THE_FLEET
 			}
 
 			cout << "Press <Enter> to continue...";
+			cin.ignore(FILENAME_MAX, '\n');
 			cin.get();
 
 			if (m_players[!whichPlayer].getPiecesLeft() == 0)

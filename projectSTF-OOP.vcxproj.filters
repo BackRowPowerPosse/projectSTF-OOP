@@ -109,5 +109,8 @@
     <Text Include="spaceShip.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="rand5.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

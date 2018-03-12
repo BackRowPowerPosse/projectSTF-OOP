@@ -51,6 +51,7 @@
     <Text Include="rand2.txt" />
     <Text Include="rand3.txt" />
     <Text Include="rand4.txt" />
+    <Text Include="rand5.txt" />
     <Text Include="spaceShip.txt" />
     <Text Include="test.txt" />
   </ItemGroup>

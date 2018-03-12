@@ -68,6 +68,7 @@ int main()
 		winner = game.play();
 
 		CSinkTheFleet::endBox(winner);
+		system("cls");
 	} while (safeChoice("Would you like to play again?", 'Y', 'N') == 'Y');
 
 	_CrtDumpMemoryLeaks();
