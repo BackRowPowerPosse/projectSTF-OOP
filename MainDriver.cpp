@@ -5,6 +5,7 @@
 //----------------------------------------------------------------------------
 
 #include "FleetLibrary.h"
+#include "CSinkTheFleet.h"
 
 #define _CRTDBG_MAP_ALLOC
 
@@ -73,10 +74,8 @@ int main()
 
 	do
 	{
-
 		CSinkTheFleet game(safeChoice("Which size grid do you want to use?",
 			'S', 'L'));
-
 
 		winner = game.play();
 

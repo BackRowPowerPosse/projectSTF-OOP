@@ -47,9 +47,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="fleet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CShip.h">
       <Filter>Header Files</Filter>
     </ClInclude>

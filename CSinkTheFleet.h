@@ -1,6 +1,7 @@
 #pragma once
 
 #include "FleetLibrary.h"
+#include "CPlayer.h"
 
 namespace SINK_THE_FLEET
 {

@@ -1,6 +1,9 @@
 #pragma once
 
 #include "FleetLibrary.h"
+#include "CCell.h"
+#include "CShip.h"
+#include "CShipInfo.h"
 
 namespace SINK_THE_FLEET
 {
@@ -13,7 +16,6 @@ namespace SINK_THE_FLEET
 
 		~CPlayer();
 
-		const int TOTALPIECES = 17;
 		unsigned short getWhichPlayer() const;
 		short getPiecesLeft() const;
 		char getGridSize() const;

@@ -7,6 +7,9 @@
 #pragma once
 
 #include "FleetLibrary.h"
+#include "CCell.h"
+#include "CDirection.h"
+#include "CShip.h"
 
 namespace SINK_THE_FLEET
 {

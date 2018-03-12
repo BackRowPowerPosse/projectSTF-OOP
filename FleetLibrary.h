@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cctype>
+#include <crtdbg.h>
 #include <cstdlib>
 #include <ctime>
 #include <fstream>
@@ -8,12 +9,6 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include "CCell.h"
-#include "CDirection.h"
-#include "CPlayer.h"
-#include "CShip.h"
-#include "CShipInfo.h"
-#include "CSinkTheFleet.h"
 #include "SafeIO.h"
 #include "TextGraphics.h"
 
@@ -35,6 +30,8 @@ const short BOXWIDTH = 79;
 const int SHIP_SIZE_ARRAYSIZE = 6;
 // Number of elements for each ship
 const short shipSize[SHIP_SIZE_ARRAYSIZE] = { 0, 2, 3, 3, 4, 5 };
+
+const int TOTALPIECES = 17;
 
 const char* shipNames[SHIP_SIZE_ARRAYSIZE] = { "No Ship", "Mine Sweeper",
 "Submarine", "Frigate", "Battleship", "Aircraft Carrier" };

@@ -5,7 +5,7 @@
 //      safeChoice
 //----------------------------------------------------------------------------
 
-#include "safeio.h"
+#include "FleetLibrary.h"
 
 //----------------------------------------------------------------------------
 // Function: safeChoice(string prompt, char choice1, char choice2)

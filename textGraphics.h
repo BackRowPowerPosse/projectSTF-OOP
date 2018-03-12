@@ -11,13 +11,8 @@
 //----------------------------------------------------------------------------
 
 #pragma once
-#include <cctype>
-#include <iomanip>
-#include <iostream>
-#include <crtdbg.h>
-#include <string>
 
-using namespace std;
+#include "FleetLibrary.h"
 
 // char definitions
 const unsigned char UL = 0xda;		// upper left
