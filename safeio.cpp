@@ -111,3 +111,36 @@ void safeRead(istream& sin, T& input, const char* prompt)
 	}
 	sin.ignore(FILENAME_MAX, '\n');
 }
+
+void safeRead(istream& sin, string& input, const char* prompt)
+{
+	while (!(sin >> input))	// read in number--enter loop if fail
+	{
+		sin.clear();
+		sin.ignore(FILENAME_MAX, '\n');
+		cout << prompt;
+	}
+	sin.ignore(FILENAME_MAX, '\n');
+}
+
+void safeRead(istream& sin, char& input, const char* prompt)
+{
+	while (!(sin >> input))	// read in number--enter loop if fail
+	{
+		sin.clear();
+		sin.ignore(FILENAME_MAX, '\n');
+		cout << prompt;
+	}
+	sin.ignore(FILENAME_MAX, '\n');
+}
+
+void safeRead(istream& sin, short& input, const char* prompt)
+{
+	while (!(sin >> input))	// read in number--enter loop if fail
+	{
+		sin.clear();
+		sin.ignore(FILENAME_MAX, '\n');
+		cout << prompt;
+	}
+	sin.ignore(FILENAME_MAX, '\n');
+}
