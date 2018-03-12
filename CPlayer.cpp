@@ -318,23 +318,17 @@ namespace SINK_THE_FLEET
 			//print out ship
 			for (short j = 0; j < numberOfCols; j++)
 			{
-				CCell cell(i,j);
+				CCell cell(i, j);
 				Ship ship = getCell(whichGrid, cell);
-				
+				sout << " " << ship << VERT;
 			}
-			sout << endl;
+				sout << endl;
+				sout << HORIZ;
 
-			//finish row with 2 horizontal lines and cross right
-			for (int k = 1; k < numberOfCols; k++)
-			{
-				if (k == 1)
-				{
-					sout << HORIZ << HORIZ << HORIZ << CR;
-				}
-				sout << HORIZ << HORIZ << CR;
-			}
-			//end line, go to next row
-			sout << endl;
+				for (short j = 0; j < numberOfCols; ++j)
+					sout << HORIZ << HORIZ << CR;
+
+				sout << endl;
 		}
 	}
 	//-----------------------------------------------------------------------------
