@@ -79,5 +79,35 @@
     <Text Include="test.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="betterGarbage.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="garbage.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="garbageSized.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="intersection.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="outOfBounds.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="rand1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="rand2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="rand3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="rand4.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="spaceShip.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
