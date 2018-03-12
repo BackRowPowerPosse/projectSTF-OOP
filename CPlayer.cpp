@@ -615,6 +615,7 @@ namespace SINK_THE_FLEET
 		cout << "File " << filename << " successfully saved" << endl
 			<< " press <enter> to continue" << endl;
 		cin.ignore(FILENAME_MAX, '\n');
+		return true;
 	}
 	//-----------------------------------------------------------------------------
 	//	Class:        CPlayer
