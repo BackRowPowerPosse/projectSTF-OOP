@@ -2,6 +2,7 @@
 
 #include "FleetLibrary.h"
 
+
 namespace SINK_THE_FLEET
 {
 	class CShip
@@ -15,8 +16,6 @@ namespace SINK_THE_FLEET
 		void printName(ostream &sout) const { sout << shipNames[m_ship]; }
 
 		void setShip(Ship ship) { m_ship = ship; }
-
-		static const char* shipNames[SHIP_SIZE_ARRAYSIZE];
 
 	private:
 		Ship m_ship;

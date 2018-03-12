@@ -65,7 +65,7 @@ namespace SINK_THE_FLEET
 
 			if (shipSunk)
 			{
-				cout << CPlayer::shipNames[whichShip] << " SUNK" << endl;
+				cout << shipNames[whichShip] << " SUNK" << endl;
 				shipSunk = false;
 			}
 

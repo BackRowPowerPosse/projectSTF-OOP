@@ -10,7 +10,7 @@ namespace SINK_THE_FLEET
 	class CPlayer
 	{
 	public:
-		CPlayer() {}
+		CPlayer(){}
 		CPlayer(unsigned short whichPlayer, char gridSize);
 		CPlayer(const CPlayer& playerObj);
 
@@ -37,8 +37,6 @@ namespace SINK_THE_FLEET
 		CPlayer operator--();
 
 		void initializationSelection();
-
-		static const char* shipNames[SHIP_SIZE_ARRAYSIZE];
 
 	private:
 		void allocateMemory();
