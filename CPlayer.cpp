@@ -440,14 +440,14 @@ namespace SINK_THE_FLEET
 
 				if (m_ships[i].getOrientation() == VERTICAL) //	if VERTICAL
 				{
-					CCell placement(bowCoordinates.getCol(),
-						bowCoordinates.getRow() + p);
+					CCell placement(bowCoordinates.getRow() + p,
+						bowCoordinates.getCol());
 					setCell(0, placement, m_ships[p].getName());
 				}					
 				else // if HORIZONTAL
 				{
-					CCell placement(bowCoordinates.getCol() + p,
-						bowCoordinates.getRow());
+					CCell placement(bowCoordinates.getRow(),
+						bowCoordinates.getCol() + p);
 					setCell(0, placement, m_ships[p].getName());
 				}									
 			}
