@@ -10,7 +10,7 @@ namespace SINK_THE_FLEET
 	//default constructor
 	CPlayer::CPlayer(unsigned short whichPlayer, char gridSize)
 	{
-
+		constructed = true;
 		//	validates and sets m_gridSize
 		if (toupper(gridSize) == 'L' || toupper(gridSize) == 'S') {
 			m_gridSize = gridSize;
@@ -30,6 +30,8 @@ namespace SINK_THE_FLEET
 		//	calls allocateMemory
 		allocateMemory();
 
+		cout << m_gameGrid[0][0][0] << endl;
+
 		initializationSelection();
 	}
 	//-----------------------------------------------------------------------------
@@ -46,7 +48,7 @@ namespace SINK_THE_FLEET
 	//	              3/6/18
 	//-----------------------------------------------------------------------------
 	void CPlayer::initializationSelection() {
-
+		constructed = true;
 		short selection = 0;
 		string filename;
 		bool doPrompt = true;
@@ -80,6 +82,7 @@ namespace SINK_THE_FLEET
 				break;
 			case 3:
 				autoSetShips();
+				cout << m_gameGrid[0][0][0] << endl;
 				doPrompt = false;	// autoSetShips should automatically succeed (will continue re-rolling until success)
 				break;
 			default:
@@ -166,46 +169,29 @@ namespace SINK_THE_FLEET
 	{
 		short numberOfRows = (toupper(playerObj.m_gridSize) == 'L') ? LARGEROWS : SMALLROWS;
 		short numberOfCols = (toupper(playerObj.m_gridSize) == 'L') ? LARGECOLS : SMALLCOLS;
-    
+		
+		deleteMemory();
+
 		m_whichPlayer = playerObj.m_whichPlayer;
 		m_gridSize = playerObj.m_gridSize;
 		m_piecesLeft = playerObj.m_piecesLeft;
-		//check for self assignment
-		if (this != &playerObj)
+
+		
+		allocateMemory();
+		
+
+		for (short row = 0; row < numberOfRows; row++) 
 		{
-			for (int i = 0; i < 6; i++)
+			for (short col = 0; col < numberOfCols; col++) 
 			{
-				m_ships[i].setName(playerObj.m_ships[i].getName());
-				m_ships[i].setBowLocation(playerObj.m_ships[i].getBowLocation());
-				m_ships[i].setOrientation(playerObj.m_ships[i].getOrientation());
-				m_ships[i].setPiecesLeft(playerObj.m_ships[i].getPiecesLeft());
-			}
-			for (int whichGrid = 0; whichGrid < NUMPLAYERS; whichGrid++)
-			{
-				// loop through both players -- player 1 and player 2
-				for (short i = 0; i < NUMPLAYERS; ++i)
+				for (short whichGrid = 0; whichGrid < NUMPLAYERS; whichGrid++) 
 				{
-					// initialize to null pointer -- simplifies debugging if
-					// exception thrown by line below --cleans this spot
-					m_gameGrid[whichGrid] = nullptr;
-					// allocate memory for array of pointers to ships
-					// -- each item constitutes a row pointer.
-					m_gameGrid[whichGrid] = playerObj.m_gameGrid[whichGrid];
-					for (short j = 0; j < numberOfRows; ++j)
-					{
-						m_gameGrid[whichGrid][j] = nullptr;
-						m_gameGrid[whichGrid][j] = playerObj.m_gameGrid[whichGrid][j];
-
-						for (short k = 0; k < numberOfCols; ++k)
-						{
-							// initialize all items in row to NOSHIP
-							(this)->m_gameGrid[whichGrid][j][k] = playerObj.m_gameGrid[whichGrid][j][k];
-						} // end for k
-					} // end for j
-
-				} // end for i
+					m_gameGrid[whichGrid][row][col] = playerObj.m_gameGrid[whichGrid][row][col];
+				}
 			}
 		}
+		printGrid(cout, 0);
+		
 		return *this;
 	}
 	//-----------------------------------------------------------------------------
@@ -292,7 +278,7 @@ namespace SINK_THE_FLEET
 	//-----------------------------------------------------------------------------
 	Ship CPlayer::getCell(short whichGrid, CCell cell) const
 	{
-		return m_gameGrid[whichGrid][cell.getCol()][cell.getRow()]; 
+		return m_gameGrid[whichGrid][cell.getRow()][cell.getCol()]; 
 	}
 	//-----------------------------------------------------------------------------
 	//	Class:        CPlayer
@@ -858,7 +844,9 @@ namespace SINK_THE_FLEET
 						for (short k = 0; k < numberOfCols; ++k)
 						{
 							m_gameGrid[whichGrid][j][k] = NOSHIP;	//	initialize all items in row to NOSHIP
+							cout << m_gameGrid[whichGrid][j][k];
 						} // end for k
+						cout << endl;
 					} // end for j
 
 				// end for i
@@ -872,6 +860,8 @@ namespace SINK_THE_FLEET
 			cin.ignore(FILENAME_MAX, '\n');
 			exit(EXIT_FAILURE);
 		}
+
+		cout << m_gameGrid[0][0][0] << endl;
 
 	}
 	//-----------------------------------------------------------------------------
@@ -894,22 +884,29 @@ namespace SINK_THE_FLEET
 
 		// delete[] in reverse order of allocMem()
 		// be sure to check if the memory was allocated (!nullptr) BEFORE deleting
+		if (constructed) {
+			for (int whichGrid = 0; whichGrid < NUMPLAYERS; whichGrid++) {	// loop through both types of grids
+				if (m_gameGrid[whichGrid] != NULL) {
 
-		for (int whichGrid = 0; whichGrid < NUMPLAYERS; whichGrid++) {	// loop through both types of grids
+					for (short j = 0; j < numberOfRows; ++j) {	//	loop through all of the rows
 
-				for (short j = 0; j < numberOfRows; ++j) {	//	loop through all of the rows
+						cout << m_gameGrid[whichGrid][0][0] << endl;
 
-															//	if pointer is NOT null --> delete the array of ships this row pointer points to
-					if (m_gameGrid[whichGrid][j] != nullptr)
-						delete[] m_gameGrid[whichGrid][j];
+						//	if pointer is NOT null --> delete the array of ships this row pointer points to
+						if (m_gameGrid[whichGrid][j] != nullptr)
+							delete[] m_gameGrid[whichGrid][j];
+					}
+
+					//	if pointer is NOT null --> delete the array of row pointers
+					if (m_gameGrid[whichGrid] != nullptr)
+						delete[] m_gameGrid[whichGrid];
+
 				}
 
-				//	if pointer is NOT null --> delete the array of row pointers
-				if (m_gameGrid[whichGrid] != nullptr)
-					delete[] m_gameGrid[whichGrid];
 
-			
-
+			}
 		}
+		
+
 	}
 }
