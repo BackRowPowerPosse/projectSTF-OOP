@@ -1,4 +1,5 @@
 #include "FleetLibrary.h"
+#include "CPlayer.h"
 
 namespace SINK_THE_FLEET
 {
@@ -108,10 +109,10 @@ namespace SINK_THE_FLEET
 
 		for (int i = 0; i < 6; i++)
 		{
-			m_ships[i].setName = playerObj.m_ships[i].getName;
-			m_ships[i].setBowLocation = playerObj.m_ships[i].getBowLocation;
-			m_ships[i].setOrientation = playerObj.m_ships[i].getOrientation;
-			m_ships[i].setPiecesLeft = playerObj.m_ships[i].getPiecesLeft;
+			m_ships[i].setName(playerObj.m_ships[i].getName());
+			m_ships[i].setBowLocation(playerObj.m_ships[i].getBowLocation());
+			m_ships[i].setOrientation(playerObj.m_ships[i].getOrientation());
+			m_ships[i].setPiecesLeft(playerObj.m_ships[i].getPiecesLeft());
 		}
 		for (int whichGrid = 0; whichGrid < NUMPLAYERS; whichGrid++)
 		{
@@ -166,10 +167,10 @@ namespace SINK_THE_FLEET
 		{
 			for (int i = 0; i < 6; i++)
 			{
-				m_ships[i].setName = playerObj.m_ships[i].getName;
-				m_ships[i].setBowLocation = playerObj.m_ships[i].getBowLocation;
-				m_ships[i].setOrientation = playerObj.m_ships[i].getOrientation;
-				m_ships[i].setPiecesLeft = playerObj.m_ships[i].getPiecesLeft;
+				m_ships[i].setName(playerObj.m_ships[i].getName());
+				m_ships[i].setBowLocation(playerObj.m_ships[i].getBowLocation());
+				m_ships[i].setOrientation(playerObj.m_ships[i].getOrientation());
+				m_ships[i].setPiecesLeft(playerObj.m_ships[i].getPiecesLeft());
 			}
 			for (int whichGrid = 0; whichGrid < NUMPLAYERS; whichGrid++)
 			{

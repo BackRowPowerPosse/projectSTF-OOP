@@ -1,3 +1,4 @@
+#include "FleetLibrary.h"
 #include "CSinkTheFleet.h"
 
 namespace SINK_THE_FLEET

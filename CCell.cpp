@@ -1,4 +1,5 @@
 #include "FleetLibrary.h"
+#include "CCell.h"
 
 namespace SINK_THE_FLEET
 {

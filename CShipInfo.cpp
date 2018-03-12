@@ -19,6 +19,7 @@
 //-----------------------------------------------------------------------------
 
 #include "FleetLibrary.h"
+#include "CShipInfo.h"
 
 namespace SINK_THE_FLEET
 {
