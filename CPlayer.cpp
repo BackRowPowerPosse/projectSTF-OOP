@@ -855,7 +855,7 @@ namespace SINK_THE_FLEET
 			else
 				if (safeChoice("Use this grid?", 'Y', 'N') == 'Y') {
 					repeatRoll = false;
-					if (safeChoice("Save this grid to file?", 'Y', 'N' == 'Y'))
+					if (safeChoice("Save this grid to file?", 'Y', 'N') == 'Y')
 						saveGrid();
 
 				}
