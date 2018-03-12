@@ -15,7 +15,7 @@ namespace SINK_THE_FLEET
 	public:
 		CShipInfo(CShip name, CDirection direction, CCell bow, short pieces)
 			: m_name(name), m_orientation(direction), m_bowLocation(bow), m_piecesLeft(pieces) {}
-		CShipInfo();
+		CShipInfo() {};
 		void print(ostream &sout) const;
 		void print() const;
 		CShip getName() const;

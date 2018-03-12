@@ -29,7 +29,19 @@ namespace SINK_THE_FLEET
 
 		
 	}
-
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:       CPlayer::initializationSelection
+	//	description:  menu selection 
+	//	Input:        None 
+	//	Output:       player prompts
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   n/a
+	//	Returns:      n/a
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	void CPlayer::initializationSelection() {
 
 		short selection;
@@ -189,26 +201,106 @@ namespace SINK_THE_FLEET
 		}
 		return *this;
 	}
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:       CPlayer CPlayer::~CPlayer()
+	//	description:  destructor calls deleteMemory 
+	//	Input:        None 
+	//	Output:       None 
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   n/a
+	//	Returns:      n/a
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	CPlayer::~CPlayer()
 	{
 		this->deleteMemory();
 	}
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:       CPlayer CPlayer::getWhichPlayer()
+	//	description:  accessor for m_whichPlayer 
+	//	Input:        None 
+	//	Output:       None 
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   n/a
+	//	Returns:      m_whichPlayer
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	unsigned short CPlayer::getWhichPlayer() const
 	{
 		return m_whichPlayer;
 	}
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:       CPlayer CPlayer::getPiecesLeft()
+	//	description:  accessor for m_piecesLeft 
+	//	Input:        None 
+	//	Output:       None 
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   n/a
+	//	Returns:      m_piecesLeft
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	short CPlayer::getPiecesLeft() const
 	{
 		return m_piecesLeft;
 	}
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:       CPlayer CPlayer::getGridSize()
+	//	description:  accessor for m_gridSize 
+	//	Input:        None 
+	//	Output:       None 
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   n/a
+	//	Returns:      m_gridSize
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	char CPlayer::getGridSize() const
 	{
 		return m_gridSize;
 	}
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:       CPlayer Ship CPlayer::getCell(short whichGrid, CCell cell)
+	//	description:  Returns type Ship located at CCell cell
+	//	Input:        None 
+	//	Output:       None 
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   short whichGrid - 0 or 1 (ship grid or hits/misses)
+	//				  CCell cell - cell object
+	//	Returns:      Returns type Ship located at CCell cell
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	Ship CPlayer::getCell(short whichGrid, CCell cell) const
 	{
 		return (**m_gameGrid[whichGrid][cell.getCol][cell.getRow]); 
 	}
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:       CPlayer CPlayer::printGrid(ostream & sout, short whichGrid) const
+	//	description:  prints grid based on whichGrid 
+	//	Input:        None 
+	//	Output:       players grid 
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   short whichGrid - 0 or 1 (ship grid or hits/misses)
+	//				  ostream &sout - ostream reference
+	//	Returns:      n/a
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	void CPlayer::printGrid(ostream & sout, short whichGrid) const
 	{
 		//clear the screen before printing the grid
@@ -252,7 +344,19 @@ namespace SINK_THE_FLEET
 			sout << endl;
 		}
 	}
-
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:       bool CPlayer::getGrid(string fileName)
+	//	description:  attempts to get grid that user inputs 
+	//	Input:        fileName 
+	//	Output:       n/a
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   n/a
+	//	Returns:      true if successful, false otherwise
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	bool CPlayer::getGrid(string fileName)
 	{
 		string line;
@@ -370,7 +474,21 @@ namespace SINK_THE_FLEET
 
 		return true;
 	}
-
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:       bool CPlayer::isValidLocation(short whichShip)
+	//	description:  checks to see if ship location is valid
+	//				  to be valid, ship must not go out of bounds
+	//				  or collide with any other ships
+	//	Input:        n/a 
+	//	Output:       n/a
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   short whichShip - corresponds to number for ship in m_ships
+	//	Returns:      true if location is valid, false otherwise
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	bool CPlayer::isValidLocation(short whichShip)
 	{
 		short numberOfRows = (m_gridSize == 'L') ? LARGEROWS : SMALLROWS;
@@ -413,6 +531,19 @@ namespace SINK_THE_FLEET
 		}
 		return isOpen;
 	}
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:      CShipInfo CPlayer::operator[](short index) const
+	//	description:  overloaded [] operator for accessing m_ships
+	//	Input:        n/a 
+	//	Output:       n/a
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   short index - index to return in m_ships
+	//	Returns:      CShipInfo object
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	CShipInfo CPlayer::operator[](short index) const
 	{
 		if ((index > SHIP_SIZE_ARRAYSIZE))
@@ -430,7 +561,19 @@ namespace SINK_THE_FLEET
 	{
 		m_gameGrid[whichGrid][cell.getRow][cell.getCol] = ship;
 	}
-
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:      bool CPlayer::saveGrid()
+	//	description:  saves current grid to a file
+	//	Input:        n/a 
+	//	Output:       n/a
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   n/a
+	//	Returns:      true if grid saved successfully, false otherwise
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	bool CPlayer::saveGrid()
 	{
 		//~~~~~~~~~~~~~Ready for testing
@@ -496,7 +639,19 @@ namespace SINK_THE_FLEET
 			<< " press <enter> to continue" << endl;
 		cin.ignore(FILENAME_MAX, '\n');
 	}
-
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:       bool CPlayer::setShips()
+	//	description:  prompt loop for setting ships
+	//	Input:        n/a 
+	//	Output:       n/a
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   n/a
+	//	Returns:      true if grid saved successfully, false otherwise
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	bool CPlayer::setShips()
 	{
 		char input = 'V';
@@ -597,7 +752,19 @@ namespace SINK_THE_FLEET
 			} while (badShip);
 		} // end for j
 	}
-
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:       void CPlayer::autoSetShips()
+	//	description:  sets ships in the players grid to random locations
+	//	Input:        n/a 
+	//	Output:       n/a
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   n/a
+	//	Returns:      n/a
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	void CPlayer::autoSetShips() {
 
 		short numberOfRows = (toupper(m_gridSize) == 'L') ? LARGEROWS : SMALLROWS;
@@ -630,7 +797,20 @@ namespace SINK_THE_FLEET
 			}
 		}
 	}
-
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:      void CPlayer::hitShip(CShip ship)
+	//	description:  decrements the pieces left in players fleet
+	//				  and the pieces left of the passed in Ship
+	//	Input:        n/a 
+	//	Output:       n/a
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   
+	//	Returns:      n/a
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	void CPlayer::hitShip(CShip ship)
 	{
 		static_cast<short>(ship);
@@ -638,11 +818,39 @@ namespace SINK_THE_FLEET
 		m_piecesLeft--;
 		
 	}
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:      void CPlayer::hitShip(CShip ship)
+	//	description:  decrements the pieces left in players fleet
+	//				  and the pieces left of the passed in Ship
+	//	Input:        n/a 
+	//	Output:       n/a
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   
+	//	Returns:      n/a
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	CPlayer CPlayer::operator--()
 	{
 		m_piecesLeft--;
 		return *this;
 	}
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:      void CPlayer::hitShip(CShip ship)
+	//	description:  decrements the pieces left in players fleet
+	//				  and the pieces left of the passed in Ship
+	//	Input:        n/a 
+	//	Output:       n/a
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   
+	//	Returns:      n/a
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	void CPlayer::allocateMemory()
 	{
 		short numberOfRows = (toupper(m_gridSize) == 'L') ? LARGEROWS : SMALLROWS;
@@ -681,6 +889,20 @@ namespace SINK_THE_FLEET
 		}
 
 	}
+	//-----------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:      void CPlayer::hitShip(CShip ship)
+	//	description:  decrements the pieces left in players fleet
+	//				  and the pieces left of the passed in Ship
+	//	Input:        n/a 
+	//	Output:       n/a
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   
+	//	Returns:      n/a
+	//	History Log:
+	//	              3/6/18
+	//-----------------------------------------------------------------------------
 	void CPlayer::deleteMemory()
 	{
 		short numberOfRows = (toupper(m_gridSize) == 'L') ? LARGEROWS : SMALLROWS;
