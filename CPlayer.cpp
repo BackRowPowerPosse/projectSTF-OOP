@@ -3,6 +3,10 @@
 
 namespace SINK_THE_FLEET
 {
+	const char* CPlayer::shipNames[SHIP_SIZE_ARRAYSIZE] = { "No Ship",
+		"Mine Sweeper", "Submarine", "Frigate", "Battleship",
+		"Aircraft Carrier" };
+
 	//default constructor
 	CPlayer::CPlayer(unsigned short whichPlayer, char gridSize)
 	{

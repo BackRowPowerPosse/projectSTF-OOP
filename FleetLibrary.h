@@ -33,9 +33,6 @@ const short shipSize[SHIP_SIZE_ARRAYSIZE] = { 0, 2, 3, 3, 4, 5 };
 
 const int TOTALPIECES = 17;
 
-const char* shipNames[SHIP_SIZE_ARRAYSIZE] = { "No Ship", "Mine Sweeper",
-"Submarine", "Frigate", "Battleship", "Aircraft Carrier" };
-
 //------------------------------------------------------------------------
 //	Enumerated type for ships
 //		(1-5) are used only for owner
