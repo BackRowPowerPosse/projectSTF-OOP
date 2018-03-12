@@ -112,6 +112,18 @@ namespace SINK_THE_FLEET
 		return *this;
 	}
 
+	//------------------------------------------------------------------------
+	// Class:			CShipInfo
+	// Method:			operator=()
+	// Description:		overloaded equals operator
+	// Input:			Other CShipInfo object
+	// Output:			this object (after copying)
+	// Calls:			None
+	// Called By:		
+	// Parameters:		ostream &sout
+	// Returns:			this object (after copying)
+	// History Log:		03/12/2018 Class completed (1.0.0)
+	//------------------------------------------------------------------------
 	CShipInfo CShipInfo::operator=(const CShipInfo& other) {
 		m_bowLocation = other.m_bowLocation;
 		m_orientation = other.m_orientation;

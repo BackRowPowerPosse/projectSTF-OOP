@@ -25,7 +25,6 @@
     <ClCompile Include="CShip.cpp" />
     <ClCompile Include="CShipInfo.cpp" />
     <ClCompile Include="CSinkTheFleet.cpp" />
-    <ClCompile Include="fleet.cpp" />
     <ClCompile Include="SafeIO.cpp" />
     <ClCompile Include="MainDriver.cpp" />
     <ClCompile Include="TextGraphics.cpp" />
@@ -52,6 +51,8 @@
     <Text Include="rand3.txt" />
     <Text Include="rand4.txt" />
     <Text Include="rand5.txt" />
+    <Text Include="randLarge.txt" />
+    <Text Include="randLarge2.txt" />
     <Text Include="spaceShip.txt" />
     <Text Include="test.txt" />
   </ItemGroup>

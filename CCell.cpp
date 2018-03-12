@@ -77,6 +77,18 @@ namespace SINK_THE_FLEET
 		m_row = static_cast<short>(toupper(row) - 'A');
 	}
 
+	//------------------------------------------------------------------------
+	// Class:			CCell
+	// Method:			operator=()
+	// Description:		overloaded equals operator
+	// Input:			Other CCell object
+	// Output:			this object (after copying)
+	// Calls:			None
+	// Called By:		
+	// Parameters:		ostream &sout
+	// Returns:			this object (after copying)
+	// History Log:		03/12/2018 Class completed (1.0.0)
+	//------------------------------------------------------------------------
 	CCell CCell::operator=(const CCell & cell)
 	{
 		m_row = cell.m_row;

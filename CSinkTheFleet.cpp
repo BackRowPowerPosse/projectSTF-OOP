@@ -170,7 +170,7 @@ namespace SINK_THE_FLEET
 	{
 		const string empty;
 		const string sink("SINK THE FLEET!");
-		const string by("Back Row Power Posse");
+		const string by("Back Row Power Posse: Paul J, Aaron M, Albert A, Cameron S, Matt J");
 		const string institution("Edmonds Community College CS 132");
 
 		boxTop(cout, BOXWIDTH);

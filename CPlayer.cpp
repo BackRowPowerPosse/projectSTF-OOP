@@ -535,7 +535,19 @@ namespace SINK_THE_FLEET
 		return m_ships[index];
 	}
 
-
+	//------------------------------------------------------------------------
+	//	Class:        CPlayer
+	//	method:		  clearGrid()
+	//	description:  sets all indexes within both gamegrids to NOSHIP
+	//	Input:        index of grid to clear
+	//	Output:       n/a
+	//	Calls:        n/a 
+	//	Called By:    n/a 
+	//	Parameters:   whichPlayer (short)
+	//	Returns:      void
+	//	History Log:
+	//	              3/6/18
+	//------------------------------------------------------------------------
 	void CPlayer::clearGrid(short whichPlayer) {
 		short numberOfRows = (toupper(m_gridSize) == 'L') ? LARGEROWS :
 			SMALLROWS;

@@ -100,6 +100,18 @@ namespace SINK_THE_FLEET
 
 	}
 
+	//------------------------------------------------------------------------
+	// Class:			CShip
+	// Method:			operator=()
+	// Description:		overloaded equals operator
+	// Input:			Other CShip object
+	// Output:			this object (after copying)
+	// Calls:			None
+	// Called By:		
+	// Parameters:		ostream &sout
+	// Returns:			this object (after copying)
+	// History Log:		03/12/2018 Class completed (1.0.0)
+	//------------------------------------------------------------------------
 	CShip CShip::operator=(const CShip& other) {
 		m_ship = other.m_ship;
 		return *this;

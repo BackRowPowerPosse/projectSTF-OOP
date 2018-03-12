@@ -78,6 +78,18 @@ namespace SINK_THE_FLEET
 		return sout;
 	}
 
+	//------------------------------------------------------------------------
+	// Class:			CDirection
+	// Method:			operator=()
+	// Description:		overloaded equals operator
+	// Input:			Other CCell object
+	// Output:			this object (after copying)
+	// Calls:			None
+	// Called By:		
+	// Parameters:		ostream &sout
+	// Returns:			this object (after copying)
+	// History Log:		03/12/2018 Class completed (1.0.0)
+	//------------------------------------------------------------------------
 	CDirection CDirection::operator=(const CDirection& other) {
 		m_direction = other.m_direction;
 		return *this;

@@ -18,9 +18,6 @@
     <ClCompile Include="TextGraphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="fleet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CShip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -110,6 +107,12 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="rand5.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="randLarge.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="randLarge2.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
