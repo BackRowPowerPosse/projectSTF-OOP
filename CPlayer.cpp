@@ -749,6 +749,13 @@ namespace SINK_THE_FLEET
 			} while (badShip);
 		} // end for j
 
+		do
+		{
+			cout << "Do you wish to save this grid to a file?";
+			if (safeChoice(outSStream.str(), 'Y', 'N') == 'N')
+				break;
+		} while (saveGrid() != true);
+
 		return true;
 	}
 	//------------------------------------------------------------------------
