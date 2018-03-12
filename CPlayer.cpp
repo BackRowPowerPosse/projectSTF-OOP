@@ -471,8 +471,6 @@ namespace SINK_THE_FLEET
 			return false;
 		}
 
-		cin.get();
-
 		return true;
 	}
 
