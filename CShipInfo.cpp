@@ -231,7 +231,7 @@ namespace SINK_THE_FLEET
 	//-----------------------------------------------------------------------------
 	void CShipInfo::setBowLocation(CCell &bowLocation)
 	{
-		this->m_bowLocation = bowLocation;
+		
 	}
 	//-----------------------------------------------------------------------------
 	//	Class:         CShipInfo
