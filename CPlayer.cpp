@@ -30,7 +30,7 @@ namespace SINK_THE_FLEET
 		//	calls allocateMemory
 		allocateMemory();
 
-		cout << m_gameGrid[0][0][0] << endl;
+		/*cout << m_gameGrid[0][0][0] << endl;*/
 
 		initializationSelection();
 	}
@@ -319,8 +319,11 @@ namespace SINK_THE_FLEET
 			for (short j = 0; j < numberOfCols; j++)
 			{
 				CCell cell(i, j);
-				Ship ship = getCell(whichGrid, cell);
-				sout << " " << ship << VERT;
+				CShip ship;
+				ship.setShip(getCell(whichGrid, cell));
+				sout << " ";
+				sout << ship;
+				sout << VERT;
 			}
 				sout << endl;
 				sout << HORIZ;
@@ -634,7 +637,7 @@ namespace SINK_THE_FLEET
 			do {
 				badShip = false; // reset loop flag -- will exit by default
 
-				printGrid(cout, 0); //Show grid. Empty at first.				
+				printGrid(cout, NOSHIP); //Show grid. Empty at first.				
 				
 				//Initialize pieces left for each ship
 				m_ships[j].setPiecesLeft(shipSize[j]); 
@@ -838,7 +841,7 @@ namespace SINK_THE_FLEET
 						for (short k = 0; k < numberOfCols; ++k)
 						{
 							m_gameGrid[whichGrid][j][k] = NOSHIP;	//	initialize all items in row to NOSHIP
-							cout << m_gameGrid[whichGrid][j][k];
+							/*cout << m_gameGrid[whichGrid][j][k];*/
 						} // end for k
 						cout << endl;
 					} // end for j
@@ -855,7 +858,7 @@ namespace SINK_THE_FLEET
 			exit(EXIT_FAILURE);
 		}
 
-		cout << m_gameGrid[0][0][0] << endl;
+	/*	cout << m_gameGrid[0][0][0] << endl;*/
 
 	}
 	//-----------------------------------------------------------------------------
