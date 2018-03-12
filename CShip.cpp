@@ -44,7 +44,7 @@ namespace SINK_THE_FLEET
 	{
 		ship.print(sout);
 
-		return sout;
+		return cout;
 	}
 
 	istream &operator>>(istream &sin, CShip &ship)
