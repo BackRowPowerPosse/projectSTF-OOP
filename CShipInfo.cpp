@@ -232,7 +232,7 @@ namespace SINK_THE_FLEET
 	//-----------------------------------------------------------------------------
 	void CShipInfo::setBowLocation(CCell &bowLocation)
 	{
-		
+		m_bowLocation = bowLocation;
 	}
 	//-----------------------------------------------------------------------------
 	//	Class:         CShipInfo
@@ -269,6 +269,15 @@ namespace SINK_THE_FLEET
 		--this->m_piecesLeft;
 		return *this;
 	}
+
+	CShipInfo CShipInfo::operator=(const CShipInfo& other) {
+		m_bowLocation = other.m_bowLocation;
+		m_orientation = other.m_orientation;
+		m_name = other.m_name;
+		m_piecesLeft = other.m_piecesLeft;
+		return *this;
+	}
+
 	// ----------------------------------------------------------------------------
 	//	method:         ostream& operator<<(ostream& sout, const CShipInfo & shipInfo)
 	//	description:    prints out the shipInfo object to the stream

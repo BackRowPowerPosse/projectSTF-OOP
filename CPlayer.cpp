@@ -176,6 +176,10 @@ namespace SINK_THE_FLEET
 		m_gridSize = playerObj.m_gridSize;
 		m_piecesLeft = playerObj.m_piecesLeft;
 
+		for (short i = 1; i < SHIP_SIZE_ARRAYSIZE; i++) {
+			m_ships[i] = playerObj.m_ships[i];
+		}
+
 		
 		allocateMemory();
 		
@@ -529,6 +533,7 @@ namespace SINK_THE_FLEET
 	void CPlayer::setCell(short whichGrid, CCell cell, CShip ship)
 	{
 		m_gameGrid[whichGrid][cell.getRow()][cell.getCol()] = ship;
+		cout << m_gameGrid[whichGrid][cell.getRow()][cell.getCol()] << endl;
 	}
 	//-----------------------------------------------------------------------------
 	//	Class:        CPlayer
@@ -762,8 +767,10 @@ namespace SINK_THE_FLEET
 				randX = rand() % numberOfCols;	// random number from 0 to numberOfCols
 				randY = rand() % numberOfRows;	// random number from 0 to numberOfRows
 				m_ships[j].setBowLocation(CCell(randY, randX));
-				if (isValidLocation(j))	// if m_ships[j] is in a valid location...
+				if (isValidLocation(j)) {	// if m_ships[j] is in a valid location...
 					badCoord = false;	//	do NOT re-roll
+					setCell(0, CCell(randY, randX), CShip(FRIGATE));
+				}
 
 			}
 		}

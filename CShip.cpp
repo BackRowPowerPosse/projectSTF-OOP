@@ -40,6 +40,11 @@ namespace SINK_THE_FLEET
 		sout << VERT;
 	}
 
+	CShip CShip::operator=(const CShip& other) {
+		m_ship = other.m_ship;
+		return *this;
+	}
+
 	ostream &operator<<(ostream &sout, const CShip &ship)
 	{
 		ship.print(sout);
