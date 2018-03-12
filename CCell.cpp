@@ -65,7 +65,8 @@ namespace SINK_THE_FLEET
 					<< " and column must be from 1 to "
 					<< numberOfCols << ": ";
 			}
-			while ((row = toupper(sin.get())) < 'A' || row > highChar)
+			sin >> row;
+			while (toupper(row) < 'A' || row > highChar)
 			{
 				sin.ignore(FILENAME_MAX, '\n');
 				if (&sin == &cin) {
