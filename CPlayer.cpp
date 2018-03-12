@@ -368,8 +368,6 @@ namespace SINK_THE_FLEET
 		short shipCount[SHIP_SIZE_ARRAYSIZE] = { 0 };
 		char cell = ' ';
 		char fsize = 'S';
-		char row;
-		short col;
 		CCell bowCoordinates;
 
 		//~_~_~_~_~_~Unsure what to do with clearGrid section here.
@@ -619,6 +617,7 @@ namespace SINK_THE_FLEET
 		cout << "File " << filename << " successfully saved" << endl
 			<< " press <enter> to continue" << endl;
 		cin.ignore(FILENAME_MAX, '\n');
+		return true;
 	}
 	//-----------------------------------------------------------------------------
 	//	Class:        CPlayer
