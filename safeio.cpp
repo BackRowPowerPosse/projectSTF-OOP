@@ -5,7 +5,7 @@
 //      safeChoice
 //----------------------------------------------------------------------------
 
-#include "safeio.h"
+#include "FleetLibrary.h"
 
 //----------------------------------------------------------------------------
 // Function: safeChoice(string prompt, char choice1, char choice2)
@@ -102,6 +102,39 @@ char safeChoice(string prompt, char choice1, char choice2)
 // -------------------------------------------------------------------------
 template<class T>
 void safeRead(istream& sin, T& input, const char* prompt)
+{
+	while (!(sin >> input))	// read in number--enter loop if fail
+	{
+		sin.clear();
+		sin.ignore(FILENAME_MAX, '\n');
+		cout << prompt;
+	}
+	sin.ignore(FILENAME_MAX, '\n');
+}
+
+void safeRead(istream& sin, string& input, const char* prompt)
+{
+	while (!(sin >> input))	// read in number--enter loop if fail
+	{
+		sin.clear();
+		sin.ignore(FILENAME_MAX, '\n');
+		cout << prompt;
+	}
+	sin.ignore(FILENAME_MAX, '\n');
+}
+
+void safeRead(istream& sin, char& input, const char* prompt)
+{
+	while (!(sin >> input))	// read in number--enter loop if fail
+	{
+		sin.clear();
+		sin.ignore(FILENAME_MAX, '\n');
+		cout << prompt;
+	}
+	sin.ignore(FILENAME_MAX, '\n');
+}
+
+void safeRead(istream& sin, short& input, const char* prompt)
 {
 	while (!(sin >> input))	// read in number--enter loop if fail
 	{
