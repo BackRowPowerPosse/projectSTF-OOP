@@ -494,7 +494,7 @@ namespace SINK_THE_FLEET
 			for (short i = 0; i < shipLength && isOpen; i++)
 			{
 				if (((bow.getCol() + shipLength) > numberOfCols) ||
-					getCell(0, bow.getCol() + i) != NOSHIP)
+					getCell(0, CCell(bow.getRow(), bow.getCol() + i)) != NOSHIP)
 					// check if spot is empty
 					isOpen = false;
 
@@ -506,7 +506,7 @@ namespace SINK_THE_FLEET
 			for (short i = 0; i < shipLength && isOpen; i++)
 			{
 				if (((bow.getRow() + shipLength) > numberOfRows) ||
-					getCell(0, bow.getRow() + i) != NOSHIP)
+					getCell(0, CCell(bow.getRow() + i, bow.getCol())) != NOSHIP)
 					// check overlapping from previous entries
 					isOpen = false;
 			}
@@ -790,6 +790,7 @@ namespace SINK_THE_FLEET
 			int randY;
 			CCell coord;
 
+			printGrid(cout, 0);
 			while (badCoord)
 			{
 				badCoord = true;
