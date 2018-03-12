@@ -180,7 +180,7 @@ namespace SINK_THE_FLEET
 				break;
 
 			default:
-				cout << "bad input, try again <press ENTER to continue>"
+				cout << "Restarting prompt <press ENTER to continue>"
 					<< endl;
 				cin.ignore(FILENAME_MAX, '\n');
 				// this might be unnecessary to hold prompt at this spot for 1
