@@ -291,7 +291,8 @@ namespace SINK_THE_FLEET
 			}
 		}
 		printGrid(cout, 0);
-		
+		cin.ignore(FILENAME_MAX, '\n');
+		cin.get();
 		return *this;
 	}
 	
@@ -336,7 +337,7 @@ namespace SINK_THE_FLEET
 			{
 				CCell cell(i, j);
 				sout << " ";
-				sout << m_gameGrid[0][i][j];
+				sout << m_gameGrid[whichGrid][i][j];
 				sout << VERT;
 			}
 				sout << endl;
@@ -494,10 +495,10 @@ namespace SINK_THE_FLEET
 		switch (orientation)
 		{
 		case HORIZONTAL: // ship is horizontal
-			for(short i = 0; i < shipLength && isOpen; i++)
+			for (short i = 0; i < shipLength && isOpen; i++)
 			{
 				if (((bow.getCol() + shipLength) > numberOfCols) ||
-					getCell(0, bow.getCol() + i) != NOSHIP) 
+					getCell(0, bow.getCol() + i) != NOSHIP)
 					// check if spot is empty
 					isOpen = false;
 
@@ -509,7 +510,7 @@ namespace SINK_THE_FLEET
 			for (short i = 0; i < shipLength && isOpen; i++)
 			{
 				if (((bow.getRow() + shipLength) > numberOfRows) ||
-					getCell(0, bow.getRow() + i) != NOSHIP) 
+					getCell(0, bow.getRow() + i) != NOSHIP)
 					// check overlapping from previous entries
 					isOpen = false;
 			}
