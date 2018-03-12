@@ -656,11 +656,10 @@ namespace SINK_THE_FLEET
 		bool badShip;
 		char save = 'N';
 		ostringstream outSStream;
-		//Cell location = { 0, 0 };
 		CCell bow;
 
-		// clear the grid
-		//clearGrid(players[whichPlayer].m_gameGrid[0], size);
+		//Start with empty grid
+		clearGrid(0);
 		m_piecesLeft = TOTALPIECES; // TOTALPIECES = 17
 
 		// loop through each of this player's ships
@@ -677,11 +676,8 @@ namespace SINK_THE_FLEET
 				
 				// ORIENTATION
 				outSStream.str("");
-				// Should show "Player (number of player) Enter (shipName)
-				// orientation"
 				outSStream << "Player " << m_whichPlayer << " Enter " 
 					<< shipNames[j] << " orientation";
-				//input = cin.get();
 				input = safeChoice(outSStream.str(), 'V', 'H');
 
 				if (input == 'V')
@@ -710,11 +706,6 @@ namespace SINK_THE_FLEET
 				//	WRITING SHIPS INTO GRID ARRAYS
 				for (int p = 0; p < shipSize[j]; p++) 
 				{
-					//int shipX = players[whichPlayer].m_ships[j]
-					//.m_bowLocation.m_col;	// get x coordinate
-					//int shipY = players[whichPlayer].m_ships[j]
-					//.m_bowLocation.m_row;	// get y coordinate
-
 					if (m_ships[j].getOrientation() == VERTICAL)
 					{	//	if VERTICAL
 						// write ship ID into location (Column incremented)
@@ -762,9 +753,14 @@ namespace SINK_THE_FLEET
 			} while (badShip);
 		} // end for j
 
+		//Final confirmation prompt. 'N' returns user to placement sytle menu.
 		if (safeChoice("Is this grid ok?", 'Y', 'N') == 'N')
+		{
+			clearGrid(0);
 			return false;
+		}			
 
+		//Save prompt
 		do
 		{
 			//cout << endl << "Do you wish to save this grid to a file?";
