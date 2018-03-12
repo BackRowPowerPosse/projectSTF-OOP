@@ -42,6 +42,16 @@
     <ClInclude Include="TextGraphics.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="betterGarbage.txt" />
+    <Text Include="garbage.txt" />
+    <Text Include="garbageSized.txt" />
+    <Text Include="intersection.txt" />
+    <Text Include="outOfBounds.txt" />
+    <Text Include="rand1.txt" />
+    <Text Include="rand2.txt" />
+    <Text Include="rand3.txt" />
+    <Text Include="rand4.txt" />
+    <Text Include="spaceShip.txt" />
     <Text Include="test.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

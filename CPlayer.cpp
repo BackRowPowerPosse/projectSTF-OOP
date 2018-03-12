@@ -719,9 +719,9 @@ namespace SINK_THE_FLEET
 				printGrid(cout, 0);
 				outSStream.str("");
 				outSStream << shipNames[j] << " location okay?";
-				ok = safeChoice(outSStream.str(), 'Y', 'N'); // is ship ok?
+				cin.ignore(FILENAME_MAX, '\n');
 
-				if (ok == 'N')
+				if (safeChoice(outSStream.str(), 'Y', 'N') == 'N')	// is this ship ok
 				{
 					badShip = true; // redo loop
 
