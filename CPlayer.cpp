@@ -122,7 +122,7 @@ namespace SINK_THE_FLEET
 	//------------------------------------------------------------------------
 	void CPlayer::initializationSelection() {
 		constructed = true;
-		short selection = 0;
+		char selection = '0';
 		string filename;
 		bool doPrompt = true;
 
@@ -138,13 +138,14 @@ namespace SINK_THE_FLEET
 			//	"choose an option from above (enter a number)");
 			cout << "Choose an option from above (enter a number)" << endl;
 			cin >> selection;
-
+			cin.ignore(FILENAME_MAX, '\n');
 			switch (selection)
 			{
-			case 1:
+			case '1':
 				//safeRead(cin, filename, "enter filename");
 				cout << "Enter filename" << endl;
 				cin >> filename;
+				cin.ignore(FILENAME_MAX, '\n');
 				if (getGrid(filename))
 					// loading succeeds, exit prompt. Otherwise, prompt should
 					// restart from the top of loop
@@ -161,7 +162,7 @@ namespace SINK_THE_FLEET
 
 				break;
 
-			case 2:
+			case '2':
 				// this will show as error until setShips() is developed to
 				// return bool
 				if (setShips())
@@ -170,7 +171,7 @@ namespace SINK_THE_FLEET
 
 				break;
 
-			case 3:
+			case '3':
 				autoSetShips();
 				// autoSetShips should automatically succeed (will continue
 				// re-rolling until success)
@@ -184,7 +185,7 @@ namespace SINK_THE_FLEET
 				cin.ignore(FILENAME_MAX, '\n');
 				// this might be unnecessary to hold prompt at this spot for 1
 				// char input
-				cin.get();
+				//cin.get();
 			}
 		}	
 	}
@@ -730,16 +731,16 @@ namespace SINK_THE_FLEET
 						// if VERTICAL
 						if (m_ships[j].getOrientation() == VERTICAL)
 						{
-							CCell placement = (bow.getCol() + j,
-								bow.getRow());
+							CCell placement = (bow.getRow(),
+								bow.getCol() + p);
 							// Sets cell to NOSHIP
 							setCell(0, placement, m_ships[0].getName());
 						}
 							
 						else // if HORIZONTAL
 						{
-							CCell placement = (bow.getCol(),
-								bow.getRow() + j);
+							CCell placement = (bow.getRow() + p,
+								bow.getCol());
 							//Sets cell to NOSHIP
 							setCell(0, placement, m_ships[0].getName());
 						}							
