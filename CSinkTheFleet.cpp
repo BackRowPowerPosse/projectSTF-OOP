@@ -111,7 +111,7 @@ namespace SINK_THE_FLEET
 				coord.inputCoordinates(cin, m_gridSize);
 			}
 
-			whichShip = m_players[whichPlayer].getCell(0, coord);
+			whichShip = m_players[!whichPlayer].getCell(0, coord);
 
 			if (whichShip != NOSHIP)
 			{
