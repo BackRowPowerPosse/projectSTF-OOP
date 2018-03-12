@@ -609,6 +609,8 @@ namespace SINK_THE_FLEET
 			// orientation
 			if (m_ships[i].getOrientation() == VERTICAL)
 				orientation = 'V';
+			else
+				orientation = 'H';
 
 			ofs << orientation << ' ';
 			// row
