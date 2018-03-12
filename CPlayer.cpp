@@ -336,10 +336,8 @@ namespace SINK_THE_FLEET
 			for (short j = 0; j < numberOfCols; j++)
 			{
 				CCell cell(i, j);
-				CShip ship;
-				ship.setShip(getCell(whichGrid, cell));
 				sout << " ";
-				sout << ship;
+				sout << m_gameGrid[0][i][j];
 				sout << VERT;
 			}
 				sout << endl;
@@ -546,6 +544,8 @@ namespace SINK_THE_FLEET
 
 		return m_ships[index];
 	}
+
+
 
 	//-----------------------------------------------------------------------------
 	//	Class:        CPlayer
@@ -810,16 +810,21 @@ namespace SINK_THE_FLEET
 				m_ships[j].setBowLocation(CCell(randY, randX));
 
 				// if m_ships[j] is in a valid location...
-				if (isValidLocation(j))
-				{
+				if (isValidLocation(j)) {
 					badCoord = false;	//	do NOT re-roll
 
-					setCell(0, CCell(randY, randX), m_ships[j].getName());
+					for (int i = 0; i < shipSize[j]; i++) {
+						if((Direction)m_ships[j].getOrientation() == VERTICAL)
+							setCell(0, CCell(randY + i, randX), m_ships[j].getName());
+						else
+							setCell(0, CCell(randY, randX + i), m_ships[j].getName());
+					}
 				}
 
 			}
 		}
 	}
+	
 	//------------------------------------------------------------------------
 	//	Class:        CPlayer
 	//	method:      void CPlayer::hitShip(CShip ship)
