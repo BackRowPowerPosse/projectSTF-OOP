@@ -93,6 +93,9 @@ namespace SINK_THE_FLEET
 		m_gameGrid[0] = nullptr;
 		m_gameGrid[1] = nullptr;
 
+		//	initialize m_piecesLeft
+		m_piecesLeft = TOTALPIECES;
+
 		// calls allocateMemory
 		allocateMemory();
 
