@@ -713,7 +713,7 @@ namespace SINK_THE_FLEET
 				}
 
 				//GRID CONFIRMATION
-				printGrid(cout, j);
+				printGrid(cout, 0);
 				outSStream.str("");
 				outSStream << shipNames[j] << " location okay?";
 				ok = safeChoice(outSStream.str(), 'Y', 'N'); // is ship ok?
