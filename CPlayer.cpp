@@ -93,6 +93,9 @@ namespace SINK_THE_FLEET
 		m_gameGrid[0] = nullptr;
 		m_gameGrid[1] = nullptr;
 
+		//	initialize m_piecesLeft
+		m_piecesLeft = TOTALPIECES;
+
 		// calls allocateMemory
 		allocateMemory();
 
@@ -836,9 +839,8 @@ namespace SINK_THE_FLEET
 	//------------------------------------------------------------------------
 	void CPlayer::hitShip(CShip ship)
 	{
-		static_cast<short>(ship);
-		m_ships[ship].setPiecesLeft(m_ships[ship].getPiecesLeft() - 1);
-		m_piecesLeft--;
+		--*this;
+		--m_ships[ship];
 	}
 	//------------------------------------------------------------------------
 	//	Class:        CPlayer
