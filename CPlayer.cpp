@@ -693,7 +693,7 @@ namespace SINK_THE_FLEET
 					cout << "invalid location. Press <enter>";
 					cin.ignore(FILENAME_MAX, '\n');
 					cin.get();
-					j--; // redo
+					j--; // redo current ship
 
 					continue; // skip to next loop iteration
 				}
