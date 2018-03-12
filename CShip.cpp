@@ -1,8 +1,54 @@
-#include "FleetLibrary.h"
+//----------------------------------------------------------------------------
+// File:		CShip.cpp
+//
+// Functions:	void CShip::print(ostream &sout) const;
+//				ostream &operator<<(ostream &sout, const CShip &ship);
+//				istream &operator>>(istream &sin, CShip &ship);
+//----------------------------------------------------------------------------
+
 #include "CShip.h"
 	
 namespace SINK_THE_FLEET
 {
+	//------------------------------------------------------------------------
+	// Class:			CShip
+	//
+	// Title:			Ship Class
+	//
+	// Description:		Definitions for CSinkTheFleet methods and related
+	//					functions
+	//
+	// Programmer:		Aaron Miller
+	//					Albert Shymanskyy
+	//					Cameron Stevenson
+	//					Matthew Jacobson
+	//					Paul Jacobson
+	//   
+	// Date:			03/12/2018
+	// 
+	// Version:			1.0.0
+	//  
+	// Environment:		Hardware: PC-compatible
+	// 					OS: Microsoft Windows 10
+	// 					Compiler: Microsoft Visual Studio 2017
+	//
+	// Properties:		Ship m_ship;
+	//
+	// History Log:		03/12/2018 Class completed (1.0.0)
+	//------------------------------------------------------------------------
+
+	//------------------------------------------------------------------------
+	// Class:			CShip
+	// Method:			CShip()
+	// Description:		Printer for CShip
+	// Input:			Output stream
+	// Output:			The CShip object
+	// Calls:			None
+	// Called By:		
+	// Parameters:		ostream &sout
+	// Returns:			None 
+	// History Log:		03/12/2018 Class completed (1.0.0)
+	//------------------------------------------------------------------------
 	void CShip::print(ostream &sout) const
 	{
 		sout << ' ';
@@ -11,28 +57,44 @@ namespace SINK_THE_FLEET
 		{
 		case NOSHIP:
 			sout << ' ';
+
 			break;
+
 		case MINESWEEPER:
 			sout << 'M';
+
 			break;
+
 		case SUB:
 			sout << 'S';
+
 			break;
+
 		case FRIGATE:
 			sout << 'F';
+
 			break;
+
 		case BATTLESHIP:
 			sout << 'B';
+
 			break;
+
 		case CARRIER:
 			sout << 'C';
+
 			break;
+
 		case HIT:
 			sout << 'H';
+
 			break;
+
 		case MISSED:
 			sout << MISS;
+
 			break;
+
 		default:
 			sout << 'X';
 		}
@@ -40,6 +102,18 @@ namespace SINK_THE_FLEET
 		sout << VERT;
 	}
 
+	//------------------------------------------------------------------------
+	// Method:			operator<<()
+	// Description:		Extraction operator for CShip
+	// Input:			Output stream and CShip object
+	// Output:			The CShip object
+	// Calls:			print()
+	// Called By:		
+	// Parameters:		ostream &sout
+	//					const CShip &ship
+	// Returns:			ostream&
+	// History Log:		03/12/2018 Class completed (1.0.0)
+	//------------------------------------------------------------------------
 	ostream &operator<<(ostream &sout, const CShip &ship)
 	{
 		ship.print(sout);
@@ -47,6 +121,18 @@ namespace SINK_THE_FLEET
 		return sout;
 	}
 
+	//------------------------------------------------------------------------
+	// Method:			operator>>()
+	// Description:		Insertion operator for CShip
+	// Input:			Input stream and CShip object
+	// Output:			The CShip object
+	// Calls:			setShip()
+	// Called By:		
+	// Parameters:		istream &sin
+	//					CShip &ship
+	// Returns:			istream&
+	// History Log:		03/12/2018 Class completed (1.0.0)
+	//------------------------------------------------------------------------
 	istream &operator>>(istream &sin, CShip &ship)
 	{
 		short number;

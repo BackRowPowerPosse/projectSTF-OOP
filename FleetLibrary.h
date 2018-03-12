@@ -1,3 +1,10 @@
+//----------------------------------------------------------------------------
+// File:			FleetLibrary.h
+//
+// Description:		A general library for libraries, constants, and enumerated
+//					types
+//----------------------------------------------------------------------------
+
 #pragma once
 
 #include <cctype>

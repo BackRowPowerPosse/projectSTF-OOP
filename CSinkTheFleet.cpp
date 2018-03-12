@@ -1,8 +1,56 @@
-#include "FleetLibrary.h"
+//----------------------------------------------------------------------------
+// File:		CSinkTheFleet.cpp
+//
+// Functions:	CSinkTheFleet::CSinkTheFleet(char size);
+//				short CSinkTheFleet::play();
+//				void CSinkTheFleet::header();
+//				void CSinkTheFleet::endBox(short winner);
+//----------------------------------------------------------------------------
+
 #include "CSinkTheFleet.h"
 
 namespace SINK_THE_FLEET
 {
+	//------------------------------------------------------------------------
+	// Class:			CSinkTheFleet
+	//
+	// Title:			CSinkTheFleet Class
+	//
+	// Description:		Definitions for CSinkTheFleet methods and related
+	//					functions
+	//
+	// Programmer:		Aaron Miller
+	//					Albert Shymanskyy
+	//					Cameron Stevenson
+	//					Matthew Jacobson
+	//					Paul Jacobson
+	//					
+	// Date:			03/12/2018
+	// 
+	// Version:			1.0.0
+	//  
+	// Environment:		Hardware: PC-compatible
+	// 					OS: Microsoft Windows 10
+	// 					Compiler: Microsoft Visual Studio 2017
+	//
+	// Properties:		CPlayer m_players[2];
+	//					char m_gridSize;
+	//
+	// History Log:		03/12/2018 Class completed (1.0.0)
+	//------------------------------------------------------------------------
+
+	//------------------------------------------------------------------------
+	// Class:			CSinkTheFleet
+	// Method:			CSinkTheFleet()
+	// Description:		Default constructor
+	// Input:			Size of the grid
+	// Output:			None
+	// Calls:			None
+	// Called By:		main()
+	// Parameters:		char size
+	// Returns:			None 
+	// History Log:		03/12/2018 Class completed (1.0.0)
+	//------------------------------------------------------------------------
 	CSinkTheFleet::CSinkTheFleet(char size)
 	{
 		m_gridSize = size;
@@ -11,6 +59,27 @@ namespace SINK_THE_FLEET
 		m_players[1] = CPlayer(2, size);
 	}
 
+	//------------------------------------------------------------------------
+	// Class:			CSinkTheFleet
+	// Method:			play()
+	// Description:		Gameplay
+	// Input:			Cell locations for firing during the game
+	// Output:			The winner's number
+	// Calls:			header()
+	//					printGrid()
+	//					inputCoordinates()
+	//					getCell()
+	//					getRow()
+	//					getCol()
+	//					setCell()
+	//					hitShip()
+	//					isSunk()
+	//					getPiecesLeft()
+	// Called By:		main()
+	// Parameters:		None
+	// Returns:			short whichPlayer 
+	// History Log:		03/12/2018 Class completed (1.0.0)
+	//------------------------------------------------------------------------
 	short CSinkTheFleet::play()
 	{
 		short whichPlayer = 0;
@@ -82,6 +151,21 @@ namespace SINK_THE_FLEET
 		return whichPlayer;
 	}
 
+	//------------------------------------------------------------------------
+	// Class:			CSinkTheFleet
+	// Method:			header()
+	// Description:		Game header
+	// Input:			None
+	// Output:			Game header
+	// Calls:			boxTop()
+	//					boxLine()
+	//					boxBottom()
+	// Called By:		main()
+	//					play()
+	// Parameters:		None
+	// Returns:			None 
+	// History Log:		03/12/2018 Class completed (1.0.0)
+	//------------------------------------------------------------------------
 	void CSinkTheFleet::header()
 	{
 		const string empty;
@@ -100,6 +184,20 @@ namespace SINK_THE_FLEET
 		boxBottom(cout, BOXWIDTH);
 	}
 
+	//------------------------------------------------------------------------
+	// Class:			CSinkTheFleet
+	// Method:			endBox()
+	// Description:		Game end box
+	// Input:			Winner's number
+	// Output:			Game end box
+	// Calls:			boxTop()
+	//					boxLine()
+	//					boxBottom()
+	// Called By:		main()
+	// Parameters:		short winner
+	// Returns:			None 
+	// History Log:		03/12/2018 Class completed (1.0.0)
+	//------------------------------------------------------------------------
 	void CSinkTheFleet::endBox(short winner)
 	{
 		const string empty;
