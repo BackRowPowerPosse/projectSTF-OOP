@@ -173,10 +173,10 @@ namespace SINK_THE_FLEET
 				break;
 
 			case '3':
-				autoSetShips();
+				if(autoSetShips())
 				// autoSetShips should automatically succeed (will continue
 				// re-rolling until success)
-				doPrompt = false;
+					doPrompt = false;
 
 				break;
 
@@ -295,9 +295,6 @@ namespace SINK_THE_FLEET
 				}
 			}
 		}
-		printGrid(cout, 0);
-		cin.ignore(FILENAME_MAX, '\n');
-		cin.get();
 		return *this;
 	}
 	
