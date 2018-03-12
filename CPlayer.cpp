@@ -364,7 +364,6 @@ namespace SINK_THE_FLEET
 		short shipCount[SHIP_SIZE_ARRAYSIZE] = { 0 };
 		char cell = ' ';
 		char fsize = 'S';
-	
 		CCell bowCoordinates;
 
 		//~_~_~_~_~_~Unsure what to do with clearGrid section here.
