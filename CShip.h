@@ -54,6 +54,8 @@ namespace SINK_THE_FLEET
 		void print() const { print(cout); };
 		void printName(ostream &sout) const { sout << shipNames[m_ship]; }
 
+		CShip operator=(const CShip& other);
+
 		void setShip(Ship ship) { m_ship = ship; }
 
 		static const char *shipNames[SHIP_SIZE_ARRAYSIZE];

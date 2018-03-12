@@ -84,14 +84,21 @@ namespace SINK_THE_FLEET
 		m_row = static_cast<short>(row - 'A');
 	}
 
-	//------------------------------------------------------------------------
-	// method:			ostream& operator<<(ostream& sout, const CCell &cell)
-	// description:		prints out the cell object to the stream
-	// Input:			None
-	// Output:			Screen display of cell coordinates
-	// Calls:			None
-	// Called By:		n/a
-	// Parameters:		ostream & sout  -- the stream used for output
+	CCell CCell::operator=(const CCell & cell)
+	{
+		m_row = cell.m_row;
+		m_col = cell.m_col;
+		return *this;
+	}
+
+	// ----------------------------------------------------------------------------
+	//	method:         ostream& operator<<(ostream& sout, const CCell &cell)
+	//	description:    prints out the cell object to the stream
+	//	Input:          None
+	//	Output:         Screen display of cell coordinates
+	//	Calls:          None
+	//	Called By:      n/a
+	//	Parameters:     ostream & sout  -- the stream used for output
 	//	                const CCell &cell -- the object to print
 	// Returns:			a reference to sout 
 	// History Log:		3/04/18

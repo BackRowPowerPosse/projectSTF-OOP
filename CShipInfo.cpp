@@ -89,7 +89,7 @@ namespace SINK_THE_FLEET
 	//------------------------------------------------------------------------
 	void CShipInfo::setBowLocation(CCell &bowLocation)
 	{
-		
+		m_bowLocation = bowLocation;
 	}
 
 	//------------------------------------------------------------------------
@@ -109,6 +109,14 @@ namespace SINK_THE_FLEET
 	{
 		--this->m_piecesLeft;
 
+		return *this;
+	}
+
+	CShipInfo CShipInfo::operator=(const CShipInfo& other) {
+		m_bowLocation = other.m_bowLocation;
+		m_orientation = other.m_orientation;
+		m_name = other.m_name;
+		m_piecesLeft = other.m_piecesLeft;
 		return *this;
 	}
 

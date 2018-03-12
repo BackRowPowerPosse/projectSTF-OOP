@@ -107,7 +107,7 @@ namespace SINK_THE_FLEET
 	private:
 		void allocateMemory();
 		void deleteMemory();
-
+		bool constructed = false;
 		unsigned short m_whichPlayer;
 		short m_piecesLeft;
 		CShipInfo m_ships[SHIP_SIZE_ARRAYSIZE];

@@ -78,6 +78,11 @@ namespace SINK_THE_FLEET
 		return sout;
 	}
 
+	CDirection CDirection::operator=(const CDirection& other) {
+		m_direction = other.m_direction;
+		return *this;
+	}
+
 	//------------------------------------------------------------------------
 	// Method:			operator>>()
 	// Description:		Insertion operator for CDirection

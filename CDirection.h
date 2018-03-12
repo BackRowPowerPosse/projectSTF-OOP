@@ -50,7 +50,10 @@ namespace SINK_THE_FLEET
 
 		operator Direction() const { return m_direction; }
 		void print(ostream &sout) const;
-		void print() const { print(cout); }
+		void print() const { print(cout); };
+
+		CDirection operator=(const CDirection& other);
+
 
 	private:
 		Direction m_direction;
